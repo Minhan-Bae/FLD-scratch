@@ -11,7 +11,7 @@ DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 WORKERS = 0 if os.name == 'nt' else 4
 
 ## Define Hyperparameter
-EPOCHS = 20
+EPOCHS = 200
 BATCH_SIZE = {
     "TRAIN":32,
     "VALID":2
