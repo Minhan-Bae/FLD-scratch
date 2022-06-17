@@ -18,13 +18,13 @@ class kfacedataset(Dataset):
         return len(self.image_list)
     
     def __getitem__(self, idx):
-        image = cv2.imread(self.image_list[idx])
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        image = cv2.imread(self.image_list[idx], 0)
         
         label = self.label_list[idx]
         label = pd.read_csv(label).values.tolist()
-        
+        label = np.array(label).astype("float32")
+                
         if self.transform:
             image, label = self.transform(image, label)
-        
+                
         return image, label

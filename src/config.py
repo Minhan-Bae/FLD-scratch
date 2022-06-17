@@ -7,13 +7,12 @@ from src.utils.get_list import *
 
 ## Define Environment
 
-DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 WORKERS = 0 if os.name == 'nt' else 4
 
 ## Define Hyperparameter
-EPOCHS = 200
+EPOCHS = 50
 BATCH_SIZE = {
-    "TRAIN":32,
+    "TRAIN":16,
     "VALID":2
 }
 LEARNING_RATE= 1e-4
