@@ -10,7 +10,7 @@ from src.utils.get_list import *
 WORKERS = 0 if os.name == 'nt' else 4
 
 ## Define Hyperparameter
-EPOCHS = 50
+EPOCHS = 200
 BATCH_SIZE = {
     "TRAIN":16,
     "VALID":2
