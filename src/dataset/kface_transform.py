@@ -3,7 +3,7 @@ import numpy as np
 import torch
 from torchvision import transforms
 import torchvision.transforms.functional as TF
-
+import cv2
 import imutils
 import random
 from math import *
@@ -27,7 +27,14 @@ class Transforms():
     #     new_landmarks = np.matmul(landmarks, transformation_matrix)
     #     new_landmarks = new_landmarks + 0.5
     #     return Image.fromarray(image), new_landmarks
-
+    def add_noise(self, images):
+        images = images.numpy()
+        noise = 0.008 * np.random.randn(224,224,1)
+        noise = noise.astype(np.float32)
+        # 생성한 noise를 원본에 add
+        noisy_image = cv2.add(images, noise)
+        return noisy_image
+    
     def resize(self, image, landmarks, img_size):
         image = TF.resize(image, img_size)
         return image, landmarks
@@ -56,7 +63,7 @@ class Transforms():
         # image, landmarks = self.crop_face(image, landmarks)
         image, landmarks = self.color_jitter(image, landmarks)
         # image, landmarks = self.rotate(image, landmarks, angle=10)
-
+        image = self.add_noise(image)
         landmarks = landmarks * torch.tensor((1/874, 1/576))
         
         image = TF.to_tensor(image)

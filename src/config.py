@@ -10,7 +10,7 @@ from src.utils.get_list import *
 WORKERS = 0 if os.name == 'nt' else 4
 
 ## Define Hyperparameter
-EPOCHS = 200
+EPOCHS = 20
 BATCH_SIZE = {
     "TRAIN":16,
     "VALID":2
@@ -18,7 +18,7 @@ BATCH_SIZE = {
 LEARNING_RATE= 1e-4
 WEIGHT_DECAY = 1e-6
 
-PRETRAINED_ROOT = "/home/ubuntu/workspace/FLD-scratch/src/pretrained_model/face_landmarks.pth"
+PRETRAINED_ROOT = "/home/ubuntu/workspace/FLD-scratch/src/pretrained_model/face_landmarks_2.pth"
 
 
 ## Define Path
