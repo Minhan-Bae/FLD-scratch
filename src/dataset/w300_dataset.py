@@ -63,7 +63,7 @@ class Transforms():
 
         img_shape = np.array(image).shape
         landmarks = torch.tensor(landmarks) - torch.tensor([[left, top]])
-        landmarks = landmarks / torch.tensor([img_shape[1], img_shape[0]])
+        landmarks = landmarks
         return image, landmarks
 
     def __call__(self, image, landmarks, crops):
