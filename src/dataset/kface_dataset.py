@@ -23,8 +23,15 @@ class kfacedataset(Dataset):
         label = self.label_list[idx]
         label = pd.read_csv(label).values.tolist()
         label = np.array(label).astype("float32")
-                
+        
         if self.transform:
-            image, label = self.transform(image, label)
+            transformed = self.transform(image=image, keypoints=label)
+            image = transformed['image']
+            label = transformed['keypoints']
+            
                 
+        image = torch.tensor(image, dtype=torch.float)
+        image /= 255
+        label = torch.tensor(label, dtype=torch.float)
+        
         return image, label
