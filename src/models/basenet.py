@@ -1,86 +1,100 @@
+import torch
 import torch.nn as nn
-import torch.nn.functional as F
-import torchvision.models as models
 
 
+class BfSNet(nn.Module):
+    def __init__(self, in_channels=3, out_channels=54, pretrained=False):
+        super().__init__()
+        self.resnet = self._build_resnet("resnet18", in_channels, pretrained)
 
-class BaseNet(nn.Module):
+        self.resnet4 = ResNet4(1024, 2048)
+        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
+        self.fc = nn.Linear(2048 + 2, out_channels)
 
-    def __init__(self, num_classes=54):
-        super(BaseNet, self).__init__()
-        self.features = nn.Sequential(
-            nn.Conv2d(1, 64, kernel_size=11, stride=4, padding=5),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(kernel_size=2, stride=2),
-            nn.Conv2d(64, 192, kernel_size=5, padding=2),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(kernel_size=2, stride=2),
-            nn.Conv2d(192, 384, kernel_size=3, padding=1),
-            nn.ReLU(inplace=True),
-            nn.Conv2d(384, 256, kernel_size=3, padding=1),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(kernel_size=2, stride=2),
-            nn.Conv2d(256, 256, kernel_size=3, padding=1),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(kernel_size=2, stride=2),
-        )
-        self.classifier = nn.Linear(4096, num_classes)
+        self.log_weights_points = nn.Parameter(torch.tensor(0, dtype=torch.float32))
 
-    def forward(self, x):
-        x = self.features(x)
-        x = x.view(x.size(0), -1)
-        x = F.dropout(x,inplace=True)
-        x = self.classifier(x)
+    def _build_resnet(self, model_name, in_channels, pretrained):
+        # load model
+        resnet = torch.hub.load("pytorch/vision:v0.10.0", model_name, pretrained=pretrained)
+
+        # change in_channels
+        if in_channels != 3:
+            resnet.conv1 = nn.Conv2d(in_channels, 64, kernel_size=7, stride=2, padding=3, bias=False)
+
+        # disable unused parameters
+        for param in resnet.fc.parameters():
+            param.requires_grad = False
+
+        return resnet
+
+    def _forward_without_fc(self, x, resnet):
+        x = resnet.conv1(x)
+        x = resnet.bn1(x)
+        x = resnet.relu(x)
+        x = resnet.maxpool(x)
+
+        x = resnet.layer1(x)
+        x = resnet.layer2(x)
+        x = resnet.layer3(x)
+        x = resnet.layer4(x)
         return x
 
-def conv_bn(inp, oup, stride):
-    return nn.Sequential(
-        nn.Conv2d(inp, oup, 3, stride, 1, bias=False),
-        nn.BatchNorm2d(oup),
-        nn.ReLU(inplace=True)
-    )
+    def forward(self):
+        front = self._forward_without_fc(front, self.front_resnet)
 
-def conv_dw(inp, oup, stride):
-    return nn.Sequential(
-        nn.Conv2d(inp, inp, 3, stride, 1, groups=inp, bias=False),
-        nn.BatchNorm2d(inp),
-        nn.ReLU(inplace=True),
+        x = self.resnet4(x)
 
-        nn.Conv2d(inp, oup, 1, 1, 0, bias=False),
-        nn.BatchNorm2d(oup),
-        nn.ReLU(inplace=True),
-    )
-
-class MobileNet(nn.Module):
-
-    def __init__(self,num_classes = 152):
-        super(MobileNet,self).__init__()
-        self.features = nn.Sequential(
-            conv_bn(3,16,2),
-            conv_dw(16,32,2),
-            conv_dw(32,64,2),
-            conv_dw(64,128,2),
-        )
-        self.classifier = nn.Linear(256*128,num_classes)
-
-    def forward(self,x):
-        x = self.features(x)
-        x = x.view(x.size(0), -1)
-        x = F.dropout(x,inplace=False)
-        x = self.classifier(x)
-        return x
-
-
-class SqueezeNet(nn.Module):
-    def __init__(self,num_classes):
-        super(SqueezeNet,self).__init__()
-        self.pretrain_net = models.squeezenet1_1(pretrained=True)
-        self.base_net = self.pretrain_net.features
-        self.pooling  = nn.AvgPool2d(3)
-        self.fc = nn.Linear(512,num_classes)
-    def forward(self,x):
-        x = self.base_net(x)
-        x = self.pooling(x)
-        x = x.view(x.size(0), -1)
+        x = self.avgpool(x)
+        x = torch.flatten(x, 1)
         x = self.fc(x)
         return x
+
+
+class ResNet4(nn.Module):
+    def __init__(self, in_channels, out_channels):
+        super().__init__()
+        self.block1 = ResNetBlock(in_channels, out_channels, downsample=True)
+        self.block2 = ResNetBlock(out_channels, out_channels, downsample=False)
+
+    def forward(self, x):
+        x = self.block1(x)
+        x = self.block2(x)
+        return x
+
+
+class ResNetBlock(nn.Module):
+    def __init__(self, in_channels, out_channels, downsample):
+        super().__init__()
+        stride = (2, 2) if downsample else (1, 1)
+
+        self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size=(3, 3), stride=stride, padding=(1, 1), bias=False)
+        self.bn1 = nn.BatchNorm2d(out_channels)
+        self.relu = nn.ReLU(inplace=True)
+        self.conv2 = nn.Conv2d(
+            out_channels, out_channels, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+        )
+        self.bn2 = nn.BatchNorm2d(out_channels)
+
+        self.downsample = None
+        if downsample:
+            self.downsample = nn.Sequential(
+                nn.Conv2d(in_channels, out_channels, kernel_size=(1, 1), stride=stride, bias=False),
+                nn.BatchNorm2d(out_channels),
+            )
+
+    def forward(self, x):
+        identity = x
+
+        out = self.conv1(x)
+        out = self.bn1(out)
+        out = self.relu(out)
+
+        out = self.conv2(out)
+        out = self.bn2(out)
+
+        if self.downsample is not None:
+            identity = self.downsample(x)
+
+        out += identity
+        out = self.relu(out)
+        return out

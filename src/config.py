@@ -8,9 +8,10 @@ from src.utils.get_list import *
 ## Define Environment
 
 WORKERS = 0 if os.name == 'nt' else 4
+SEED = 2022
 
 ## Define Hyperparameter
-EPOCHS = 20
+EPOCHS = 100
 BATCH_SIZE = {
     "TRAIN":16,
     "VALID":2
@@ -25,8 +26,8 @@ PRETRAINED_ROOT = "/home/ubuntu/workspace/FLD-scratch/src/pretrained_model/face_
 
 INPUT_ROOT = "/data/komedi/k_face_100"
 
-IMAGE_ROOT = os.path.join(INPUT_ROOT, "rename_image")
-LABEL_ROOT = os.path.join(INPUT_ROOT, "result_lmk")
+IMAGE_ROOT = os.path.join(INPUT_ROOT, "cropped_img")
+LABEL_ROOT = os.path.join(INPUT_ROOT, "cropped_lmk")
 
 IMAGE_LIST = get_file_list(IMAGE_ROOT, case="image")
 LABEL_LIST = get_file_list(LABEL_ROOT, case="label")
