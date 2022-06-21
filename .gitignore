@@ -3,3 +3,7 @@ __pycache__
 
 # Ignore
 *.pth
+*.json
+
+result/*
+runs/*
