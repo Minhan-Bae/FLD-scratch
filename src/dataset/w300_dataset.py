@@ -113,7 +113,7 @@ class FaceLandmarksDataset(Dataset):
         return len(self.image_filenames)
 
     def __getitem__(self, index):
-        image = cv2.imread(self.image_filenames[index], 0)
+        image = cv2.imread(self.image_filenames[index])
         landmarks = self.landmarks[index]
         
         if self.transform:

@@ -13,8 +13,8 @@ SEED = 2022
 ## Define Hyperparameter
 EPOCHS = 200
 BATCH_SIZE = {
-    "TRAIN":64,
-    "VALID":8
+    "TRAIN":32,
+    "VALID":4
 }
 LEARNING_RATE= 1e-4
 WEIGHT_DECAY = 1e-6

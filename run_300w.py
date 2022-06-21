@@ -21,18 +21,19 @@ from torch.cuda.amp import autocast, GradScaler
 
 device = 'cuda:3' if torch.cuda.is_available() else 'cpu'
 
-print("\n| Pytorch version: {}".format(torch.__version__))
-print("| GPU: {}".format(torch.cuda.is_available()))
-print("| Device : ",device)
-print("| Device name: ", torch.cuda.get_device_name(0))
-print("| Device count: ", torch.cuda.device_count())
+print(f"\n| Set device")
+print("|     Pytorch version: {}".format(torch.__version__))
+print("|     GPU: {}".format(torch.cuda.is_available()))
+print("|     Device : ",device)
+print("|     Device name: ", torch.cuda.get_device_name(0))
+print("|     Device count: ", torch.cuda.device_count())
 
 torch.cuda.empty_cache()
 gc.collect()
 
 # Import local modules
 from src import config as C
-from src.models import hrnet, resnet, basenet
+from src.models import hrnet, resnet, basenet, resnet50d
 
 from src.utils.collate_fn import *
 from src.utils.print_overwrite import *
@@ -46,12 +47,6 @@ from src.dataset.w300_dataset import *
 
 seed_everything(C.SEED)
 
-print(f"\n| Get Dataset")
-print(f"|   Number of image : {len(C.IMAGE_LIST)}")
-print(f"|   Number of label : {len(C.LABEL_LIST)}")
-print(f"|   Number of trainset : {C.LEN_TRAIN_SET}")
-print(f"|   Number of validset : {C.LEN_VALID_SET}")
-
 w_dataset = FaceLandmarksDataset(Transforms())
 
 len_valid_set = int(0.2*len(w_dataset))
@@ -60,8 +55,8 @@ len_train_set = len(w_dataset) - len_valid_set
 train_dataset , valid_dataset,  = torch.utils.data.random_split(w_dataset , [len_train_set, len_valid_set])
 
 # shuffle and batch the datasets
-train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=64, shuffle=True, num_workers=4)
-valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=32, shuffle=False, num_workers=4)
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=C.BATCH_SIZE["TRAIN"], shuffle=True, num_workers=4)
+valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=C.BATCH_SIZE["VALID"], shuffle=False, num_workers=4)
 
 train_images, train_landmarks = next(iter(train_loader))
 valid_images, valid_landmarks = next(iter(valid_loader))
@@ -73,7 +68,7 @@ print(f"|   Size of image in train_loader : {valid_images.shape}")
 print(f"|   Size of label in train_loader : {valid_landmarks.shape}")
 
 
-model = resnet50d()
+model = resnet50d.FaceSynthetics()
 criterion = nn.L1Loss(reduction='mean')
 optimizer = torch.optim.SGD(params=model.parameters(), lr =C.LEARNING_RATE, momentum=0.9, weight_decay = 0.0005)
 scheduler = CosineAnnealingWarmRestarts(optimizer, T_0=C.EPOCHS, T_mult=1)
