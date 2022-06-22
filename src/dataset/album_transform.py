@@ -10,7 +10,7 @@ def get_augmentation(data_type):
                 # A.Normalize(),
                 A.OneOf([
                     A.HueSaturationValue(p=0.5), 
-                    # A.RGBShift(p=0.7)
+                    A.RGBShift(p=0.7)
                 ], p=1),                          
                 A.RandomBrightnessContrast(p=0.5),
                 ToTensorV2()

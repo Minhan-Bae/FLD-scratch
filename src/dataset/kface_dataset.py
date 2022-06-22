@@ -18,7 +18,7 @@ class kfacedataset(Dataset):
         return len(self.image_list)
     
     def __getitem__(self, idx):
-        image = cv2.imread(self.image_list[idx],0)
+        image = cv2.imread(self.image_list[idx])
         
         label = self.label_list[idx]
         label = pd.read_csv(label).values.tolist()

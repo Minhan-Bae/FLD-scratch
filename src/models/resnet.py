@@ -9,7 +9,6 @@ class resnet18(nn.Module):
         self.model_name='resnet18'
         self.model=models.resnet18()
     
-        self.model.conv1=nn.Conv2d(1, 64, kernel_size=3, stride=2, padding=3, bias=False)
         self.model.fc=nn.Linear(self.model.fc.in_features, num_classes)
         
     def forward(self, x):
