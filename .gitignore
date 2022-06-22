@@ -2,8 +2,16 @@
 __pycache__
 
 # Ignore
+*.pt
 *.pth
+*.ckpt
+
 *.json
+
+*.mp4
+*.jpg
 
 result/*
 runs/*
+
+olds/*
