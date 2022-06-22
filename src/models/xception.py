@@ -155,14 +155,15 @@ class ExitBlock(nn.Module):
         return x
     
 class XceptionNet(nn.Module):
-    def __init__(self, num_middle_blocks = 6):
+    def __init__(self, num_classes, num_middle_blocks = 6):
         super(XceptionNet, self).__init__()
 
+        self.num_classes = num_classes
         self.entry_block = EntryBlock()
         self.middel_block = MiddleBlock(num_middle_blocks)
         self.exit_block = ExitBlock()
 
-        self.fc = nn.Linear(1024, 54)
+        self.fc = nn.Linear(1024, num_classes)
 
     def forward(self, x):
         x = self.entry_block(x)

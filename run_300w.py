@@ -39,10 +39,8 @@ from src.utils.collate_fn import *
 from src.utils.print_overwrite import *
 from src.utils.seed import *
 
-from src.models import resnet50d
-
 from src.dataset.kface_dataset import *
-from src.dataset.album_transform import *
+from src.dataset.kface_transform_A import *
 from src.dataset.w300_dataset import *
 
 seed_everything(C.SEED)
