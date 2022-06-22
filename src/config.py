@@ -24,7 +24,7 @@ PRETRAINED_ROOT = "/home/ubuntu/workspace/FLD-scratch/src/pretrained_model/face_
 
 ## Define Path
 
-INPUT_ROOT = "/data/komedi/k_face_100"
+INPUT_ROOT = "/data/komedi/k-face-100"
 
 IMAGE_ROOT = os.path.join(INPUT_ROOT, "cropped_img")
 LABEL_ROOT = os.path.join(INPUT_ROOT, "cropped_lmk")
