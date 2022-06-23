@@ -4,8 +4,7 @@ import pandas as pd
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset
-
-from src.dataset.kface_transform import *
+import numpy as np
 
 class kfacedataset(Dataset):
     def __init__(self, image_list, label_list, type="train", transform=None):
@@ -22,7 +21,7 @@ class kfacedataset(Dataset):
         
         label = self.label_list[idx]
         label = pd.read_csv(label).values.tolist()
-        label = np.array(label).astype("float32")
+        label = np.array(label)
         
         if self.transform:
             transformed = self.transform(image=image, keypoints=label)
@@ -31,8 +30,10 @@ class kfacedataset(Dataset):
             
                 
         image = torch.tensor(image, dtype=torch.float)
+        image = (2 * image) - 1
         image /= 255
         label = torch.tensor(label, dtype=torch.float)
-        label /= 512
+        label /= 128
+        label = label.reshape(-1) - 0.5
         
         return image, label

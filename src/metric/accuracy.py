@@ -1,5 +1,5 @@
 import torch
-
+import torch.nn.functional as F
 
 class Accuracy:
     def __init__(self):
