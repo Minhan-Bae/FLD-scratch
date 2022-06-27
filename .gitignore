@@ -16,3 +16,4 @@ result/*
 runs/*
 
 olds/**
+*.pth.tar

@@ -5,7 +5,7 @@ def get_augmentation(data_type):
     if data_type=="train":
         return A.Compose([
                 A.Resize(128,128),
-                A.Rotate(p=0.5),
+                A.Rotate(limit=10, p=0.5),
                 A.HorizontalFlip(p=0.5),
                 # A.Normalize(),
                 A.OneOf([
