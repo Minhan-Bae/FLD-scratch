@@ -2,4 +2,18 @@
 __pycache__
 
 # Ignore
+*.pt
 *.pth
+*.ckpt
+
+*.json
+
+*.mp4
+*.jpg
+*.png
+
+result/*
+runs/*
+
+olds/**
+*.pth.tar

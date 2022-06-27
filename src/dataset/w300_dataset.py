@@ -66,12 +66,13 @@ class Transforms():
         landmarks = landmarks / torch.tensor([img_shape[1], img_shape[0]])
         return image, landmarks
 
-    def __call__(self, image, landmarks, crops):
+    def __call__(self, image, landmarks, crops, type):
         image = Image.fromarray(image)
         image, landmarks = self.crop_face(image, landmarks, crops)
-        image, landmarks = self.resize(image, landmarks, (224, 224))
-        image, landmarks = self.color_jitter(image, landmarks)
-        image, landmarks = self.rotate(image, landmarks, angle=10)
+        image, landmarks = self.resize(image, landmarks, (512, 512))
+        if type == "train":
+            image, landmarks = self.color_jitter(image, landmarks)
+            image, landmarks = self.rotate(image, landmarks, angle=10)
         
         image = TF.to_tensor(image)
         image = TF.normalize(image, [0.5], [0.5])
@@ -79,7 +80,7 @@ class Transforms():
 
 class FaceLandmarksDataset(Dataset):
     
-    def __init__(self, transform=None):
+    def __init__(self, transform=None, type="train"):
 
         tree = ET.parse('/data/komedi/ibug_300W/labels_ibug_300W_train.xml')
         root = tree.getroot()
@@ -88,6 +89,7 @@ class FaceLandmarksDataset(Dataset):
         self.landmarks = []
         self.crops = []
         self.transform = transform
+        self.type = type
         self.root_dir = '/data/komedi/ibug_300W'
         
         for filename in root[2]:
@@ -96,7 +98,8 @@ class FaceLandmarksDataset(Dataset):
             self.crops.append(filename[0].attrib)
 
             landmark = []
-            for num in range(27):
+            num_list = [2, 5, 6, 7, 8, 9, 11, 13, 14, 15, 16, 18, 19, 20, 21, 27, 28, 30, 33, 36, 39, 42, 45, 48, 51, 54, 62]
+            for num in num_list:
                 x_coordinate = int(filename[0][num].attrib['x'])
                 y_coordinate = int(filename[0][num].attrib['y'])
                 landmark.append([x_coordinate, y_coordinate])
@@ -110,13 +113,13 @@ class FaceLandmarksDataset(Dataset):
         return len(self.image_filenames)
 
     def __getitem__(self, index):
-        image = cv2.imread(self.image_filenames[index], 0)
+        image = cv2.imread(self.image_filenames[index])
         landmarks = self.landmarks[index]
         
         if self.transform:
-            image, landmarks = self.transform(image, landmarks, self.crops[index])
+            image, landmarks = self.transform(image, landmarks, self.crops[index], type=self.type)
 
-        landmarks = landmarks - 0.5
+        landmarks = landmarks
 
         return image, landmarks
 
