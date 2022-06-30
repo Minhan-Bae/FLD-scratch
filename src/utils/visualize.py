@@ -1,3 +1,4 @@
+import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import ImageGrid
@@ -6,26 +7,32 @@ def visualize_image(image, landmarks):
     plt.figure(figsize = (5, 5))
 
     landmarks = landmarks.view(-1, 2)
-    landmarks = (landmarks+0.5) * 128
+    landmarks = (landmarks+0.5) * 224
 
-    plt.imshow(image[0], cmap = 'gray')
+    plt.imshow(image[0], cmap ='gray')
     plt.scatter(landmarks[:, 0], landmarks[:, 1], s = 25, c = 'dodgerblue')
     plt.axis('off')
     plt.show()
     
-def visualize_batch(images_list, landmarks_list, size = 14, shape = (6, 6), title = None, save = None):
+def visualize_batch(images_list, landmarks_list, gt_list, size = 14, shape = (10, 10), title = None, save = None):
     fig = plt.figure(figsize = (size, size))
     grid = ImageGrid(fig, 111, nrows_ncols = shape, axes_pad = 0.08)
-    for ax, image, landmarks in zip(grid, images_list, landmarks_list):
+    for ax, image, landmarks, gt in zip(grid, images_list, landmarks_list, gt_list):
         image = (image - image.min())/(image.max() - image.min())
 
         landmarks = landmarks.view(-1, 2)
-        landmarks = (landmarks+0.5) * 128
+        landmarks = (landmarks+0.5) * 224
         landmarks = landmarks.numpy().tolist()
-        landmarks = np.array([(x, y) for (x, y) in landmarks if 0 <= x <= 128 and 0 <= y <= 128])
+        landmarks = np.array([(x, y) for (x, y) in landmarks if 0 <= x <= 224 and 0 <= y <= 224])
 
-        ax.imshow(image[0], cmap = 'gray')
+        gt = gt.view(-1, 2)
+        gt = (gt+0.5) * 224
+        gt = gt.numpy().tolist()
+        gt = np.array([(x, y) for (x, y) in gt if 0 <= x <= 224 and 0 <= y <= 224])
+
+        ax.imshow(image[0], cmap='gray')
         ax.scatter(landmarks[:, 0], landmarks[:, 1], s = 25, c = 'dodgerblue')
+        ax.scatter(gt[:, 0], gt[:, 1], s = 10, c = 'red', marker='*')
         ax.axis('off')
 
     if title:

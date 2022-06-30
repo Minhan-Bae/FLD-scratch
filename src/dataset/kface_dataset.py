@@ -9,7 +9,7 @@ import pandas as pd
 
 
 class kfacedataset(Dataset):
-    def __init__(self, data_path = "/data/komedi/dataset/540x1L_kface_nocropped/540x10L_27pt_kface.csv", type="train", transform=None):
+    def __init__(self, data_path = "/data/komedi/dataset/540_kface_cropped_noresize/labels/535_27pt_kface.csv", type="train", transform=None):
         super().__init__()
         self.data_path = data_path
         self.transform = transform
@@ -20,9 +20,10 @@ class kfacedataset(Dataset):
         return len(self.data_list)
     
     def __getitem__(self, idx):
+        # image = cv2.cvtColor(cv2.imread(self.data_list[idx][1],0),cv2.COLOR_BGR2RGB)
         image = cv2.imread(self.data_list[idx][1],0)
         
-        labels = self.data_list[idx][7:]
+        labels = self.data_list[idx][2:]
         label_list = []
         for label in labels:
             x,y = eval(label[1:-1])
@@ -39,7 +40,7 @@ class kfacedataset(Dataset):
         image = (2 * image) - 1
         image /= 255
         label = torch.tensor(label, dtype=torch.float)
-        label /= 128
+        label /= 224
         label = label.reshape(-1) - 0.5
         
         return image, label
