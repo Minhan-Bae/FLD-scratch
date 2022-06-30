@@ -4,9 +4,9 @@ from albumentations.pytorch import ToTensorV2
 def get_augmentation(data_type):    
     if data_type=="train":
         return A.Compose([
-                A.Resize(128,128),
+                A.Resize(224,224),
                 A.Rotate(limit=10, p=0.5),
-                A.HorizontalFlip(p=0.5),
+                # A.HorizontalFlip(p=0.5), # 좌, 우 데이터 존재로 인해 제거
                 # A.Normalize(),
                 A.OneOf([
                     A.HueSaturationValue(p=0.5), 
@@ -19,7 +19,7 @@ def get_augmentation(data_type):
         )
     elif data_type=="valid":
         return A.Compose([
-            A.Resize(128,128),
+            A.Resize(224,224),
             # A.Normalize(),
             ToTensorV2()
             ],
