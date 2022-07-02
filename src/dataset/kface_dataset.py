@@ -9,7 +9,7 @@ import pandas as pd
 
 
 class kfacedataset(Dataset):
-    def __init__(self, data_path = "/data/komedi/dataset/540_kface_cropped_noresize/labels/535_27pt_kface.csv", type="train", transform=None):
+    def __init__(self, data_path = "/data/komedi/dataset/frontal_all.csv", type="train", transform=None):
         super().__init__()
         self.data_path = data_path
         self.transform = transform
@@ -21,9 +21,9 @@ class kfacedataset(Dataset):
     
     def __getitem__(self, idx):
         # image = cv2.cvtColor(cv2.imread(self.data_list[idx][1],0),cv2.COLOR_BGR2RGB)
-        image = cv2.imread(self.data_list[idx][1],0)
+        image = cv2.imread(self.data_list[idx][3],0)
         
-        labels = self.data_list[idx][2:]
+        labels = self.data_list[idx][8:]
         label_list = []
         for label in labels:
             x,y = eval(label[1:-1])
