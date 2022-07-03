@@ -4,8 +4,8 @@ import numpy as np
 
 class NME:
     def __init__(self, nme_left_index, nme_right_index):
-        self.nme_left_index = nme_left_index
-        self.nme_right_index = nme_right_index
+        self.nme_left_index = 0
+        self.nme_right_index = 1
 
     def __repr__(self):
         return "NME()"
