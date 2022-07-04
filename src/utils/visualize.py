@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import ImageGrid
 
 def visualize_image(image, landmarks):
-    plt.figure(figsize = (5, 5))
+    plt.figure(figsize = (6, 6))
 
     landmarks = landmarks.view(-1, 2)
     landmarks = (landmarks+0.5) * 224
@@ -14,7 +14,7 @@ def visualize_image(image, landmarks):
     plt.axis('off')
     plt.show()
     
-def visualize_batch(images_list, landmarks_list, gt_list, size = 14, shape = (10, 10), title = None, save = None):
+def visualize_batch(images_list, landmarks_list, gt_list, size = 6, shape = (10, 10), title = None, save = None):
     fig = plt.figure(figsize = (size, size))
     grid = ImageGrid(fig, 111, nrows_ncols = shape, axes_pad = 0.08)
     for ax, image, landmarks, gt in zip(grid, images_list, landmarks_list, gt_list):

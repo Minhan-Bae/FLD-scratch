@@ -1,70 +1,35 @@
+from datetime import date
 import os
-import pandas as pd
 import torch
+import torch.nn as nn
+import torch.optim as optim
 
-import os
-import natsort
+from models.timm_swin import timm_Net
 
-def get_file_list(path, case):
-    if case=="image":
-        image_extension = [".jpg", ".png", ".jpeg"]
-    else:
-        image_extension = [".csv"]
-    file_list = []
-    for (root, _, files) in os.walk(path):
-        if len(files) > 0:
-            for file_name in files:
-                if file_name[-4:] in image_extension:
-                    file_list.append(os.path.join(root,file_name))
-    return natsort.natsorted(file_list)
+DEVICE = 'cuda:0' if torch.cuda.is_available() else 'cpu'
+EXP = {
+    "DAY": date.today().isoformat(),
+    "MODEL" : "swin",
+    "EPOCH" : 100,
+    "LR" : 1e-4,
+}
 
-
-
-
-from pathlib import Path
-
-def get_mkdir(path, dir_type):
-    dir_dict = {}
-    try:
-        for d in dir_type:
-            dir_name = d+"_path"
-            dir_list = os.path.join(path,d)
-            dir_dict[d]=dir_list
-            
-            if not os.path.exists(dir_list):
-                Path(dir_list).mkdir(parents=True, exist_ok=True)
-                print(f"| {dir_name} was maked")
-    except IndexError:
-        pass
-
-## Define Environment
-
-WORKERS = 0 if os.name == 'nt' else 4
 SEED = 2022
 
-## Define Hyperparameter
-EPOCHS = 200
-BATCH_SIZE = 4
-LEARNING_RATE= 1e-8
-WEIGHT_DECAY = 1e-6
+BATCH_SIZE = 64
+WORKERS = 4
 
-PRETRAINED_ROOT = "/home/ubuntu/workspace/FLD-scratch/src/pretrained_model/face_landmarks_2.pth"
+MODEL_NAME = "swin_base_patch4_window7_224"
+PRETRAINED_WEIGHT_PATH = "/data/komedi/pretrained_model/0704/swin_all_home_add_trans_noresize_200epoch_20pt_add_trans_noresize.pth"
 
+MODEL = timm_Net(model_name=MODEL_NAME, pretrained=PRETRAINED_WEIGHT_PATH)
 
-## Define Path
+os.makedirs(f"/data/komedi/logs/{EXP['DAY']}/kface_progresses_{EXP['MODEL']}", exist_ok=True)
+os.makedirs(f"/data/komedi/pretrained_model/{EXP['DAY']}",exist_ok=True)
 
-INPUT_ROOT = "/data/komedi/dataset/k-face-100"
+SAVE_IMAGE_PATH = f"/data/komedi/logs/{EXP['DAY']}/kface_progresses_{EXP['MODEL']}"
+SAVE_MODEL_PATH = f"/data/komedi/pretrained_model/{EXP['DAY']}"
 
-IMAGE_ROOT = os.path.join(INPUT_ROOT, "cropped_img")
-LABEL_ROOT = os.path.join(INPUT_ROOT, "cropped_lmk")
-
-IMAGE_LIST = get_file_list(IMAGE_ROOT, case="image")
-LABEL_LIST = get_file_list(LABEL_ROOT, case="label")
-
-## Dataset
-
-RATIO  = 0.2
-LEN_VALID_SET = int(RATIO*len(IMAGE_LIST))
-LEN_TRAIN_SET = len(IMAGE_LIST)-LEN_VALID_SET
-
-## Loss and Optimizer
+SAVE_MODEL = os.path.join(SAVE_MODEL_PATH, f"{MODEL_NAME}_{EXP['EPOCH']}.pt")
+LOSS = nn.MSELoss()
+OPTIMIZER = optim.Adam(MODEL.parameters(), lr = EXP["LR"])
