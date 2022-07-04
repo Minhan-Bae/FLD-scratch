@@ -69,9 +69,7 @@ OPTIMIZER.zero_grad()
 
 start_time = time.time()
 for epoch in range(EXP["EPOCH"]):
-    if epoch==1:
-        break
-    
+
     cum_loss = 0.0
     scaler = GradScaler() 
     

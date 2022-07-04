@@ -22,7 +22,7 @@ def visualize_batch(images_list, landmarks_list, gt_list, size = 6, shape = (10,
 
         landmarks = landmarks.view(-1, 2)
         landmarks = (landmarks+0.5) * 224
-        landmarks = landmarks.numpy().tolist()
+        landmarks = landmarks.detach().numpy().tolist()
         landmarks = np.array([(x, y) for (x, y) in landmarks if 0 <= x <= 224 and 0 <= y <= 224])
 
         gt = gt.view(-1, 2)
