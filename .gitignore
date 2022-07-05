@@ -15,5 +15,5 @@ __pycache__
 result/*
 runs/*
 
-olds/**
+backup/**
 *.pth.tar
