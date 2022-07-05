@@ -1,42 +1,28 @@
 # Import Moudles and Packages
+import warnings
+warnings.filterwarnings("ignore")
+
 import gc
+gc.collect()
+
+import torch
+torch.cuda.empty_cache()
+
 import os
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 import time
-import random
-from tqdm.auto import tqdm
-
-import warnings
-warnings.filterwarnings("ignore")
-
 import numpy as np
-import matplotlib.pyplot as plt
-
-# Import pytorch modules
-import torch
-import torch.nn as nn
-from torch.utils import data
-
-from torch.optim.lr_scheduler import CosineAnnealingWarmRestarts
+from tqdm import tqdm
 from torch.cuda.amp import autocast, GradScaler
-from madgrad import MADGRAD
-
-import gc
-import torch
-
-from mpl_toolkits.axes_grid1 import ImageGrid
-
-gc.collect()
-torch.cuda.empty_cache()
 
 from config import *
 from utils.fix_seed import *
 from utils.visualize import *
 from dataset.dataloader import *
-from metric.nme import NME
-from models.timm_swin import timm_Net
+from metric.nme import *
 
+# Fix seed
 seed_everything(SEED)
 
 # Set dataloader
@@ -61,8 +47,8 @@ def validate(save = None):
         description_valid = f"| Loss: {cum_loss/len(valid_loader):.4f}, NME: {cum_nme/len(valid_loader)*100:.4f}"
         pbar.set_description(description_valid)
         
-    visualize_batch(features[:4].cpu(), outputs[:4].cpu(), labels[:4].cpu(),
-                shape = (2, 2), size = 16, title = 'Validation sample predictions', save = save)
+    visualize_batch(features[:16].cpu(), outputs[:16].cpu(), labels[:16].cpu(),
+                shape = (4, 4), size = 16, title = 'Validation sample predictions', save = save)
     
     return cum_loss/len(valid_loader), cum_nme/len(valid_loader)*100
 
@@ -72,7 +58,7 @@ OPTIMIZER.zero_grad()
 
 start_time = time.time()
 for epoch in range(EXP["EPOCH"]):
-    cnt = 0
+    early_cnt = 0
     cum_loss = 0.0
     scaler = GradScaler() 
     
@@ -104,18 +90,16 @@ for epoch in range(EXP["EPOCH"]):
                                      f'epoch({str(epoch + 1).zfill(len(str(EXP["EPOCH"])))}).jpg'))
 
     if val_loss < best_loss:
-        cnt = 0
+        early_cnt = 0
         best_loss = val_loss
         print('Saving model....................')
         torch.save(MODEL.state_dict(), SAVE_MODEL)
-        
     else:
-        cnt += 1
-        print(f"Early stopping cnt... {cnt}")
+        early_cnt += 1
+        print(f"Early stopping cnt... {early_cnt}")
         
-    if cnt > 10:
+    if early_cnt > 10:
         break
-    
     print(f'Epoch({epoch + 1}/{EXP["EPOCH"]}) -> Loss: {val_loss:.8f} | nme: {nme_value:.8f}')
 
 print('Training Complete')
