@@ -9,3 +9,5 @@ opencv-python==4.6.0
 albumentations==1.2.0
 tqdm==4.64.0
 facenet_pytorch==2.5.2
+dlib==19.24
+imutils==0.5.4
