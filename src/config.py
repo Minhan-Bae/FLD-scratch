@@ -20,7 +20,7 @@ BATCH_SIZE = 32
 WORKERS = 4
 
 MODEL_NAME = "swin_base_patch4_window7_224"
-PRETRAINED_WEIGHT_PATH = "/data/komedi/pretrained_model/0704/swin_all_home_add_trans_noresize_200epoch_20pt_add_trans_noresize.pth"
+PRETRAINED_WEIGHT_PATH = "/data/komedi/pretrained_model/2022-07-04/swin_base_patch4_window7_224_100.pt"
 
 MODEL = timm_Net(model_name=MODEL_NAME, pretrained=None)
 
