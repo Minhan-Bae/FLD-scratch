@@ -38,6 +38,7 @@ def get_augmentation(data_type):
     elif data_type=="valid":
         return A.Compose([ 
         A.Resize(height=224,width=224),
+        A.Rotate(limit = 15,border_mode = cv2.BORDER_CONSTANT,p=0.8),
         A.Normalize(
             mean=[0.4897,0.4897,0.4897],
             std = [0.2330,0.2330,0.2330],
