@@ -16,7 +16,7 @@ EXP = {
 
 SEED = 2022
 
-BATCH_SIZE = 64
+BATCH_SIZE = 32
 WORKERS = 4
 
 MODEL_NAME = "swin_base_patch4_window7_224"
