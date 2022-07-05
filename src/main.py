@@ -52,13 +52,14 @@ def validate(save = None):
     
     return cum_loss/len(valid_loader), cum_nme/len(valid_loader)*100
 
+early_cnt = 0
 batches = len(train_loader)
 best_loss = np.inf
+best_nme = np.inf
 OPTIMIZER.zero_grad()
 
 start_time = time.time()
 for epoch in range(EXP["EPOCH"]):
-    early_cnt = 0
     cum_loss = 0.0
     scaler = GradScaler() 
     
@@ -89,9 +90,9 @@ for epoch in range(EXP["EPOCH"]):
     val_loss, nme_value = validate(os.path.join(f'{SAVE_IMAGE_PATH}',
                                      f'epoch({str(epoch + 1).zfill(len(str(EXP["EPOCH"])))}).jpg'))
 
-    if val_loss < best_loss:
+    if nme_value < best_nme:
         early_cnt = 0
-        best_loss = val_loss
+        best_loss = nme_value
         print('Saving model....................')
         torch.save(MODEL.state_dict(), SAVE_MODEL)
     else:
