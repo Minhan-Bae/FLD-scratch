@@ -16,7 +16,7 @@ import numpy as np
 from tqdm import tqdm
 from torch.cuda.amp import autocast, GradScaler
 
-from config import *
+from config_2 import *
 from utils.fix_seed import *
 from utils.visualize import *
 from dataset.dataloader import *
@@ -44,7 +44,7 @@ def validate(save = None):
         cum_loss += loss.item()
         cum_nme += nme.item()
         
-        description_valid = f"| Loss: {cum_loss/len(valid_loader):.4f}, NME: {cum_nme/len(valid_loader)*100:.4f}"
+        description_valid = f"| Loss: {cum_loss/len(valid_loader):.8f}, NME: {cum_nme/len(valid_loader):.8f}"
         pbar.set_description(description_valid)
         
     visualize_batch(features[:16].cpu(), outputs[:16].cpu(), labels[:16].cpu(),
