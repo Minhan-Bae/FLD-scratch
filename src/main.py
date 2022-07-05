@@ -45,7 +45,8 @@ train_loader, valid_loader = dataloader(batch_size=BATCH_SIZE, workers=WORKERS)
 def validate(save = None):
     cum_loss = 0.0
     cum_nme = 0.0
-    for features, labels in valid_loader:
+    pbar = tqdm(enumerate(valid_loader), total=len(valid_loader))
+    for idx, (features, labels) in pbar:
         features = features.to(DEVICE)
         labels = labels.to(DEVICE)
         
@@ -56,8 +57,10 @@ def validate(save = None):
         
         cum_loss += loss.item()
         cum_nme += nme.item()
-        break
-    
+        
+        description_valid = f"| Loss: {cum_loss/len(valid_loader):.4f}, NME: {cum_nme/len(valid_loader)*100:.4f}"
+        pbar.set_description(description_valid)
+        
     visualize_batch(features[:4].cpu(), outputs[:4].cpu(), labels[:4].cpu(),
                 shape = (2, 2), size = 16, title = 'Validation sample predictions', save = save)
     
@@ -69,12 +72,13 @@ OPTIMIZER.zero_grad()
 
 start_time = time.time()
 for epoch in range(EXP["EPOCH"]):
-
+    cnt = 0
     cum_loss = 0.0
     scaler = GradScaler() 
     
     MODEL.train()
-    for idx, (features, labels) in enumerate(tqdm(train_loader, desc= 'Training')):
+    pbar = tqdm(enumerate(train_loader),total=len(train_loader))
+    for idx, (features, labels) in pbar:
         features = features.to(DEVICE)
         labels = labels.to(DEVICE)
 
@@ -93,15 +97,26 @@ for epoch in range(EXP["EPOCH"]):
 
         cum_loss += loss.item()
         
+        description_train = f"| # Epoch: {epoch+1}, Loss: {cum_loss/len(train_loader):.4f}"
+        pbar.set_description(description_train)        
+        
     val_loss, nme_value = validate(os.path.join(f'{SAVE_IMAGE_PATH}',
                                      f'epoch({str(epoch + 1).zfill(len(str(EXP["EPOCH"])))}).jpg'))
 
     if val_loss < best_loss:
+        cnt = 0
         best_loss = val_loss
         print('Saving model....................')
         torch.save(MODEL.state_dict(), SAVE_MODEL)
-
-    print(f'Epoch({epoch + 1}/{EXP["EPOCH"]}) -> Training Loss: {cum_loss/batches:.8f} | Validation Loss: {val_loss:.8f} | Validation Rsme: {nme_value:.8f}')
+        
+    else:
+        cnt += 1
+        print(f"Early stopping cnt... {cnt}")
+        
+    if cnt > 10:
+        break
+    
+    print(f'Epoch({epoch + 1}/{EXP["EPOCH"]}) -> Loss: {val_loss:.8f} | nme: {nme_value:.8f}')
 
 print('Training Complete')
 print("Total Elapsed Time : {} s".format(time.time()-start_time))    
