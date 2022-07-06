@@ -6,7 +6,7 @@ import torch.optim as optim
 
 from models.timm_swin import timm_Net
 
-DEVICE = 'cuda:1' if torch.cuda.is_available() else 'cpu'
+DEVICE = 'cuda:2' if torch.cuda.is_available() else 'cpu'
 EXP = {
     "DAY": date.today().isoformat(),
     "MODEL" : "swin",
@@ -19,7 +19,7 @@ SEED = 2022
 BATCH_SIZE = 32
 WORKERS = 4
 
-TYPE = "all"
+TYPE = "axis"
 
 MODEL_NAME = "swin_base_patch4_window7_224"
 PRETRAINED_WEIGHT_PATH = "/data/komedi/backup/pretrained_model/0703/swin_lateral_home_200epoch_20pt.pth"
@@ -34,4 +34,5 @@ SAVE_MODEL_PATH = f"/data/komedi/pretrained_model/{EXP['DAY']}"
 
 SAVE_MODEL = os.path.join(SAVE_MODEL_PATH, f"{TYPE}_{MODEL_NAME}_{EXP['EPOCH']}.pt")
 LOSS = nn.MSELoss()
+LOSS_AXIS = nn.CrossEntropyLoss()
 OPTIMIZER = optim.Adam(MODEL.parameters(), lr = EXP["LR"])
