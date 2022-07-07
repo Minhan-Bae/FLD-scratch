@@ -19,7 +19,7 @@ def visualize_batch(images_list, landmarks_list, gt_list, size = 6, shape = (10,
     grid = ImageGrid(fig, 111, nrows_ncols = shape, axes_pad = 0.08)
     for ax, image, landmarks, gt in zip(grid, images_list, landmarks_list, gt_list):
         image = (image - image.min())/(image.max() - image.min())
-
+        landmarks = landmarks[:40]
         landmarks = landmarks.view(-1, 2)
         landmarks = (landmarks+0.5) * 224
         landmarks = landmarks.detach().numpy().tolist()
