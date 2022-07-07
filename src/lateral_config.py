@@ -6,11 +6,11 @@ import torch.optim as optim
 
 from models.timm_swin import timm_Net
 
-DEVICE = 'cuda:1' if torch.cuda.is_available() else 'cpu'
+DEVICE = 'cuda:3' if torch.cuda.is_available() else 'cpu'
 EXP = {
     "DAY": date.today().isoformat(),
     "MODEL" : "swin",
-    "EPOCH" : 40,
+    "EPOCH" : 100,
     "LR" : 1e-4,
 }
 
@@ -22,7 +22,7 @@ WORKERS = 4
 TYPE = "lateral"
 
 MODEL_NAME = "swin_base_patch4_window7_224"
-PRETRAINED_WEIGHT_PATH = None
+PRETRAINED_WEIGHT_PATH = "/data/komedi/pretrained_model/2022-07-04/swin_base_patch4_window7_224_100.pt"
 
 MODEL = timm_Net(model_name=MODEL_NAME, pretrained=None)
 

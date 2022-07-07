@@ -36,12 +36,13 @@ class kfacedataset(Dataset):
 
     def __getitem__(self, idx):
         image = cv2.imread(self.data_list[idx][3])
-        axis = int(self.data_list[0][0].split("_")[-1][1:])
+        axis = (int(self.data_list[0][0].split("_")[-1][1:]),0)
         labels = self.data_list[idx][8:]
         label_list = []
         for label in labels:
             x,y = eval(label[1:-1])
             label_list.append((x,y))
+        label_list.append(axis)
         label = np.array(label_list)
         
         if self.transform:
@@ -52,9 +53,8 @@ class kfacedataset(Dataset):
         image = torch.tensor(image, dtype=torch.float)
         image = (2 * image) - 1
         image /= 255
-        
+
         label = torch.tensor(label, dtype=torch.float)
         label /= 224
         label = label.reshape(-1) - 0.5
-        label.append(axis)
         return image, label

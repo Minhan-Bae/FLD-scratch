@@ -22,9 +22,9 @@ class kfacedataset(Dataset):
         super().__init__()
         self.type = type
         if self.type == "train":
-            self.data_path = "/data/komedi/dataset/split_frontal_train.csv"
+            self.data_path = "/data/komedi/dataset/frontal_all.csv"
         else:
-            self.data_path = "/data/komedi/dataset/split_frontal_valid.csv"
+            self.data_path = "/data/komedi/dataset/frontal_all.csv"
         
         self.transform = transform
         self.data_list = pd.read_csv(self.data_path,header=None).values.tolist()
@@ -35,9 +35,9 @@ class kfacedataset(Dataset):
 
 
     def __getitem__(self, idx):
-        image = cv2.imread(self.data_list[idx][0])
+        image = cv2.imread(self.data_list[idx][3])
         
-        labels = self.data_list[idx][1:]
+        labels = self.data_list[idx][8:]
         label_list = []
         for label in labels:
             x,y = eval(label[1:-1])

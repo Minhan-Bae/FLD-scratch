@@ -28,7 +28,7 @@ from metric.nme import *
 seed_everything(SEED)
 
 # Set dataloader
-train_loader, valid_loader = dataloader(batch_size=BATCH_SIZE, workers=WORKERS)
+train_loader, valid_loader = axis_dataloader(batch_size=BATCH_SIZE, workers=WORKERS)
 
 def validate(save = None):
     cum_loss = 0.0
@@ -40,10 +40,12 @@ def validate(save = None):
         
         with autocast(enabled=True):
             outputs = MODEL(features)
-            loss = LOSS(outputs, labels)
+            point_loss = LOSS(outputs[:-2], labels[:-2])
+            axis_loss = LOSS_AXIS(outputs[-2:], labels[-2:])
             nme = NME(outputs, labels)
+        total_loss = 0.5*point_loss+0.5*axis_loss
         
-        cum_loss += loss.item()
+        cum_loss += total_loss.item()
         cum_nme += nme.item()
         
         description_valid = f"| Loss: {cum_loss/len(valid_loader):.8f}, NME: {cum_nme/len(valid_loader):.8f}"
@@ -76,9 +78,9 @@ for epoch in range(EXP["EPOCH"]):
             MODEL = MODEL.to(DEVICE)
             
             outputs = MODEL(features)
-        
-            point_loss = LOSS(outputs[:-1], labels[:-1])
-            axis_loss = LOSS_AXIS(outputs[-1], labels[-1])
+            # print(len(outputs[0]))
+            point_loss = LOSS(outputs[:-2], labels[:-2])
+            axis_loss = LOSS_AXIS(outputs[-2:], labels[-2:])
         total_loss = 0.5*point_loss+0.5*axis_loss
 
         scaler.scale(total_loss).backward()
