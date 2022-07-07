@@ -24,7 +24,7 @@ TYPE = "all"
 MODEL_NAME = "swin_base_patch4_window7_224"
 PRETRAINED_WEIGHT_PATH = "/data/komedi/pretrained_model/2022-07-06/all_swin_base_patch4_window7_224_40.pt"
 
-MODEL = timm_Net(model_name=MODEL_NAME, pretrained=None)
+MODEL = timm_Net(model_name=MODEL_NAME, pretrained=PRETRAINED_WEIGHT_PATH)
 
 os.makedirs(f"/data/komedi/logs/{EXP['DAY']}/{TYPE}_progresses_{EXP['MODEL']}", exist_ok=True)
 os.makedirs(f"/data/komedi/pretrained_model/{EXP['DAY']}",exist_ok=True)
