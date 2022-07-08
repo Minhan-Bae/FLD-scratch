@@ -17,3 +17,5 @@ runs/*
 
 backup/**
 *.pth.tar
+
+src_old/*
