@@ -2,6 +2,7 @@ import cv2
 import torch
 import numpy as np
 import pandas as pd
+import random
 
 from torch.utils.data import Dataset
 
@@ -35,9 +36,11 @@ class kfacedataset(Dataset):
 
 
     def __getitem__(self, idx):
-        image = cv2.imread(self.data_list[idx][3])
+        data_list = self.data_list
+        random.shuffle(data_list)
+        image = cv2.imread(data_list[idx][3])
         
-        labels = self.data_list[idx][8:]
+        labels = data_list[idx][8:]
         label_list = []
         for label in labels:
             x,y = eval(label[1:-1])

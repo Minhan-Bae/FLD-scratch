@@ -23,13 +23,12 @@ class kfacedataset(Dataset):
         super().__init__()
         self.type = type
         if self.type == "train":
-            self.data_path = "/data/komedi/dataset/frontal_all.csv"
+            self.data_path = "/data/komedi/dataset/pt27_lateral_303x3x10.csv"
         else:
-            self.data_path = "/data/komedi/dataset/frontal_all.csv"
+            self.data_path = "/data/komedi/dataset/pt27_lateral_303x3x10.csv"
         
         self.transform = transform
         self.data_list = pd.read_csv(self.data_path,header=None).values.tolist()
-
 
     def __len__(self):
         return len(self.data_list)

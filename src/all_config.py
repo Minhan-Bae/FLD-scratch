@@ -10,8 +10,8 @@ DEVICE = 'cuda:1' if torch.cuda.is_available() else 'cpu'
 EXP = {
     "DAY": date.today().isoformat(),
     "MODEL" : "swin",
-    "EPOCH" : 200,
-    "LR" : 2e-4,
+    "EPOCH" : 100,
+    "LR" : 1e-4,
 }
 
 SEED = 2022
@@ -19,10 +19,10 @@ SEED = 2022
 BATCH_SIZE = 32
 WORKERS = 4
 
-TYPE = "all"
+TYPE = "all_07_08_10_26_F"
 
 MODEL_NAME = "swin_base_patch4_window7_224"
-PRETRAINED_WEIGHT_PATH = "/data/komedi/pretrained_model/2022-07-06/all_swin_base_patch4_window7_224_40.pt"
+PRETRAINED_WEIGHT_PATH = "/data/komedi/pretrained_model/2022-07-07/frontal_addshift_swin_base_patch4_window7_224_100.pt"
 
 MODEL = timm_Net(model_name=MODEL_NAME, pretrained=PRETRAINED_WEIGHT_PATH)
 

@@ -4,9 +4,9 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-from models.timm_swin import timm_Net
+from models.timm_swin_54 import timm_Net_54
 
-DEVICE = 'cuda:1' if torch.cuda.is_available() else 'cpu'
+DEVICE = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 EXP = {
     "DAY": date.today().isoformat(),
     "MODEL" : "swin",
@@ -19,12 +19,12 @@ SEED = 2022
 BATCH_SIZE = 32
 WORKERS = 4
 
-TYPE = "frontal_daily"
+TYPE = "frontal_27pt_pre0707"
 
 MODEL_NAME = "swin_base_patch4_window7_224"
-PRETRAINED_WEIGHT_PATH = "/data/komedi/backup/pretrained_model/0703/swin_frontal_home_200epoch_20pt.pth"
+PRETRAINED_WEIGHT_PATH = "/data/komedi/pretrained_model/2022-07-07/frontal_daily_swin_base_patch4_window7_224_100.pt"
 
-MODEL = timm_Net(model_name=MODEL_NAME, pretrained=PRETRAINED_WEIGHT_PATH)
+MODEL = timm_Net_54(model_name=MODEL_NAME, pretrained=PRETRAINED_WEIGHT_PATH)
 
 os.makedirs(f"/data/komedi/logs/{EXP['DAY']}/{TYPE}_progresses_{EXP['MODEL']}", exist_ok=True)
 os.makedirs(f"/data/komedi/pretrained_model/{EXP['DAY']}",exist_ok=True)
