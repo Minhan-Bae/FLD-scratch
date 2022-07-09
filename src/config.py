@@ -6,11 +6,11 @@ import torch.optim as optim
 
 from models.timm_swin import timm_Net_54
 
-DEVICE = 'cuda:2' if torch.cuda.is_available() else 'cpu'
+DEVICE = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 EXP = {
     "DAY": date.today().isoformat(),
     "MODEL" : "swin",
-    "EPOCH" : 200,
+    "EPOCH" : 100,
     "LR" : 1e-4,
 }
 
@@ -22,15 +22,15 @@ WORKERS = 4
 TYPE = "refactory"
 
 MODEL_NAME = "swin_base_patch4_window7_224"
-PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/model_logs/checkpoint/0707_frontal_27pt_swin_100.pt"
+PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-08/all_27pt_swin/model_logs/all_27pt_swin_base_patch4_window7_224_100.pt"
 
 MODEL = timm_Net_54(model_name=MODEL_NAME, pretrained=PRETRAINED_WEIGHT_PATH)
 
-os.makedirs(f"/data/komedi/logs/{EXP['DAY']}/{TYPE}_{EXP['MODEL']}/image_logs", exist_ok=True)
-os.makedirs(f"/data/komedi/logs/{EXP['DAY']}/{TYPE}_{EXP['MODEL']}/model_logs",exist_ok=True)
+os.makedirs(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}/image_logs", exist_ok=True)
+os.makedirs(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}/model_logs",exist_ok=True)
 
-SAVE_IMAGE_PATH = f"/data/komedi/logs/{EXP['DAY']}/{TYPE}_{EXP['MODEL']}/image_logs"
-SAVE_MODEL_PATH = f"/data/komedi/logs/{EXP['DAY']}/{TYPE}_{EXP['MODEL']}/model_logs"
+SAVE_IMAGE_PATH = f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}/image_logs"
+SAVE_MODEL_PATH = f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}/model_logs"
 
 SAVE_MODEL = os.path.join(SAVE_MODEL_PATH, f"{TYPE}_{MODEL_NAME}_{EXP['EPOCH']}.pt")
 LOSS = nn.MSELoss()
