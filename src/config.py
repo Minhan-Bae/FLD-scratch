@@ -10,7 +10,7 @@ DEVICE = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 EXP = {
     "DAY": date.today().isoformat(),
     "MODEL" : "swin",
-    "EPOCH" : 100,
+    "EPOCH" : 400,
     "LR" : 1e-4,
 }
 
@@ -35,3 +35,5 @@ SAVE_MODEL_PATH = f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}/model_l
 SAVE_MODEL = os.path.join(SAVE_MODEL_PATH, f"{TYPE}_{MODEL_NAME}_{EXP['EPOCH']}.pt")
 LOSS = nn.MSELoss()
 OPTIMIZER = optim.Adam(MODEL.parameters(), lr = EXP["LR"])
+
+EARLY_STOPPING_CNT = 9999

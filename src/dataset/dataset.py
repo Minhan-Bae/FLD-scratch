@@ -23,9 +23,9 @@ class kfacedataset(Dataset):
         super().__init__()
         self.type = type
         if self.type == "train":
-            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/pt27_all_604x3x10.csv"
+            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/pt27_train.csv"
         else:
-            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/pt27_all_604x3x10.csv"
+            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/pt27_valid.csv"
         
         self.transform = transform
         self.data_list = pd.read_csv(self.data_path,header=None).values.tolist()
@@ -36,7 +36,7 @@ class kfacedataset(Dataset):
 
     def __getitem__(self, idx):
         data_list = self.data_list
-        random.shuffle(data_list)
+        # random.shuffle(data_list)
         image = cv2.imread(data_list[idx][3])
         
         labels = data_list[idx][8:]

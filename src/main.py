@@ -102,7 +102,7 @@ for epoch in range(EXP["EPOCH"]):
         early_cnt += 1
         print(f"Early stopping cnt... {early_cnt}")
         
-    if early_cnt >= 40:
+    if early_cnt >= EARLY_STOPPING_CNT:
         break
     print(f'Epoch({epoch + 1}/{EXP["EPOCH"]}) -> Loss: {val_loss:.8f} | nme: {nme_value:.8f}')
 

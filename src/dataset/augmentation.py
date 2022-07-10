@@ -6,8 +6,7 @@ def get_augmentation(data_type):
     if data_type=="train":
         return A.Compose([
         A.Resize(width = 224,height = 224),
-        A.Rotate(limit = 15,border_mode = cv2.BORDER_CONSTANT,p=0.8),
-        # A.IAAAffine(shear = 15,scale = 1.0,mode = 'constant',p = 0.2),
+        A.Rotate(limit = 15,border_mode =0, p=0.8),
         A.RandomBrightnessContrast(contrast_limit=0.5,brightness_limit=0.5,p=0.2),
         A.OneOf([
             A.GaussNoise(p=0.8),
