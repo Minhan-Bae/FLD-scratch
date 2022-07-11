@@ -6,12 +6,12 @@ import torch.optim as optim
 
 from models.timm_swin import timm_Net_54
 
-DEVICE = 'cuda:0' if torch.cuda.is_available() else 'cpu'
+DEVICE = 'cuda:1' if torch.cuda.is_available() else 'cpu'
 EXP = {
     "DAY": date.today().isoformat(),
     "MODEL" : "swin",
-    "EPOCH" : 400,
-    "LR" : 1e-4,
+    "EPOCH" : 200,
+    "LR" : 1e-5,
 }
 
 SEED = 2022
@@ -19,7 +19,7 @@ SEED = 2022
 BATCH_SIZE = 32
 WORKERS = 4
 
-TYPE = "refactory"
+TYPE = "from_raw_crop"
 
 MODEL_NAME = "swin_base_patch4_window7_224"
 PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-08/all_27pt_swin/model_logs/all_27pt_swin_base_patch4_window7_224_100.pt"

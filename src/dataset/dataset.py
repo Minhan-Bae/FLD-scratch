@@ -4,6 +4,8 @@ import numpy as np
 import pandas as pd
 import random
 
+from PIL import Image
+
 from torch.utils.data import Dataset
 
 """
@@ -23,9 +25,9 @@ class kfacedataset(Dataset):
         super().__init__()
         self.type = type
         if self.type == "train":
-            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/pt27_train.csv"
+            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/raw_pt27_train.csv"
         else:
-            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/pt27_valid.csv"
+            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/raw_pt27_valid.csv"
         
         self.transform = transform
         self.data_list = pd.read_csv(self.data_path,header=None).values.tolist()
@@ -37,7 +39,18 @@ class kfacedataset(Dataset):
     def __getitem__(self, idx):
         data_list = self.data_list
         # random.shuffle(data_list)
+                
         image = cv2.imread(data_list[idx][3])
+
+        margin = 200
+        crop_area = (data_list[idx][4]-margin//2, # get bbox area with margin
+                    data_list[idx][5]-margin//2,
+                    data_list[idx][6]+margin//2,
+                    data_list[idx][7]+margin//2)
+
+        pil_image = Image.fromarray(image)
+        image = pil_image.crop(crop_area)
+        image = np.array(image)
         
         labels = data_list[idx][8:]
         label_list = []
@@ -52,7 +65,7 @@ class kfacedataset(Dataset):
             label = transformed['keypoints']
             
         image = torch.tensor(image, dtype=torch.float)
-        image = (2 * image) - 1
+        # image = (2 * image) - 1 #TODO 07M-11D-10H-10M
         image /= 255
         
         label = torch.tensor(label, dtype=torch.float)
