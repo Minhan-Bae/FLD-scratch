@@ -28,5 +28,5 @@ valid += 68
 w300 350 건 추가 
 kface validation dataset 200건으로 종결 -> data/komedi/300wdataset/data_version/v3 에 백업
 
-train = 1207 * 100배 키우기
+train = 1207 * 10배 키우기
 valid = 500
