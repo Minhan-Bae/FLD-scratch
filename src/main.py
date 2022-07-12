@@ -49,11 +49,11 @@ def validate(save = None):
         cum_std_nme += std_nme.item()
         
         
-        description_valid = f"| Loss: {cum_loss/len(valid_loader):.4f}, mean NME: {cum_mean_nme/len(valid_loader):.4f}, std NME: {cum_std_nme/len(valid_loader):.4f}"
+        description_valid = f"| mean_nme: {cum_mean_nme/(idx+1):.4f}, std_nme: {cum_std_nme/(idx+1):.4f}"
         pbar.set_description(description_valid)
         
-    visualize_batch(features[:4].cpu(), outputs[:4].cpu(), labels[:4].cpu(),
-                shape = (2, 2), size = 16, title = 'Validation sample predictions', save = save)
+    visualize_batch(features[:16].cpu(), outputs[:16].cpu(), labels[:16].cpu(),
+                shape = (4, 4), size = 16, title = 'Validation sample predictions', save = save)
     
     return cum_loss/len(valid_loader), cum_mean_nme/len(valid_loader)
 
@@ -90,7 +90,7 @@ for epoch in range(EXP["EPOCH"]):
 
         cum_loss += loss.item()
         
-        description_train = f"| # Epoch: {epoch+1}, Loss: {cum_loss/len(train_loader):.8f}"
+        description_train = f"| # Epoch: {epoch+1}"
         pbar.set_description(description_train)   
      
     MODEL.eval()
@@ -113,6 +113,6 @@ for epoch in range(EXP["EPOCH"]):
 
     df = pd.DataFrame(loss_list)
     df.to_csv(f"{SAVE_IMAGE_PATH}/lateral_raw_data_validation.csv", index=None, header=None)
-
+print(f"best mean nme is : {best_nme}")
 print('Training Complete')
 print("Total Elapsed Time : {} s".format(time.time()-start_time))    

@@ -1,9 +1,6 @@
 import numpy as np
 from math import *
 def NME(label_pd, label_gt):
-    # label_pd = label_pd.data.cpu().numpy()
-    # label_gt = label_gt.data.cpu().numpy()
-    
     nme_list = []
     length_list = []
     

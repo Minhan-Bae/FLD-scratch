@@ -11,7 +11,7 @@ EXP = {
     "DAY": date.today().isoformat(),
     "MODEL" : "swin",
     "EPOCH" : 200,
-    "LR" : 1e-4,
+    "LR" : 1e-5,
 }
 
 SEED = 2022
