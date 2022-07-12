@@ -19,7 +19,14 @@ w300_pt27_valid: 크롭 이미지에 대한 27 랜드마크 300w 데이터셋(80
 kface_w300_train: w300 + kface (712 건)
 kface_w300_valid: w300 + kface (182 건)
 
-22-07-12
+22-07-12 10-00 v2.0
 w300 340 건 추가 예정
 train += 272
 valid += 68
+
+22-07-12 14-00 v3.0
+w300 350 건 추가 
+kface validation dataset 200건으로 종결 -> data/komedi/300wdataset/data_version/v3 에 백업
+
+train = 1207 * 10배 키우기
+valid = 500

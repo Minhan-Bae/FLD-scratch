@@ -25,9 +25,9 @@ class kfacedataset(Dataset):
         super().__init__()
         self.type = type
         if self.type == "train":
-            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/kface_w300_train.csv"
+            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/kface_w300_train_v3.csv"
         else:
-            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/kface_w300_valid.csv"
+            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/kface_w300_valid_v3.csv"
         
         self.transform = transform
         self.data_list = pd.read_csv(self.data_path,header=None).values.tolist()
