@@ -31,7 +31,9 @@ train_loader, valid_loader = kfacedataloader(batch_size=BATCH_SIZE, workers=WORK
 
 def validate(save = None):
     cum_loss = 0.0
-    cum_nme = 0.0
+    cum_mean_nme = 0.0
+    cum_std_nme = 0.0
+    
     pbar = tqdm(enumerate(valid_loader), total=len(valid_loader))
     for idx, (features, labels) in pbar:
         features = features.to(DEVICE)
@@ -40,18 +42,20 @@ def validate(save = None):
         with autocast(enabled=True):
             outputs = MODEL(features)
             loss = LOSS(outputs, labels)
-            nme = NME(outputs, labels)
+            mean_nme, std_nme = NME(outputs, labels)
         
         cum_loss += loss.item()
-        cum_nme += nme.item()
+        cum_mean_nme += mean_nme.item()
+        cum_std_nme += std_nme.item()
         
-        description_valid = f"| Loss: {cum_loss/len(valid_loader):.4f}, NME: {cum_nme/len(valid_loader):.4f}"
+        
+        description_valid = f"| Loss: {cum_loss/len(valid_loader):.4f}, mean NME: {cum_mean_nme/len(valid_loader):.4f}, std NME: {cum_std_nme/len(valid_loader):.4f}"
         pbar.set_description(description_valid)
         
     visualize_batch(features[:4].cpu(), outputs[:4].cpu(), labels[:4].cpu(),
                 shape = (2, 2), size = 16, title = 'Validation sample predictions', save = save)
     
-    return cum_loss/len(valid_loader), cum_nme/len(valid_loader)
+    return cum_loss/len(valid_loader), cum_mean_nme/len(valid_loader)
 
 early_cnt = 0
 batches = len(train_loader)
@@ -87,8 +91,9 @@ for epoch in range(EXP["EPOCH"]):
         cum_loss += loss.item()
         
         description_train = f"| # Epoch: {epoch+1}, Loss: {cum_loss/len(train_loader):.8f}"
-        pbar.set_description(description_train)        
-        
+        pbar.set_description(description_train)   
+     
+    MODEL.eval()
     val_loss, nme_value = validate(os.path.join(f'{SAVE_IMAGE_PATH}',
                                      f'epoch({str(epoch + 1).zfill(len(str(EXP["EPOCH"])))}).jpg'))
     loss_list.append((epoch, val_loss, nme_value))
