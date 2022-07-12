@@ -25,9 +25,9 @@ class kfacedataset(Dataset):
         super().__init__()
         self.type = type
         if self.type == "train":
-            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/raw_pt27_train.csv"
+            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/kface_w300_train.csv"
         else:
-            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/raw_pt27_valid.csv"
+            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/kface_w300_valid.csv"
         
         self.transform = transform
         self.data_list = pd.read_csv(self.data_path,header=None).values.tolist()
@@ -41,7 +41,8 @@ class kfacedataset(Dataset):
         # random.shuffle(data_list)
                 
         image = cv2.imread(data_list[idx][3])
-
+        # if image.shape(3)==4:
+        #     image = image[:,:,:-1]
         margin = 200
         crop_area = (data_list[idx][4]-margin//2, # get bbox area with margin
                     data_list[idx][5]-margin//2,
@@ -56,6 +57,9 @@ class kfacedataset(Dataset):
         label_list = []
         for label in labels:
             x,y = eval(label[1:-1])
+            # if self.type=="train":
+            #     x = x-(data_list[idx][4]-margin//2)
+            #     y = y-(data_list[idx][5]-margin//2)
             label_list.append((x,y))
         label = np.array(label_list)
         

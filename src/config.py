@@ -11,7 +11,7 @@ EXP = {
     "DAY": date.today().isoformat(),
     "MODEL" : "swin",
     "EPOCH" : 200,
-    "LR" : 1e-5,
+    "LR" : 1e-4,
 }
 
 SEED = 2022
@@ -19,10 +19,10 @@ SEED = 2022
 BATCH_SIZE = 32
 WORKERS = 4
 
-TYPE = "from_raw_crop"
+TYPE = "10_41"
 
 MODEL_NAME = "swin_base_patch4_window7_224"
-PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-08/all_27pt_swin/model_logs/all_27pt_swin_base_patch4_window7_224_100.pt"
+PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-12/swin_valid_300w/model_logs/valid_300w_swin_base_patch4_window7_224_400.pt"
 
 MODEL = timm_Net_54(model_name=MODEL_NAME, pretrained=PRETRAINED_WEIGHT_PATH)
 

@@ -8,9 +8,14 @@ def NME(label_pd, label_gt):
     
     for i in range(label_gt.shape[0]):
         landmarks_gt = label_gt[i]
+        # print(landmarks_gt)
         landmarks_pv = label_pd[i]
-        pupil_distance = np.linalg.norm(landmarks_gt[9] - landmarks_gt[12])
-        landmarks_delta = landmarks_pv - landmarks_gt
+        # print(landmarks_pv)
+        pupil_distance = landmarks_gt[9] - landmarks_gt[12]
+        # print(pupil_distance)
+        if pupil_distance <= 0.0:
+            pupil_distance = 0.01
+        landmarks_delta = np.linalg.norm(landmarks_pv - landmarks_gt)
         nme = np.linalg.norm(landmarks_delta) / pupil_distance
         sum_nme+= nme
         total_cnt+=1
