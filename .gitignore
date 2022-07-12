@@ -17,3 +17,7 @@ runs/*
 
 backup/**
 *.pth.tar
+
+src_old/*
+src_mobilenetv3/*
+src_hrnet/*
