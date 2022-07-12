@@ -21,6 +21,6 @@ def kfacedataloader(batch_size, workers):
     train_loader = data.DataLoader(
         k_dataset_train, batch_size=batch_size, shuffle=True, num_workers=workers)
     valid_loader = data.DataLoader(
-        k_dataset_valid, batch_size=batch_size, shuffle=False, num_workers=workers)
+        k_dataset_valid, batch_size=64, shuffle=False, num_workers=workers)
     
     return train_loader, valid_loader
