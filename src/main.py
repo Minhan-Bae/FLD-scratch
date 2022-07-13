@@ -110,7 +110,7 @@ for epoch in range(EXP["EPOCH"]):
         model.eval()
         mean_nme, std_nme = validate(os.path.join(f'{SAVE_IMAGE_PATH}',
                                         f'epoch({str(epoch + 1).zfill(len(str(EXP["EPOCH"])))}).jpg'))
-        loss_list.append(f"     EPOCH : {epoch}/{EXP['EPOCH']}\tNME_MEAN : {mean_nme:.8f}\tNME_STD : {std_nme:.8f}")
+        loss_list.append(f"     EPOCH : {epoch+1}/{EXP['EPOCH']}\tNME_MEAN : {mean_nme:.8f}\tNME_STD : {std_nme:.8f}")
         torch.save(MODEL.state_dict(), os.path.join(SAVE_MODEL_PATH, f"{TYPE}_{MODEL_NAME}_{epoch}.pt"))
         if mean_nme < best_nme:
             early_cnt = 0
