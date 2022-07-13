@@ -93,13 +93,13 @@ for epoch in range(EXP["EPOCH"]):
         pbar.set_description(description_train)   
         
     scheduler.step()
-    loss_list.append(f"| # Epoch: {epoch+1}/{EXP['EPOCH']}, Loss: {cum_loss/(idx+1):.8f}")
+    loss_list.append(description_train)
     
     if epoch%5==0: 
         model.eval()
         mean_nme, std_nme = validate(valid_loader, model, os.path.join(f'{SAVE_IMAGE_PATH}',
                                         f'epoch({str(epoch + 1).zfill(len(str(EXP["EPOCH"])))}).jpg'))
-        loss_list.append(f"     EPOCH : {epoch}/{EXP['EPOCH']}\tNME_MEAN : {mean_nme:.8f}\tNME_STD : {std_nme:.8f}")
+        loss_list.append(f"\tEPOCH : {epoch}/{EXP['EPOCH']}\tNME_MEAN : {mean_nme:.8f}\tNME_STD : {std_nme:.8f}")
         torch.save(model.state_dict(), os.path.join(SAVE_MODEL_PATH, f"{TYPE}_{MODEL_NAME}_{epoch}.pt"))
         if mean_nme < best_nme:
             early_cnt = 0
