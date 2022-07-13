@@ -2,7 +2,6 @@ import numpy as np
 from math import *
 def NME(label_pd, label_gt):
     nme_list = []
-    length_list = []
     
     for i in range(label_gt.shape[0]):
         
@@ -14,18 +13,19 @@ def NME(label_pd, label_gt):
         landmarks_pv = (landmarks_pv+0.5) * 224
         landmarks_pv = landmarks_pv.detach().cpu().numpy()
         
-        minx, maxx = np.min(landmarks_gt[0,:]), np.max(landmarks_gt[0,:])
-        miny, maxy = np.min(landmarks_gt[1,:]), np.max(landmarks_gt[1,:])
-
-        llength = sqrt((maxx - minx) * (maxy - miny))
-        length_list.append(llength)
+        minx, maxx = np.min(landmarks_gt[0,:20]), np.max(landmarks_gt[0,:20])
+        miny, maxy = np.min(landmarks_gt[1,:20]), np.max(landmarks_gt[1,:20])
         
-        dis = landmarks_pv - landmarks_gt
-        dis = np.sqrt(np.sum(np.power(dis,2),0))
-        nme = dis/llength
-        nme_list.append(nme)
+        llength = sqrt((maxx - minx) * (maxy - miny))
+        
+        # length_list.append(llength)
+        for idx in range(20):
+            dis = landmarks_pv[idx] - landmarks_gt[idx]
+            dis = np.sqrt(np.sum(np.power(dis,2),0))
+            nme = dis/llength
+            nme_list.append(nme)
 
     nme_list = np.array(nme_list, dtype=np.float32)
     mean_nme = np.mean(nme_list)*100
-    std_nme = np.std(nme_list)*100
+    std_nme = np.std(nme_list, ddof=1)*100
     return mean_nme, std_nme
