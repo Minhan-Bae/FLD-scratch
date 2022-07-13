@@ -9,7 +9,7 @@ EXP = {
     "DAY": date.today().isoformat(),
     "MODEL" : "swin",
     "EPOCH" : 100,
-    "LR" : 2e-4,
+    "LR" : 1e-5,
 }
 
 BATCH_SIZE = {
@@ -21,7 +21,7 @@ WORKERS = 4
 
 # model part
 MODEL_NAME = "swin_base_patch4_window7_224"
-PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-12/swin_v2/model_logs/v2_swin_base_patch4_window7_224_200.pt"
+PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-13/swin_v6/model_logs/v6_swin_base_patch4_window7_224_best.pt"
 
 os.makedirs(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}/image_logs", exist_ok=True)
 os.makedirs(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}/model_logs",exist_ok=True)

@@ -13,13 +13,13 @@ def NME(label_pd, label_gt):
         landmarks_pv = (landmarks_pv+0.5) * 224
         landmarks_pv = landmarks_pv.detach().cpu().numpy()
         
-        minx, maxx = np.min(landmarks_gt[0,:20]), np.max(landmarks_gt[0,:20])
-        miny, maxy = np.min(landmarks_gt[1,:20]), np.max(landmarks_gt[1,:20])
+        minx, maxx = np.min(landmarks_gt[0,:27]), np.max(landmarks_gt[0,:27])
+        miny, maxy = np.min(landmarks_gt[1,:27]), np.max(landmarks_gt[1,:27])
         
         llength = sqrt((maxx - minx) * (maxy - miny))
         
         # length_list.append(llength)
-        for idx in range(20):
+        for idx in range(27):
             dis = landmarks_pv[idx] - landmarks_gt[idx]
             dis = np.sqrt(np.sum(np.power(dis,2),0))
             nme = dis/llength
