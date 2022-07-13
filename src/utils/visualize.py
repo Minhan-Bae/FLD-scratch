@@ -1,4 +1,3 @@
-import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import ImageGrid
@@ -23,15 +22,15 @@ def visualize_batch(images_list, landmarks_list, gt_list, size = 6, shape = (10,
         landmarks = landmarks.view(-1, 2)
         landmarks = (landmarks+0.5) * 224
         landmarks = landmarks.detach().numpy().tolist()
-        landmarks = np.array([(x, y) for (x, y) in landmarks if 0 <= x <= 224 and 0 <= y <= 224])
+        landmarks = np.array([(x, y) for (x, y) in landmarks if 0 <= x and 0 <= y])
 
         gt = gt.view(-1, 2)
         gt = (gt+0.5) * 224
         gt = gt.numpy().tolist()
-        gt = np.array([(x, y) for (x, y) in gt if 0 <= x <= 224 and 0 <= y <= 224])
+        gt = np.array([(x, y) for (x, y) in gt if 0 <= x  and 0 <= y])
 
         ax.imshow(image[0], cmap='gray')
-        ax.scatter(landmarks[:, 0], landmarks[:, 1], s = 25, c = 'dodgerblue')
+        ax.scatter(landmarks[:, 0], landmarks[:, 1], s = 10, c = 'dodgerblue')
         ax.scatter(gt[:, 0], gt[:, 1], s = 10, c = 'red', marker='*')
         ax.axis('off')
 

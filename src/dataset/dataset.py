@@ -69,7 +69,7 @@ class kfacedataset(Dataset):
             label = transformed['keypoints']
             
         image = torch.tensor(image, dtype=torch.float)
-        # image = (2 * image) - 1 #TODO 07M-11D-10H-10M
+        image = (2 * image) - 1 #TODO 07M-11D-10H-10M
         image /= 255
         
         label = torch.tensor(label, dtype=torch.float)
