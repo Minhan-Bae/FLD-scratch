@@ -2,10 +2,8 @@ import cv2
 import torch
 import numpy as np
 import pandas as pd
-import random
 
 from PIL import Image
-
 from torch.utils.data import Dataset
 
 """
@@ -38,11 +36,7 @@ class kfacedataset(Dataset):
 
     def __getitem__(self, idx):
         data_list = self.data_list
-        # random.shuffle(data_list)
-                
         image = cv2.imread(data_list[idx][3])
-        # if image.shape(3)==4:
-        #     image = image[:,:,:-1]
         margin = 200
         crop_area = (data_list[idx][4]-margin//2, # get bbox area with margin
                     data_list[idx][5]-margin//2,
@@ -57,9 +51,6 @@ class kfacedataset(Dataset):
         label_list = []
         for label in labels:
             x,y = eval(label[1:-1])
-            # if self.type=="train":
-            #     x = x-(data_list[idx][4]-margin//2)
-            #     y = y-(data_list[idx][5]-margin//2)
             label_list.append((x,y))
         label = np.array(label_list)
         
@@ -69,7 +60,7 @@ class kfacedataset(Dataset):
             label = transformed['keypoints']
             
         image = torch.tensor(image, dtype=torch.float)
-        image = (2 * image) - 1 #TODO 07M-11D-10H-10M
+        image = (2 * image) - 1 #TODO 왜 2*image -1 인지 이해할 것
         image /= 255
         
         label = torch.tensor(label, dtype=torch.float)
