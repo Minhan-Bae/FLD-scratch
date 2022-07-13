@@ -27,9 +27,7 @@ from metric.nme import *
 import torch.backends.cudnn as cudnn
 cudnn.benchmark=True
 
-devices_id = '0,1,2'
-devices_id = [int(d) for d in devices_id.split(',')]
-
+devices_id = [int(d) for d in DEVICE.split(',')]
 
 # Fix seed
 seed_everything(SEED)
@@ -127,7 +125,14 @@ for epoch in range(EXP["EPOCH"]):
                 break
 
         df = pd.DataFrame(loss_list)
-        df.to_csv(f"{SAVE_IMAGE_PATH}/lateral_raw_data_validation.csv", index=None, header=None)
+        df.to_csv(f"{SAVE_PATH}/{TYPE}_validation.csv", index=None, header=None)
 print(f"best mean nme is : {best_nme:.8f}")
 print('Training Complete')
 print("Total Elapsed Time : {} s".format(time.time()-start_time))    
+
+loss_list.append(f"best mean nme is : {best_nme:.8f}")
+loss_list.append("Training Complete")
+loss_list.append("Total Elapsed Time : {} s".format(time.time()-start_time))
+
+df = pd.DataFrame(loss_list)
+df.to_csv(f"{SAVE_PATH}/{TYPE}_validation.csv", index=None, header=None)

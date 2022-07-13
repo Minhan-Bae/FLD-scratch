@@ -6,12 +6,12 @@ import torch.optim as optim
 from torch.optim.lr_scheduler import CosineAnnealingWarmRestarts
 
 from models.timm_swin import timm_Net_54
-DEVICE = 'cuda:1' if torch.cuda.is_available() else 'cpu'
+DEVICE = '0,1,2,3'
 EXP = {
     "DAY": date.today().isoformat(),
     "MODEL" : "swin",
-    "EPOCH" : 100,
-    "LR" : 2e-4,
+    "EPOCH" : 200,
+    "LR" : 1e-4,
 }
 
 SEED = 2022
@@ -19,18 +19,19 @@ SEED = 2022
 BATCH_SIZE = 128
 WORKERS = 4
 
-TYPE = "v8"
+TYPE = "v9"
 
 MODEL_NAME = "swin_base_patch4_window7_224"
-PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-12/swin_v2/model_logs/v2_swin_base_patch4_window7_224_200.pt"
+PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-13/swin_v8/v8_swin_base_patch4_window7_224_best.pt"
 
 MODEL = timm_Net_54(model_name=MODEL_NAME, pretrained=PRETRAINED_WEIGHT_PATH)
 
 os.makedirs(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}/image_logs", exist_ok=True)
 os.makedirs(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}/model_logs",exist_ok=True)
 
-SAVE_IMAGE_PATH = f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}/image_logs"
-SAVE_MODEL_PATH = f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}/model_logs"
+SAVE_PATH = f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}"
+SAVE_IMAGE_PATH = os.path.join(SAVE_PATH,"image_logs")
+SAVE_MODEL_PATH = os.path.join(SAVE_PATH,"model_logs")
 
 SAVE_MODEL = os.path.join(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}", f"{TYPE}_{MODEL_NAME}_best.pt")
 LOSS = nn.MSELoss()
