@@ -17,10 +17,10 @@ def mtcnn(image, margin=200): #PIL
     )
     
     bbox, _ = mtcnn.detect(numpy_image)
-    crop_area = (max(bbox[0][0]-margin//2,0), # get bbox area with margin
-                 max(bbox[0][1]-margin//2,0),
-                 max(bbox[0][2]+margin//2,0),
-                 max(bbox[0][3]+margin//2,0))
+    crop_area = (bbox[0][0]-margin//2, # get bbox area with margin
+                 bbox[0][1]-margin//2,
+                 bbox[0][2]+margin//2,
+                 bbox[0][3]+margin//2)
     pil_image = Image.fromarray(numpy_image)
     crop_img = pil_image.crop(crop_area)
     
