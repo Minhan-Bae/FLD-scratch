@@ -6,7 +6,7 @@ import torch.optim as optim
 from torch.optim.lr_scheduler import CosineAnnealingWarmRestarts
 
 from models.timm_swin import timm_Net_54
-DEVICE = '0,1,2,3'
+DEVICE = '0,1,2'
 EXP = {
     "DAY": date.today().isoformat(),
     "MODEL" : "swin",
@@ -16,13 +16,13 @@ EXP = {
 
 SEED = 2022
 
-BATCH_SIZE = 256
+BATCH_SIZE = 128
 WORKERS = 4
 
-TYPE = "v9"
+TYPE = "v10"
 
 MODEL_NAME = "swin_base_patch4_window7_224"
-PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-13/swin_v8/v8_swin_base_patch4_window7_224_best.pt"
+PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-14/swin_v9/v9_swin_base_patch4_window7_224_best.pt"
 
 MODEL = timm_Net_54(model_name=MODEL_NAME, pretrained=PRETRAINED_WEIGHT_PATH)
 
