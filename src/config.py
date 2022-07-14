@@ -19,10 +19,10 @@ SEED = 2022
 BATCH_SIZE = 128
 WORKERS = 4
 
-TYPE = "v10"
+TYPE = "v11"
 
 MODEL_NAME = "swin_base_patch4_window7_224"
-PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-14/swin_v9/v9_swin_base_patch4_window7_224_best.pt"
+PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-14/swin_v10/v10_swin_base_patch4_window7_224_best.pt"
 
 MODEL = timm_Net_54(model_name=MODEL_NAME, pretrained=PRETRAINED_WEIGHT_PATH)
 
@@ -37,4 +37,4 @@ SAVE_MODEL = os.path.join(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}
 LOSS = nn.MSELoss()
 OPTIMIZER = optim.Adam(MODEL.parameters(), lr = EXP["LR"])
 SCHEDULER = CosineAnnealingWarmRestarts(OPTIMIZER, T_0=EXP["EPOCH"], T_mult=1)
-EARLY_STOPPING_CNT = 9999
+EARLY_STOPPING_CNT = 20
