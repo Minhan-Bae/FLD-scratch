@@ -10,7 +10,7 @@ from vis_src.model import *
 from vis_src.transform import *
 
 def visualization(image, crop_img, landmarks, w, h, save=False):
-    plt.figure(figsize=(10,20))
+    plt.figure(figsize=(22,44))
     plt.subplot(1,2,1)
     plt.axis("off")
 

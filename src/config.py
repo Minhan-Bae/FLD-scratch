@@ -19,10 +19,10 @@ SEED = 2022
 BATCH_SIZE = 256
 WORKERS = 4
 
-TYPE = "v12"
+TYPE = "v13"
 
 MODEL_NAME = "swin_base_patch4_window7_224"
-PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-14/swin_v10/v10_swin_base_patch4_window7_224_best.pt"
+PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-14/swin_v12/v12_swin_base_patch4_window7_224_best.pt"
 
 MODEL = timm_Net_54(model_name=MODEL_NAME, pretrained=PRETRAINED_WEIGHT_PATH)
 
