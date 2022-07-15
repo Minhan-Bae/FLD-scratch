@@ -7,7 +7,7 @@ from PIL import Image
 
 from facenet_pytorch import MTCNN
 
-def mtcnn(image, margin=100): #PIL
+def mtcnn(image, margin=400): #PIL
     numpy_image =  np.array(image)
     # numpy_image = numpy.
     mtcnn = MTCNN(
@@ -17,10 +17,11 @@ def mtcnn(image, margin=100): #PIL
     )
     
     bbox, _ = mtcnn.detect(numpy_image)
-    crop_area = (bbox[0][0]-margin//2, # get bbox area with margin
-                 bbox[0][1]-margin//2,
-                 bbox[0][2]+margin//2,
-                 bbox[0][3]+margin//2)
+    crop_area = (bbox[0][0]-(bbox[0][2]-bbox[0][0])//2, # get bbox area with margin
+                 bbox[0][1]-(bbox[0][3]-bbox[0][1])//2,
+                 bbox[0][2]+(bbox[0][2]-bbox[0][0])//2,
+                 bbox[0][3]+(bbox[0][3]-bbox[0][1])//2)
+    
     pil_image = Image.fromarray(numpy_image)
     crop_img = pil_image.crop(crop_area)
     
