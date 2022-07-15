@@ -25,7 +25,7 @@ def get_augmentation(data_type):
             A.Blur(p=0.8),
         ],p=1.0),
         A.ColorJitter (brightness=0.2, contrast=0.2, saturation=0.2, hue=0.2, always_apply=False, p=0.5),
-        A.HorizontalFlip(p=0.5),
+        # A.HorizontalFlip(p=0.5),
         A.ShiftScaleRotate(shift_limit=0.0625, scale_limit=(-0.5, 0),rotate_limit=30, border_mode=0 ,p=0.8,),
         A.Normalize(
             mean=[0.4897,0.4897,0.4897],

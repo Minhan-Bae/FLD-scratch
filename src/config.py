@@ -17,7 +17,7 @@ EXP = {
 SEED = 2022
 
 BATCH_SIZE = 256
-WORKERS = 4
+WORKERS = 16
 
 TYPE = "v15"
 
