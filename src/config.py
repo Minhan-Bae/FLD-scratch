@@ -19,7 +19,7 @@ SEED = 2022
 BATCH_SIZE = 256
 WORKERS = 16
 
-TYPE = "v15"
+TYPE = "v1-aug"
 
 MODEL_NAME = "swin_base_patch4_window7_224"
 PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-14/swin_v13/v13_swin_base_patch4_window7_224_best.pt"

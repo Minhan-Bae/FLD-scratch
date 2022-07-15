@@ -5,7 +5,6 @@ import cv2
 def get_augmentation(data_type):    
     if data_type=="train":
         return A.Compose([
-        A.Resize(width = 224,height = 224),
         A.Rotate(limit = 15,border_mode =0, p=0.8),
         A.RandomBrightnessContrast(contrast_limit=0.5,brightness_limit=0.5,p=0.2),
         A.OneOf([
@@ -25,27 +24,25 @@ def get_augmentation(data_type):
             A.Blur(p=0.8),
         ],p=1.0),
         A.ColorJitter (brightness=0.2, contrast=0.2, saturation=0.2, hue=0.2, always_apply=False, p=0.5),
-        # A.HorizontalFlip(p=0.5),
         A.ShiftScaleRotate(shift_limit=0.0625, scale_limit=(-0.5, 0),rotate_limit=30, border_mode=0 ,p=0.8,),
         A.Normalize(
             mean=[0.4897,0.4897,0.4897],
             std = [0.2330,0.2330,0.2330],
             max_pixel_value=255.0,
         ),
+        A.Resize(width = 224,height = 224),
         ToTensorV2(),
         ],keypoint_params = A.KeypointParams(format="xy",remove_invisible = False)
     )
     
     elif data_type=="valid":
         return A.Compose([ 
-        A.Resize(height=224,width=224),
-        # A.Rotate(limit = 15,border_mode=0,p=0.8),
-        # A.ShiftScaleRotate(shift_limit=0.0625, scale_limit=(-0.5, 0),rotate_limit=30, border_mode=0 ,p=0.8,),
         A.Normalize(
             mean=[0.4897,0.4897,0.4897],
             std = [0.2330,0.2330,0.2330],
             max_pixel_value=255.0,
         ),
+        A.Resize(height=224,width=224),
         ToTensorV2(),    
         ],keypoint_params = A.KeypointParams(format="xy",remove_invisible = False)
     )
