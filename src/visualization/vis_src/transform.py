@@ -7,7 +7,7 @@ from PIL import Image
 
 from facenet_pytorch import MTCNN
 
-def mtcnn(image, margin=200): #PIL
+def mtcnn(image, margin=100): #PIL
     numpy_image =  np.array(image)
     # numpy_image = numpy.
     mtcnn = MTCNN(
