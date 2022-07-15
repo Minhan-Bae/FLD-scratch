@@ -66,7 +66,7 @@ early_cnt = 0
 best_loss = np.inf
 best_nme = np.inf
 
-loss_list = []
+log_list = []
 
 OPTIMIZER.zero_grad()
 
@@ -104,18 +104,19 @@ for epoch in range(EXP["EPOCH"]):
         description_train = f"| # Epoch: {epoch+1}/{EXP['EPOCH']}, Loss: {cum_loss/(idx+1):.8f}"
         pbar.set_description(description_train)   
     SCHEDULER.step()
-    loss_list.append(f"| # Epoch: {epoch+1}/{EXP['EPOCH']}, Loss: {cum_loss/(idx+1):.8f}")
+    log_list.append(f"| # Epoch: {epoch+1}/{EXP['EPOCH']}, Loss: {cum_loss/(idx+1):.8f}")
     
     if epoch%5==0: 
         model.eval()
         mean_nme, std_nme = validate(os.path.join(f'{SAVE_IMAGE_PATH}',
                                         f'epoch({str(epoch + 1).zfill(len(str(EXP["EPOCH"])))}).jpg'))
-        loss_list.append(f"     EPOCH : {epoch+1}/{EXP['EPOCH']}\tNME_MEAN : {mean_nme:.8f}\tNME_STD : {std_nme:.8f}")
+        log_list.append(f"     EPOCH : {epoch+1}/{EXP['EPOCH']}\tNME_MEAN : {mean_nme:.8f}\tNME_STD : {std_nme:.8f}")
         torch.save(MODEL.state_dict(), os.path.join(SAVE_MODEL_PATH, f"{TYPE}_{MODEL_NAME}_{epoch}.pt"))
         if mean_nme < best_nme:
             early_cnt = 0
             best_nme = mean_nme
             print(f'|   >> Saving model..   Best NME : {best_nme:.8f}')
+            log_list.append(f"|   >> Saving model..   Best NME : {best_nme:.8f}")
             torch.save(MODEL.state_dict(), SAVE_MODEL)
         
         else:
@@ -124,15 +125,16 @@ for epoch in range(EXP["EPOCH"]):
             if early_cnt >= EARLY_STOPPING_CNT:
                 break
 
-        df = pd.DataFrame(loss_list)
+        df = pd.DataFrame(log_list)
         df.to_csv(f"{SAVE_PATH}/{TYPE}_validation.csv", index=None, header=None)
+        
 print(f"best mean nme is : {best_nme:.8f}")
 print('Training Complete')
 print("Total Elapsed Time : {} s".format(time.time()-start_time))    
 
-loss_list.append(f"best mean nme is : {best_nme:.8f}")
-loss_list.append("Training Complete")
-loss_list.append("Total Elapsed Time : {} s".format(time.time()-start_time))
+log_list.append(f"best mean nme is : {best_nme:.8f}")
+log_list.append("Training Complete")
+log_list.append("Total Elapsed Time : {} s".format(time.time()-start_time))
 
-df = pd.DataFrame(loss_list)
+df = pd.DataFrame(log_list)
 df.to_csv(f"{SAVE_PATH}/{TYPE}_validation.csv", index=None, header=None)

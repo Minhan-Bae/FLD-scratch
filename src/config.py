@@ -1,6 +1,6 @@
 from datetime import date
+
 import os
-import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.optim.lr_scheduler import CosineAnnealingWarmRestarts
@@ -10,8 +10,8 @@ DEVICE = '0,1,2,3'
 EXP = {
     "DAY": date.today().isoformat(),
     "MODEL" : "swin",
-    "EPOCH" : 100,
-    "LR" : 1e-4,
+    "EPOCH" : 500,
+    "LR" : 2e-5,
 }
 
 SEED = 2022
@@ -19,10 +19,10 @@ SEED = 2022
 BATCH_SIZE = 256
 WORKERS = 4
 
-TYPE = "v13"
+TYPE = "v14-2"
 
 MODEL_NAME = "swin_base_patch4_window7_224"
-PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-14/swin_v12/v12_swin_base_patch4_window7_224_best.pt"
+PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-14/swin_v13/v13_swin_base_patch4_window7_224_best.pt"
 
 MODEL = timm_Net_54(model_name=MODEL_NAME, pretrained=PRETRAINED_WEIGHT_PATH)
 
@@ -37,4 +37,4 @@ SAVE_MODEL = os.path.join(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}
 LOSS = nn.MSELoss()
 OPTIMIZER = optim.Adam(MODEL.parameters(), lr = EXP["LR"])
 SCHEDULER = CosineAnnealingWarmRestarts(OPTIMIZER, T_0=EXP["EPOCH"], T_mult=1)
-EARLY_STOPPING_CNT = 20
+EARLY_STOPPING_CNT = 20 
