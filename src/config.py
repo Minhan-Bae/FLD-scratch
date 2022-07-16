@@ -11,7 +11,7 @@ EXP = {
     "DAY": date.today().isoformat(),
     "MODEL" : "swin",
     "EPOCH" : 500,
-    "LR" : 1e-4,
+    "LR" : 2e-5,
 }
 
 SEED = 2022
@@ -19,7 +19,7 @@ SEED = 2022
 BATCH_SIZE = 256
 WORKERS = 16 # number of gpu * 4
 
-TYPE = "v16"
+TYPE = "v17"
 
 MODEL_NAME = "swin_base_patch4_window7_224"
 PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/high_performance_pretrained/v15_swin_base_patch4_window7_224_best.pt"
@@ -37,4 +37,4 @@ SAVE_MODEL = os.path.join(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}
 LOSS = nn.MSELoss()
 OPTIMIZER = optim.Adam(MODEL.parameters(), lr = EXP["LR"])
 SCHEDULER = CosineAnnealingWarmRestarts(OPTIMIZER, T_0=EXP["EPOCH"], T_mult=1)
-EARLY_STOPPING_CNT = 20 
+EARLY_STOPPING_CNT = 50 
