@@ -105,7 +105,7 @@ for epoch in range(EXP["EPOCH"]):
         
         description_train = f"| # Epoch: {epoch+1}/{EXP['EPOCH']}, Loss: {cum_loss/(idx+1):.8f}"
         pbar.set_description(description_train)   
-    SCHEDULER.step()
+    SCHEDULER.step(cum_loss)
     log_list.append(f"| # Epoch: {epoch+1}/{EXP['EPOCH']}, Loss: {cum_loss/(idx+1):.8f}")
     
     if epoch%5==0: 

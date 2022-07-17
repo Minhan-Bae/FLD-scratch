@@ -30,7 +30,7 @@ def get_augmentation(data_type):
             std = [0.2330,0.2330,0.2330],
             max_pixel_value=255.0,
         ),
-        A.Resize(width = 224,height = 224),
+        A.Resize(width = 112,height = 112),
         ToTensorV2(),
         ],keypoint_params = A.KeypointParams(format="xy",remove_invisible = False)
     )
@@ -42,7 +42,7 @@ def get_augmentation(data_type):
             std = [0.2330,0.2330,0.2330],
             max_pixel_value=255.0,
         ),
-        A.Resize(height=224,width=224),
+        A.Resize(height=112,width=112),
         ToTensorV2(),    
         ],keypoint_params = A.KeypointParams(format="xy",remove_invisible = False)
     )

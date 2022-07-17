@@ -64,7 +64,7 @@ class kfacedataset(Dataset):
         image /= 255
         
         label = torch.tensor(label, dtype=torch.float)
-        label /= 224
+        label /= 112
         label = label.reshape(-1) - 0.5
         
         return image, label

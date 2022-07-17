@@ -160,7 +160,7 @@ class PFLDInference(nn.Module):
 
 def get_model():
     model = PFLDInference()
-    checkpoint = torch.load("/data/komedi/checkpoint.pth.tar")
+    checkpoint = torch.load("/data/komedi/checkpoint.pth.tar",map_location = 'cpu')
     model.load_state_dict(checkpoint["pfld_backbone"],strict=False)
     return model
 #     input = torch.randn(1, 3, 112, 112)
