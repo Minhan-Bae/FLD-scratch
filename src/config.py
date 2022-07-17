@@ -6,25 +6,28 @@ import torch.optim as optim
 from torch.optim.lr_scheduler import CosineAnnealingWarmRestarts
 
 from models.timm_swin import timm_Net_54
-DEVICE = '0,1,2,3'
+from models.xception import XceptionNet
+from models.pfld import *
+
+DEVICE = '0,1'
 EXP = {
     "DAY": date.today().isoformat(),
-    "MODEL" : "swin",
-    "EPOCH" : 500,
-    "LR" : 2e-5,
+    "MODEL" : "pfld",
+    "EPOCH" : 200,
+    "LR" : 1e-4,
 }
 
 SEED = 2022
 
-BATCH_SIZE = 256
+BATCH_SIZE = 512
 WORKERS = 16 # number of gpu * 4
 
-TYPE = "v17"
+TYPE = "ver1" # change nme metric
+MODEL_NAME="pfld"
+# MODEL_NAME = "swin_base_patch4_window7_224"
+# PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-15/swin_v15/v15_swin_base_patch4_window7_224_best.pt"
 
-MODEL_NAME = "swin_base_patch4_window7_224"
-PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/high_performance_pretrained/v15_swin_base_patch4_window7_224_best.pt"
-
-MODEL = timm_Net_54(model_name=MODEL_NAME, pretrained=PRETRAINED_WEIGHT_PATH)
+MODEL = get_model()
 
 os.makedirs(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}/image_logs", exist_ok=True)
 os.makedirs(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}/model_logs",exist_ok=True)
@@ -35,6 +38,7 @@ SAVE_MODEL_PATH = os.path.join(SAVE_PATH,"model_logs")
 
 SAVE_MODEL = os.path.join(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}", f"{TYPE}_{MODEL_NAME}_best.pt")
 LOSS = nn.MSELoss()
-OPTIMIZER = optim.Adam(MODEL.parameters(), lr = EXP["LR"])
-SCHEDULER = CosineAnnealingWarmRestarts(OPTIMIZER, T_0=EXP["EPOCH"], T_mult=1)
-EARLY_STOPPING_CNT = 50 
+OPTIMIZER = optim.Adam(MODEL.parameters(), lr = EXP["LR"], weight_decay=1e-6)
+SCHEDULER =  torch.optim.lr_scheduler.ReduceLROnPlateau(
+        OPTIMIZER, mode='min', patience=40, verbose=True)
+EARLY_STOPPING_CNT = 50
