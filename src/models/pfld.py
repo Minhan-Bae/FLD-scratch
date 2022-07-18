@@ -131,7 +131,7 @@ class PFLDInference(nn.Module):
         landmarks = self.fc(multi_scale)
         landmarks = self.fc2(landmarks)
         return landmarks
-        # return landmarks
+        # return out1, landmarks
 
 
 # class AuxiliaryNet(nn.Module):
@@ -157,12 +157,13 @@ class PFLDInference(nn.Module):
 
 #         return x
 
-
-def get_model():
+def get_model(pretrained=None):
     model = PFLDInference()
-    checkpoint = torch.load("/data/komedi/logs/2022-07-18/pfld_ver1/ver1_pfld_best.pt",map_location = 'cpu')
-    model.load_state_dict(checkpoint,strict=False)
+    if pretrained:
+        checkpoint = torch.load(pretrained, map_location = 'cpu')
+        model.load_state_dict(checkpoint,strict=False)
     return model
+
 #     input = torch.randn(1, 3, 112, 112)
 #     pfld_backbone = PFLDInference()
 #     auxiliarynet = AuxiliaryNet()
