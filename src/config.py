@@ -24,10 +24,16 @@ WORKERS = 16 # number of gpu * 4
 
 TYPE = "exp_3" # change nme metric
 MODEL_NAME="pfld"
-PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-18/pfld_ver1/ver1_pfld_best.pt"
 
-MODEL = get_model(pretrained=PRETRAINED_WEIGHT_PATH)
+if MODEL_NAME == "pfld":
+    PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-18/pfld_ver1/ver1_pfld_best.pt"
 
+    MODEL = get_model(pretrained=PRETRAINED_WEIGHT_PATH)
+    
+elif MODEL_NAME == "swin_base_patch4_window7_224":
+    PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-15/swin_v15/v15_swin_base_patch4_window7_224_best.pt"
+    
+    MODEL = timm_Net_54(model_name=MODEL_NAME, pretrained=PRETRAINED_WEIGHT_PATH)
 
 os.makedirs(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}/image_logs", exist_ok=True)
 os.makedirs(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}/model_logs",exist_ok=True)
