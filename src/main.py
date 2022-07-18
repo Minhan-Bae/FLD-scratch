@@ -32,13 +32,12 @@ devices_id = [int(d) for d in DEVICE.split(',')]
 seed_everything(SEED)
 
 # Set dataloader
-train_loader, valid_loader = kfacedataloader(batch_size=BATCH_SIZE, workers=WORKERS)
+train_loader, valid_loader_kface, valid_loader_aflw = kfacedataloader(batch_size=BATCH_SIZE, workers=WORKERS)
 
 # define validate function
-def validate(save = None):
+def validate(valid_loader, type, save = None):
     cum_loss = 0.0
     cum_mean_nme = 0.0
-    cum_std_nme = 0.0
     
     pbar = tqdm(enumerate(valid_loader), total=len(valid_loader))
     with torch.no_grad():
@@ -49,12 +48,12 @@ def validate(save = None):
             with autocast(enabled=True):
                 outputs = model(features).cuda()
                 loss = LOSS(outputs, labels)
-                mean_nme, std_nme = NME(outputs, labels)
+                mean_nme, _ = NME(outputs, labels)
             
             cum_loss += loss.item()
             cum_mean_nme += mean_nme.item()
             
-            description_valid = f"| # mean_nme: {cum_mean_nme/(idx+1):.8f}, cum_loss: {cum_loss/(idx+1):.8f}"
+            description_valid = f"| # {type}_mean_nme: {cum_mean_nme/(idx+1):.4f}, cum_loss: {cum_loss/(idx+1):.8f}"
             pbar.set_description(description_valid)
             
         visualize_batch(features[:16].cpu(), outputs[:16].cpu(), labels[:16].cpu(),
@@ -109,31 +108,48 @@ for epoch in range(EXP["EPOCH"]):
     
     if epoch%5==0: 
         model.eval()
-        mean_nme, val_loss = validate(os.path.join(f'{SAVE_IMAGE_PATH}',
-                                        f'epoch({str(epoch + 1).zfill(len(str(EXP["EPOCH"])))}).jpg'))
-        log_list.append(f"     EPOCH : {epoch+1}/{EXP['EPOCH']}\tNME_MEAN : {mean_nme:.8f}\tVAL_LOSS : {val_loss:.8f}")
+        mean_nme_kface, val_loss_kface = validate(valid_loader_kface,
+                                                  type="kface",
+                                                  save=os.path.join(f'{SAVE_IMAGE_PATH}/kface',
+                                                                    f'epoch({str(epoch + 1).zfill(len(str(EXP["EPOCH"])))}).jpg'))
+        mean_nme_aflw, val_loss_aflw = validate(valid_loader_aflw,
+                                                type="aflw",
+                                                save=os.path.join(f'{SAVE_IMAGE_PATH}/aflw',
+                                                                    f'epoch({str(epoch + 1).zfill(len(str(EXP["EPOCH"])))}).jpg'))
+        
+        mean_nme = 0.4*mean_nme_kface+0.6*mean_nme_aflw
+        val_loss = 0.4*val_loss_kface+0.6*val_loss_aflw
+        
+        log_list.append(f"     EPOCH : {epoch+1}/{EXP['EPOCH']}\tNME_MEAN : {mean_nme:.4f}\tVAL_LOSS : {val_loss:.8f}")
+        log_list.append(f"            Kface_NME : {mean_nme_kface:.4f}\tAFLW_NME : {mean_nme_aflw:.4f}")
+        log_list.append(f"            Kface_loss: {val_loss_kface:.4f}\tAFLW_loss: {val_loss_aflw:.4f}")
+        
         torch.save(MODEL.state_dict(), os.path.join(SAVE_MODEL_PATH, f"{TYPE}_{MODEL_NAME}_{epoch}.pt"))
+
+        if mean_nme < best_nme:
+            best_nme = mean_nme
+
         if val_loss < best_loss:
             early_cnt = 0
             best_loss = val_loss
-            print(f'|   >> Saving model..  NME : {mean_nme:.8f}')
-            log_list.append(f"|   >> Saving model..   NME : {mean_nme:.8f}")
+            print(f'|   >> Saving model..  NME : {mean_nme:.4f}')
+            log_list.append(f"|   >> Saving model..   NME : {mean_nme:.4f}")
             torch.save(MODEL.state_dict(), SAVE_MODEL)
         
         else:
             early_cnt += 1
-            print(f"Early stopping cnt... {early_cnt}")
+            print(f"Early stopping cnt... {early_cnt}  Best_NME : {mean_nme:.4f}")
             if early_cnt >= EARLY_STOPPING_CNT:
                 break
 
         df = pd.DataFrame(log_list)
         df.to_csv(f"{SAVE_PATH}/{TYPE}_validation.csv", index=None, header=None)
         
-print(f"best mean nme is : {best_nme:.8f}")
+print(f"best mean nme is : {best_nme:.4f}")
 print('Training Complete')
 print("Total Elapsed Time : {} s".format(time.time()-start_time))    
 
-log_list.append(f"best mean nme is : {best_nme:.8f}")
+log_list.append(f"best mean nme is : {best_nme:.4f}")
 log_list.append("Training Complete")
 log_list.append("Total Elapsed Time : {} s".format(time.time()-start_time))
 

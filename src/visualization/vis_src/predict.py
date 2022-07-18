@@ -50,7 +50,7 @@ def swin_run(image_path, img_size=224,
 
 # PFLD
 def pfld_run(image_path, img_size=112,
-        pretrained = "/data/komedi/logs/2022-07-18/pfld_v03/v03_pfld_best.pt",
+        pretrained = "/data/komedi/logs/2022-07-18/pfld_v05_19_00/v05_19_00_pfld_best.pt",
         save=False):
 
     image = Image.open(image_path)
