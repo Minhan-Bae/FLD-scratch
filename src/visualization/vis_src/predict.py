@@ -29,27 +29,27 @@ def visualization(image, crop_img, landmarks, w, h, save=False):
         plt.savefig(save)
 
 # TIMM swin 
-# def run(image_path,
-#         model_name = "swin_base_patch4_window7_224",
-#         pretrained = "/data/komedi/logs/2022-07-13/swin_v8/v8_swin_base_patch4_window7_224_best.pt",
-#         save=False):
+def swin_run(image_path, img_size=224,
+        model_name = "swin_base_patch4_window7_224",
+        pretrained = "/data/komedi/logs/2022-07-15/swin_v15_nme_42/v15_swin_base_patch4_window7_224_best.pt",
+        save=False):
 
-#     image = Image.open(image_path)
+    image = Image.open(image_path)
     
-#     image_tensor, crop_img, h, w = transform(image)
+    image_tensor, crop_img, h, w = transform(image, img_size)
     
-#     model = timm_Net_54(model_name = model_name,
-#                         pretrained = pretrained)
+    model = timm_Net_54(model_name = model_name,
+                        pretrained = pretrained)
     
-#     predict = model(image_tensor)
+    predict = model(image_tensor)
 
-#     landmarks = ((predict.view(-1,2)+0.5)).detach().numpy().tolist()
-#     landmarks = np.array([(x, y) for (x, y) in landmarks if 0 <= x and 0 <= y])
+    landmarks = ((predict.view(-1,2)+0.5)).detach().numpy().tolist()
+    landmarks = np.array([(x, y) for (x, y) in landmarks if 0 <= x and 0 <= y])
     
-#     visualization(image, crop_img, landmarks, w, h, save)
+    visualization(image, crop_img, landmarks, w, h, save)
 
 # PFLD
-def run(image_path,
+def pfld_run(image_path, img_size=112,
         pretrained = "/data/komedi/logs/2022-07-18/pfld_ver1/ver1_pfld_best.pt",
         save=False):
 

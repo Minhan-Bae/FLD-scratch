@@ -3,7 +3,7 @@ warnings.filterwarnings("ignore")
 
 import torch
 import timm
-
+# timm-model
 def timm_Net_54(model_name, pretrained=None, num_classes=54):
     model = timm.create_model(
         model_name=model_name,
@@ -21,7 +21,7 @@ import torch
 import torch.nn as nn
 import math
 
-
+# pfld
 def conv_bn(inp, oup, kernel, stride, padding=1):
     return nn.Sequential(
         nn.Conv2d(inp, oup, kernel, stride, padding, bias=False),

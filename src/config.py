@@ -19,14 +19,14 @@ EXP = {
 
 SEED = 2022
 
-BATCH_SIZE = 512
+BATCH_SIZE = 1024
 WORKERS = 16 # number of gpu * 4
 
-TYPE = "exp_3" # change nme metric
+TYPE = "v03" # v00_H_M
 MODEL_NAME="pfld"
 
 if MODEL_NAME == "pfld":
-    PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-18/pfld_ver1/ver1_pfld_best.pt"
+    PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-18/pfld_v02/v02_pfld_best.pt"
 
     MODEL = get_model(pretrained=PRETRAINED_WEIGHT_PATH)
     
@@ -48,18 +48,3 @@ OPTIMIZER = optim.Adam(MODEL.parameters(), lr = EXP["LR"], weight_decay=1e-6)
 SCHEDULER =  torch.optim.lr_scheduler.ReduceLROnPlateau(
         OPTIMIZER, mode='min', patience=40, verbose=True)
 EARLY_STOPPING_CNT = 50
-
-"""
-Note: 22-07-18 03:21
-
-Epoch 200 -> 500
-Add angle
-
-roll: 코 가운데 점 턱점 두점의 기울어진 정도로 지정
-pitch: 모르겠다..#TODO 옆모습은 할 수 있는데, 이게 문제네..?
-yaw: 눈 끝점과 가운데점의 거리가 같다고 했을 때, 비율로 계산
-
-"""
-#TODO set gt angle
-#TODO change loss
-
