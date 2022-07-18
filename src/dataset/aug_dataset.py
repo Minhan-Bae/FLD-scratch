@@ -37,7 +37,9 @@ class kfacedataset(Dataset):
     def __getitem__(self, idx):
         data_list = self.data_list
         image = cv2.imread(data_list[idx][1])
-
+        pil_image = Image.fromarray(image)
+        image = np.array(pil_image)
+        
         labels = data_list[idx][2:]
         label_list = []
         for label in labels:
@@ -55,7 +57,7 @@ class kfacedataset(Dataset):
         image /= 255
         
         label = torch.tensor(label, dtype=torch.float)
-        label /= 224
+        label /= 112
         label = label.reshape(-1) - 0.5
         
         return image, label

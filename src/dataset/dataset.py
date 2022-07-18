@@ -23,9 +23,9 @@ class kfacedataset(Dataset):
         super().__init__()
         self.type = type
         if self.type == "train":
-            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/kface_w300_alfw_train.csv"
+            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/train_df.csv"
         else:
-            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/kface_w300_alfw_valid.csv"
+            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/valid_df.csv"
         
         self.transform = transform
         self.data_list = pd.read_csv(self.data_path,header=None).values.tolist()
@@ -64,7 +64,7 @@ class kfacedataset(Dataset):
         image /= 255
         
         label = torch.tensor(label, dtype=torch.float)
-        label /= 224
+        label /= 112
         label = label.reshape(-1) - 0.5
         
         return image, label

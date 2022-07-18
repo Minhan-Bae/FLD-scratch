@@ -37,6 +37,7 @@ train_loader, valid_loader = kfacedataloader(batch_size=BATCH_SIZE, workers=WORK
 
 # define validate function
 def validate(save = None):
+    cum_loss = 0.0
     cum_mean_nme = 0.0
     cum_std_nme = 0.0
     
@@ -48,18 +49,19 @@ def validate(save = None):
             
             with autocast(enabled=True):
                 outputs = model(features).cuda()
+                loss = LOSS(outputs, labels)
                 mean_nme, std_nme = NME(outputs, labels)
             
+            cum_loss += loss.item()
             cum_mean_nme += mean_nme.item()
-            cum_std_nme += std_nme.item()
             
-            description_valid = f"| # mean_nme: {cum_mean_nme/(idx+1):.8f}, std_nme: {cum_std_nme/(idx+1):.8f}"
+            description_valid = f"| # mean_nme: {cum_mean_nme/(idx+1):.8f}, cum_loss: {cum_loss/(idx+1):.8f}"
             pbar.set_description(description_valid)
             
         visualize_batch(features[:16].cpu(), outputs[:16].cpu(), labels[:16].cpu(),
                     shape = (4, 4), size = 16, title = None, save = save)
     
-    return cum_mean_nme/len(valid_loader), cum_std_nme/len(valid_loader)
+    return cum_mean_nme/len(valid_loader), cum_loss/len(valid_loader)
 
 # initialize earlystopping count, best_score
 early_cnt = 0
@@ -103,20 +105,20 @@ for epoch in range(EXP["EPOCH"]):
         
         description_train = f"| # Epoch: {epoch+1}/{EXP['EPOCH']}, Loss: {cum_loss/(idx+1):.8f}"
         pbar.set_description(description_train)   
-    SCHEDULER.step()
+    SCHEDULER.step(cum_loss)
     log_list.append(f"| # Epoch: {epoch+1}/{EXP['EPOCH']}, Loss: {cum_loss/(idx+1):.8f}")
     
     if epoch%5==0: 
         model.eval()
-        mean_nme, std_nme = validate(os.path.join(f'{SAVE_IMAGE_PATH}',
+        mean_nme, val_loss = validate(os.path.join(f'{SAVE_IMAGE_PATH}',
                                         f'epoch({str(epoch + 1).zfill(len(str(EXP["EPOCH"])))}).jpg'))
-        log_list.append(f"     EPOCH : {epoch+1}/{EXP['EPOCH']}\tNME_MEAN : {mean_nme:.8f}\tNME_STD : {std_nme:.8f}")
+        log_list.append(f"     EPOCH : {epoch+1}/{EXP['EPOCH']}\tNME_MEAN : {mean_nme:.8f}\tVAL_LOSS : {val_loss:.8f}")
         torch.save(MODEL.state_dict(), os.path.join(SAVE_MODEL_PATH, f"{TYPE}_{MODEL_NAME}_{epoch}.pt"))
-        if mean_nme < best_nme:
+        if val_loss < best_loss:
             early_cnt = 0
-            best_nme = mean_nme
-            print(f'|   >> Saving model..   Best NME : {best_nme:.8f}')
-            log_list.append(f"|   >> Saving model..   Best NME : {best_nme:.8f}")
+            best_loss = val_loss
+            print(f'|   >> Saving model..  NME : {mean_nme:.8f}')
+            log_list.append(f"|   >> Saving model..   NME : {mean_nme:.8f}")
             torch.save(MODEL.state_dict(), SAVE_MODEL)
         
         else:
