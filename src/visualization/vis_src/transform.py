@@ -29,7 +29,7 @@ def mtcnn(image, margin=400): #PIL
 
 def transform(image):
     crop_img, h, w = mtcnn(image)
-    resize_img = TF.resize(crop_img, (224,224))
+    resize_img = TF.resize(crop_img, (112,112))
     image_tensor = TF.to_tensor(resize_img)
     image_tensor = image_tensor.unsqueeze(0)
     return image_tensor, crop_img, h, w
