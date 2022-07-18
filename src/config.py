@@ -13,7 +13,7 @@ EXP = {
     "DAY": date.today().isoformat(),
     "MODEL" : "pfld",
     "EPOCH" : 500,
-    "LR" : 1e-5,
+    "LR" : 2e-5,
 }
 
 SEED = 2022
@@ -21,12 +21,12 @@ SEED = 2022
 BATCH_SIZE = 1024
 WORKERS = 16 # number of gpu * 4
 
-TYPE = "v05_19_00" # v00_H_M
+TYPE = "v06_00_30" # v00_H_M
 
 MODEL_NAME = EXP["MODEL"]
 
 if MODEL_NAME == "pfld":
-    PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-18/pfld_v03/v03_pfld_best.pt"
+    PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-18/pfld_v05_19_00/v05_19_00_pfld_best.pt"
     MODEL = get_model(pretrained=PRETRAINED_WEIGHT_PATH)
     
 elif MODEL_NAME == "swin_base_patch4_window7_224":
