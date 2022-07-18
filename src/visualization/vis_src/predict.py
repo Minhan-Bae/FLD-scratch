@@ -50,12 +50,12 @@ def swin_run(image_path, img_size=224,
 
 # PFLD
 def pfld_run(image_path, img_size=112,
-        pretrained = "/data/komedi/logs/2022-07-18/pfld_ver1/ver1_pfld_best.pt",
+        pretrained = "/data/komedi/logs/2022-07-18/pfld_v03/v03_pfld_best.pt",
         save=False):
 
     image = Image.open(image_path)
     
-    image_tensor, crop_img, h, w = transform(image)
+    image_tensor, crop_img, h, w = transform(image, img_size)
     
     model = PFLDInference()
     

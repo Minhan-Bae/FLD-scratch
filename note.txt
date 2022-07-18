@@ -2,7 +2,7 @@
     >> AFLW-2000 3D 데이터셋 Augmentation 완료
     - 총 24,934 건
     >> 11:40 PFLD-v03 학습
-    >> 00:00 PFLD-v04 학습
+    >> 00:00 PFLD-v04 학습 : gpu 2,3 사용해서 해보기
         - v03과의 차별성: augmentation 단계에서 totensor만 넣어서 학습
 
 # TODO 22-07-16 ~ 17

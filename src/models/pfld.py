@@ -134,31 +134,32 @@ class PFLDInference(nn.Module):
         # return out1, landmarks
 
 
-# class AuxiliaryNet(nn.Module):
-#     def __init__(self):
-#         super(AuxiliaryNet, self).__init__()
-#         self.conv1 = conv_bn(64, 128, 3, 2)
-#         self.conv2 = conv_bn(128, 128, 3, 1)
-#         self.conv3 = conv_bn(128, 32, 3, 2)
-#         self.conv4 = conv_bn(32, 128, 7, 1)
-#         self.max_pool1 = nn.MaxPool2d(3)
-#         self.fc1 = nn.Linear(128, 32)
-#         self.fc2 = nn.Linear(32, 3)
+class AuxiliaryNet(nn.Module):
+    def __init__(self):
+        super(AuxiliaryNet, self).__init__()
+        self.conv1 = conv_bn(64, 128, 3, 2)
+        self.conv2 = conv_bn(128, 128, 3, 1)
+        self.conv3 = conv_bn(128, 32, 3, 2)
+        self.conv4 = conv_bn(32, 128, 7, 1)
+        self.max_pool1 = nn.MaxPool2d(3)
+        self.fc1 = nn.Linear(128, 32)
+        self.fc2 = nn.Linear(32, 2)
 
-#     def forward(self, x):
-#         x = self.conv1(x)
-#         x = self.conv2(x)
-#         x = self.conv3(x)
-#         x = self.conv4(x)
-#         x = self.max_pool1(x)
-#         x = x.view(x.size(0), -1)
-#         x = self.fc1(x)
-#         x = self.fc2(x)
+    def forward(self, x):
+        x = self.conv1(x)
+        x = self.conv2(x)
+        x = self.conv3(x)
+        x = self.conv4(x)
+        x = self.max_pool1(x)
+        x = x.view(x.size(0), -1)
+        x = self.fc1(x)
+        x = self.fc2(x)
 
-#         return x
+        return x
 
 def get_model(pretrained=None):
     model = PFLDInference()
+    model.eval()
     if pretrained:
         checkpoint = torch.load(pretrained, map_location = 'cpu')
         model.load_state_dict(checkpoint,strict=False)

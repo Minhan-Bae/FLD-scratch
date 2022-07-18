@@ -5,7 +5,7 @@ def kfacedataloader(batch_size, workers):
     k_dataset_train = aug_dataset.kfacedataset(
         type="train",
         transform=augmentation.get_augmentation(data_type="train")
-        )
+        ) # normalize만 넣어서,
 
     k_dataset_valid = aug_dataset.kfacedataset(
         type="valid",
