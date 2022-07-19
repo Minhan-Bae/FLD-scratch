@@ -1,8 +1,13 @@
 # TODO FUTURE
-
+"""
 - landmark 인덱싱 -> 인덱싱한 landmark에서 축 당 2개씩 선정
     - 코사인 값을 label로 하여 2 class 산정
     - loss의 경우 cosine similarity로 설정 
+"""
+
+# TODO 22-07-19
+    >> exp: v07 - dataset 단계에서 데이터 증대하기 시작
+    >> 
 
 # TODO 22-07-18
     >> AFLW-2000 3D 데이터셋 Augmentation 완료
@@ -14,7 +19,7 @@
     >> valid dataset을 kface와 aflw로 나눠서 평가 ㄱㅁ
 
 # TODO 22-07-16 ~ 17
-    >> 삽질X 그거 아님
+    >> 삽질X 그거 아님 : 가스라이팅에 당하지 말기
 
 # TODO 22-07-15
 
