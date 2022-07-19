@@ -130,8 +130,8 @@ class PFLDInference(nn.Module):
         multi_scale = torch.cat([x1, x2, x3], 1)
         landmarks = self.fc(multi_scale)
         landmarks = self.fc2(landmarks)
-        return landmarks
-        # return out1, landmarks
+        # return landmarks
+        return out1, landmarks
 
 
 class AuxiliaryNet(nn.Module):
@@ -157,13 +157,20 @@ class AuxiliaryNet(nn.Module):
 
         return x
 
-def get_model(pretrained=None):
-    model = PFLDInference()
-    model.eval()
-    if pretrained:
-        checkpoint = torch.load(pretrained, map_location = 'cpu')
-        model.load_state_dict(checkpoint,strict=False)
-    return model
+def get_model(pfld_pretrained=None, auxil_pretrained=None):
+    pfld_backbone = PFLDInference()
+    pfld_backbone.eval()
+    if pfld_pretrained:
+        checkpoint = torch.load(pfld_pretrained, map_location = 'cpu')
+        pfld_backbone.load_state_dict(checkpoint,strict=False)
+        
+    auxiliarynet = AuxiliaryNet()
+    auxiliarynet.eval()
+    if auxil_pretrained:
+        checkpoint = torch.load(auxil_pretrained, map_location= 'cpu')
+        auxiliarynet.load_state_dict(checkpoint,strict=False)
+
+    return pfld_backbone, auxiliarynet
 
 #     input = torch.randn(1, 3, 112, 112)
 #     pfld_backbone = PFLDInference()

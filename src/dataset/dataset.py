@@ -2,7 +2,6 @@ import cv2
 import torch
 import numpy as np
 import pandas as pd
-
 from PIL import Image
 from torch.utils.data import Dataset
 
@@ -17,8 +16,8 @@ idx 7 ~ 9: pose para
 idx 10 ~ : landmark
 """
 
-class kfacedataset(Dataset):
-    def __init__(self, type="train", transform=None, aug_data_num=5):
+class AFLWDatasets(Dataset):
+    def __init__(self, type="train", transform=None, aug_data_num=10):
         super().__init__()
         self.type = type
         
@@ -29,6 +28,8 @@ class kfacedataset(Dataset):
         
         self.transform = transform
         self.data_list = pd.read_csv(self.data_path,header=None).values.tolist()
+        
+        # pluses dataset of train
         if self.type == "train":
             self.data_list *=aug_data_num
 
@@ -37,32 +38,45 @@ class kfacedataset(Dataset):
 
 
     def __getitem__(self, idx):
+        # read data
         data_list = self.data_list
+
+        # read image
         image = cv2.imread(data_list[idx][2])
+        
+        margin = 200
+        crop_area = (data_list[idx][3]-margin//2, # get bbox area with margin
+                    data_list[idx][4]-margin//2,
+                    data_list[idx][5]+margin//2,
+                    data_list[idx][6]+margin//2)
+
         pil_image = Image.fromarray(image)
-        image = np.array(pil_image)
+        image = pil_image.crop(crop_area)
+        image = np.array(image)
         
-        pose = data_list[idx][7:9]
+        # read pose        
+        euler_angle = np.asarray(data_list[idx][7:10], dtype=np.float32)
         
+        # read label
         labels = data_list[idx][10:]
-        
         label_list = []
         for label in labels:
             x,y = eval(label[1:-1])
             label_list.append((x,y))
-        label = np.array(label_list)
+        label = np.asarray(label_list, dtype=np.float32)
         
+        # transform : albumentations
         if self.transform:
             transformed = self.transform(image=image, keypoints=label)
             image = transformed['image']
             label = transformed['keypoints']
             
         image = torch.tensor(image, dtype=torch.float)
-        image = (2 * image) - 1 #TODO 왜 2*image -1 인지 이해할 것
+        image = (2 * image) - 1
         image /= 255
         
         label = torch.tensor(label, dtype=torch.float)
         label /= 112
-        label = label.reshape(-1) - 0.5
+        landmark = label.reshape(-1) - 0.5
         
-        return image, label
+        return (image, landmark, euler_angle)
