@@ -66,6 +66,9 @@ early_cnt = 0
 best_loss = np.inf
 best_nme = np.inf
 
+best_nme_kface = np.inf
+best_nme_aflw = np.inf
+
 log_list = []
 
 OPTIMIZER.zero_grad()
@@ -129,6 +132,14 @@ for epoch in range(EXP["EPOCH"]):
         if mean_nme < best_nme:
             best_nme = mean_nme
 
+        if mean_nme_kface < best_nme_kface:
+            best_nme_kface = mean_nme_kface
+            print(f'|   nme of kface is update: {best_nme_kface:.4f}')
+            
+        if mean_nme_aflw < best_nme_aflw:
+            best_nme_aflw = mean_nme_aflw
+            print(f'|   nme of aflw is update: {best_nme_aflw:.4f}')
+            
         if val_loss < best_loss:
             early_cnt = 0
             best_loss = val_loss
@@ -146,6 +157,10 @@ for epoch in range(EXP["EPOCH"]):
         df.to_csv(f"{SAVE_PATH}/{TYPE}_validation.csv", index=None, header=None)
         
 print(f"best mean nme is : {best_nme:.4f}")
+
+print(f"    best nme of kface dataset : {best_nme_kface:.4f}")
+print(f"    best nme of aflw dataset : {best_nme_aflw:.4f}")
+
 print('Training Complete')
 print("Total Elapsed Time : {} s".format(time.time()-start_time))    
 
