@@ -1,7 +1,20 @@
+# TODO FUTURE
+
+- landmark 인덱싱 -> 인덱싱한 landmark에서 축 당 2개씩 선정
+    - 코사인 값을 label로 하여 2 class 산정
+    - loss의 경우 cosine similarity로 설정 
+
+# TODO 22-07-18
+    >> AFLW-2000 3D 데이터셋 Augmentation 완료
+    - 총 24,934 건
+    >> 11:40 PFLD-v03 학습
+    >> 00:00 PFLD-v04 학습 : gpu 2,3 사용해서 해보기
+        - v03과의 차별성: augmentation 단계에서 totensor만 넣어서 학습
+    >> ㅎ.
+    >> valid dataset을 kface와 aflw로 나눠서 평가 ㄱㅁ
+
 # TODO 22-07-16 ~ 17
-    >> 머했는지 모르겠다...
-    >> 졸려죽겠다. 서버도 제대로 안되고... 학습도 잘 되는건지 의심스럽고....
-    >> 우울하다. 노래는 흥겨운데... 주말에는 쉬었어야 했나
+    >> 삽질X 그거 아님
 
 # TODO 22-07-15
 

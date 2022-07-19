@@ -22,10 +22,13 @@ class kfacedataset(Dataset):
     def __init__(self, type="train", transform=None):
         super().__init__()
         self.type = type
+        
         if self.type == "train":
             self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/train_df.csv"
-        else:
-            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/valid_df.csv"
+        elif self.type == "valid_aflw":
+            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/valid_df_aflw.csv"
+        elif self.type == "valid_kface":
+            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/valid_df_kface.csv"
         
         self.transform = transform
         self.data_list = pd.read_csv(self.data_path,header=None).values.tolist()
@@ -36,18 +39,11 @@ class kfacedataset(Dataset):
 
     def __getitem__(self, idx):
         data_list = self.data_list
-        image = cv2.imread(data_list[idx][3])
-        margin = 200
-        crop_area = (data_list[idx][4]-margin//2, # get bbox area with margin
-                    data_list[idx][5]-margin//2,
-                    data_list[idx][6]+margin//2,
-                    data_list[idx][7]+margin//2)
-
+        image = cv2.imread(data_list[idx][1])
         pil_image = Image.fromarray(image)
-        image = pil_image.crop(crop_area)
-        image = np.array(image)
+        image = np.array(pil_image)
         
-        labels = data_list[idx][8:]
+        labels = data_list[idx][2:]
         label_list = []
         for label in labels:
             x,y = eval(label[1:-1])
