@@ -32,6 +32,7 @@ devices_id = [int(d) for d in DEVICE.split(',')]
 seed_everything(SEED)
 
 # Set dataloader
+print("Set dataloader")
 train_loader, valid_loader = AFLWDataloader(batch_size=BATCH_SIZE, workers=WORKERS)
 
 # define validate function
@@ -47,8 +48,7 @@ def validate(valid_loader, type, save = None):
             euler_angle_gt = euler_angle_gt.cuda()
             
             with autocast(enabled=True):
-                _, predicts = pfld_model(features)
-                # angle = auxi_model(out)
+                _, predicts = LMK_MODEL(features)
                 
                 loss = torch.mean(torch.sum((landmarks_gt - predicts)**2, axis=1))
                 mean_nme, _ = NME(predicts, landmarks_gt)
@@ -77,18 +77,23 @@ OPTIMIZER.zero_grad()
 start_time = time.time()
 
 # load model
-pfld_model = nn.DataParallel(LMK_MODEL, device_ids=devices_id).cuda()
-auxi_model = nn.DataParallel(ANG_MODEL, device_ids=devices_id).cuda()
-
 torch.cuda.set_device(devices_id[0])
 
+if len(devices_id) != 1:
+    LMK_MODEL = nn.DataParallel(LMK_MODEL, device_ids=devices_id).cuda()
+    ANG_MODEL = nn.DataParallel(ANG_MODEL, device_ids=devices_id).cuda()
+else:
+    LMK_MODEL.cuda()
+    ANG_MODEL.cuda()
+
 # run
+print("Start train")
 for epoch in range(EXP["EPOCH"]):
     cum_loss = 0.0 # define current loss
     scaler = GradScaler() 
     
-    pfld_model.train()
-    auxi_model.train()
+    LMK_MODEL.train()
+    ANG_MODEL.train()
     pbar = tqdm(enumerate(train_loader),total=len(train_loader))
     for idx, (features, landmarks_gt, euler_angle_gt) in pbar:
         
@@ -97,8 +102,8 @@ for epoch in range(EXP["EPOCH"]):
         euler_angle_gt = euler_angle_gt.cuda()
 
         with autocast(enabled=True):            
-            out, predicts = pfld_model(features)
-            angle = auxi_model(out)
+            out, predicts = LMK_MODEL(features)
+            angle = ANG_MODEL(out)
             
             weighted_loss, loss = LOSS(landmarks_gt, euler_angle_gt, angle, predicts)
         
@@ -110,24 +115,24 @@ for epoch in range(EXP["EPOCH"]):
 
         cum_loss += loss.item()
         
-        description_train = f"| # Epoch: {epoch+1}/{EXP['EPOCH']}, Loss: {cum_loss/(idx+1):.8f}"
+        description_train = f"| # Epoch: {epoch+1}/{EXP['EPOCH']}, Loss: {cum_loss/(idx+1):.4f}"
         pbar.set_description(description_train)   
     SCHEDULER.step(cum_loss)
-    log_list.append(f"| # Epoch: {epoch+1}/{EXP['EPOCH']}, Loss: {cum_loss/(idx+1):.8f}")
+    log_list.append(f"| # Epoch: {epoch+1}/{EXP['EPOCH']}, Loss: {cum_loss/(idx+1):.4f}")
     
-    if epoch%5==0: 
-        pfld_model.eval()
-        auxi_model.eval()
+    if epoch%10==0: 
+        LMK_MODEL.eval()
+        ANG_MODEL.eval()
         mean_nme, val_loss = validate(valid_loader,
-                                      type="kface",
+                                      type="aflw",
                                       save=os.path.join(f'{SAVE_IMAGE_PATH}',
-                                                        f'epoch({str(epoch + 1).zfill(len(str(EXP["EPOCH"])))}).jpg'))
+                                                        f'epoch({str(epoch).zfill(len(str(EXP["EPOCH"])))}).jpg'))
 
         
-        log_list.append(f"     EPOCH : {epoch+1}/{EXP['EPOCH']}\tNME_MEAN : {mean_nme:.4f}\tVAL_LOSS : {val_loss:.8f}")
+        log_list.append(f"     EPOCH : {epoch+1}/{EXP['EPOCH']}\tNME_MEAN : {mean_nme:.4f}\tVAL_LOSS : {val_loss:.4f}")
         
-        torch.save(pfld_model.state_dict(), os.path.join(SAVE_MODEL_PATH, f"{TYPE}_pfld_{epoch}.pt"))
-        torch.save(auxi_model.state_dict(), os.path.join(SAVE_MODEL_PATH, f"{TYPE}_angle_{epoch}.pt"))
+        torch.save(LMK_MODEL.state_dict(), os.path.join(SAVE_MODEL_PATH, f"{TYPE}_pfld_{epoch}.pt"))
+        torch.save(ANG_MODEL.state_dict(), os.path.join(SAVE_MODEL_PATH, f"{TYPE}_angle_{epoch}.pt"))
 
         if mean_nme < best_nme:
             best_nme = mean_nme
@@ -137,9 +142,9 @@ for epoch in range(EXP["EPOCH"]):
             best_loss = val_loss
             print(f'|   >> Saving model..  NME : {mean_nme:.4f}')
             log_list.append(f"|   >> Saving model..   NME : {mean_nme:.4f}")
-            torch.save(pfld_model.state_dict(),
+            torch.save(LMK_MODEL.state_dict(),
                        os.path.join(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}", f"{TYPE}_pfld_best.pt"))
-            torch.save(auxi_model.state_dict(),
+            torch.save(ANG_MODEL.state_dict(),
                        os.path.join(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}", f"{TYPE}_angle_best.pt"))
 
         
