@@ -19,7 +19,7 @@ Dataset configuration
 """
 
 class kfacedataset(Dataset):
-    def __init__(self, type="train", transform=None):
+    def __init__(self, type="train", transform=None, aug_data_num=2):
         super().__init__()
         self.type = type
         
@@ -32,6 +32,8 @@ class kfacedataset(Dataset):
         
         self.transform = transform
         self.data_list = pd.read_csv(self.data_path,header=None).values.tolist()
+        if self.type == "train":
+            self.data_list *=aug_data_num
 
     def __len__(self):
         return len(self.data_list)

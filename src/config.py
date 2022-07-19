@@ -21,7 +21,7 @@ SEED = 2022
 BATCH_SIZE = 1024
 WORKERS = 16 # number of gpu * 4
 
-TYPE = "v06_00_30" # v00_H_M
+TYPE = "v07_10_00" # v00_H_M
 
 MODEL_NAME = EXP["MODEL"]
 
