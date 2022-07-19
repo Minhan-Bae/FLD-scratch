@@ -7,7 +7,7 @@
 
 # TODO 22-07-19
     >> exp: v07 - dataset 단계에서 데이터 증대하기 시작
-    >> 
+    >> <CUDA_VISIBLE_DEVICES=2,3> 사용하기
 
 # TODO 22-07-18
     >> AFLW-2000 3D 데이터셋 Augmentation 완료

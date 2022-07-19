@@ -143,7 +143,7 @@ class AuxiliaryNet(nn.Module):
         self.conv4 = conv_bn(32, 128, 7, 1)
         self.max_pool1 = nn.MaxPool2d(3)
         self.fc1 = nn.Linear(128, 32)
-        self.fc2 = nn.Linear(32, 2)
+        self.fc2 = nn.Linear(32, 3)
 
     def forward(self, x):
         x = self.conv1(x)

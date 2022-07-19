@@ -9,26 +9,23 @@ from torch.utils.data import Dataset
 """
 Dataset configuration
 
-0: image name
-1: accessory type
-2: light type
-3: image path
-4 ~ 7: bbox(left-top-x, left-top-y, left_low_x, left_low_y) # float
-8 ~ : landmarks(x, y) # str
-
+idx 0: file name
+idx 1: file type(aflw)
+idx 2: file path
+idx 3 ~ 6: bbox(left, top, width, height)
+idx 7 ~ 9: pose para
+idx 10 ~ : landmark
 """
 
 class kfacedataset(Dataset):
-    def __init__(self, type="train", transform=None, aug_data_num=2):
+    def __init__(self, type="train", transform=None, aug_data_num=5):
         super().__init__()
         self.type = type
         
         if self.type == "train":
             self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/train_df.csv"
-        elif self.type == "valid_aflw":
-            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/valid_df_aflw.csv"
-        elif self.type == "valid_kface":
-            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/valid_df_kface.csv"
+        else:
+            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/valid_df.csv"
         
         self.transform = transform
         self.data_list = pd.read_csv(self.data_path,header=None).values.tolist()
@@ -41,11 +38,14 @@ class kfacedataset(Dataset):
 
     def __getitem__(self, idx):
         data_list = self.data_list
-        image = cv2.imread(data_list[idx][1])
+        image = cv2.imread(data_list[idx][2])
         pil_image = Image.fromarray(image)
         image = np.array(pil_image)
         
-        labels = data_list[idx][2:]
+        pose = data_list[idx][7:9]
+        
+        labels = data_list[idx][10:]
+        
         label_list = []
         for label in labels:
             x,y = eval(label[1:-1])
