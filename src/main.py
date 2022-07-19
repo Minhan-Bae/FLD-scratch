@@ -1,4 +1,6 @@
-# Import Moudles and Packages
+#!/usr/bin/env python3
+#-*- coding:utf-8 -*-
+
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -16,84 +18,56 @@ import pandas as pd
 from tqdm import tqdm
 from torch.cuda.amp import autocast, GradScaler
 
-from config import *
+import config as C
 from loss.loss import *
 from utils.fix_seed import *
 from utils.visualize import *
 from dataset.dataloader import *
 from metric.nme import *
 
+from validation import validate
+
 import torch.backends.cudnn as cudnn
 cudnn.benchmark=True
 
-devices_id = [int(d) for d in DEVICE.split(',')]
+# check start time
+start_time = time.time()
 
 # Fix seed
-seed_everything(SEED)
+seed_everything(C.experiment["seed"])
 
 # Set dataloader
 print("Set dataloader")
-train_loader, valid_loader = AFLWDataloader(batch_size=BATCH_SIZE, workers=WORKERS)
-
-# define validate function
-def validate(valid_loader, type, save = None):
-    cum_loss = 0.0
-    cum_mean_nme = 0.0
-    
-    pbar = tqdm(enumerate(valid_loader), total=len(valid_loader))
-    with torch.no_grad():
-        for idx, (features, landmarks_gt, euler_angle_gt) in pbar:
-            features = features.cuda()
-            landmarks_gt = landmarks_gt.cuda()
-            euler_angle_gt = euler_angle_gt.cuda()
-            
-            with autocast(enabled=True):
-                _, predicts = LMK_MODEL(features)
-                
-                loss = torch.mean(torch.sum((landmarks_gt - predicts)**2, axis=1))
-                mean_nme, _ = NME(predicts, landmarks_gt)
-            
-            cum_loss += loss.item()
-            cum_mean_nme += mean_nme.item()
-            
-            description_valid = f"| # {type}_mean_nme: {cum_mean_nme/(idx+1):.4f}, cum_loss: {cum_loss/(idx+1):.8f}"
-            pbar.set_description(description_valid)
-            
-        visualize_batch(features[:16].cpu(), predicts[:16].cpu(), landmarks_gt[:16].cpu(),
-                    shape = (4, 4), size = 16, title = None, save = save)
-    
-    return cum_mean_nme/len(valid_loader), cum_loss/len(valid_loader)
+train_loader, valid_loader = AFLWDataloader(batch_size=C.experiment["batch_size"],
+                                            workers=C.experiment["workers"])
 
 # initialize earlystopping count, best_score
-early_cnt = 0
 best_loss = np.inf
 best_nme = np.inf
+early_cnt = 0
 
-log_list = []
+log_list = list()
 
-OPTIMIZER.zero_grad()
 
-# check time
-start_time = time.time()
+C.optimizer.zero_grad()
 
 # load model
+devices_id = [int(d) for d in C.device.split(',')]
 torch.cuda.set_device(devices_id[0])
 
-if len(devices_id) != 1:
-    LMK_MODEL = nn.DataParallel(LMK_MODEL, device_ids=devices_id).cuda()
-    ANG_MODEL = nn.DataParallel(ANG_MODEL, device_ids=devices_id).cuda()
-else:
-    LMK_MODEL.cuda()
-    ANG_MODEL.cuda()
+pfld_benchmark = nn.DataParallel(C.pfld_benchmark, device_ids=devices_id).cuda()
+auxiliarynet = nn.DataParallel(C.auxiliarynet, device_ids=devices_id).cuda()
 
 # run
 print("Start train")
-for epoch in range(EXP["EPOCH"]):
+for epoch in range(C.experiment["epoch"]):
     cum_loss = 0.0 # define current loss
     scaler = GradScaler() 
     
-    LMK_MODEL.train()
-    ANG_MODEL.train()
+    # train mode
+    pfld_benchmark.train()
+    auxiliarynet.train()
+    
     pbar = tqdm(enumerate(train_loader),total=len(train_loader))
     for idx, (features, landmarks_gt, euler_angle_gt) in pbar:
         
@@ -102,37 +76,38 @@ for epoch in range(EXP["EPOCH"]):
         euler_angle_gt = euler_angle_gt.cuda()
 
         with autocast(enabled=True):            
-            out, predicts = LMK_MODEL(features)
-            angle = ANG_MODEL(out)
+            out, predicts = pfld_benchmark(features)
+            angle = auxiliarynet(out)
             
-            weighted_loss, loss = LOSS(landmarks_gt, euler_angle_gt, angle, predicts)
+            weighted_loss, loss = C.criterion(predicts, landmarks_gt,
+                                              angle, euler_angle_gt)
         
         scaler.scale(weighted_loss).backward()
-        scaler.step(OPTIMIZER)
+        scaler.step(C.optimizer)
         scaler.update(loss.item())
         
-        OPTIMIZER.zero_grad()
+        C.optimizer.zero_grad()
 
         cum_loss += loss.item()
         
-        description_train = f"| # Epoch: {epoch+1}/{EXP['EPOCH']}, Loss: {cum_loss/(idx+1):.4f}"
+        description_train = f"| # Epoch: {epoch+1}/{C.experiment['epoch']}, Loss: {cum_loss/(idx+1):.4f}"
         pbar.set_description(description_train)   
-    SCHEDULER.step(cum_loss)
-    log_list.append(f"| # Epoch: {epoch+1}/{EXP['EPOCH']}, Loss: {cum_loss/(idx+1):.4f}")
+    C.scheduler.step(cum_loss)
+    log_list.append(f"| # Epoch: {epoch+1}/{C.experiment['epoch']}, Loss: {cum_loss/(idx+1):.4f}")
     
     if epoch%10==0: 
-        LMK_MODEL.eval()
-        ANG_MODEL.eval()
+        # valid mode
+        pfld_benchmark.eval()
         mean_nme, val_loss = validate(valid_loader,
-                                      type="aflw",
-                                      save=os.path.join(f'{SAVE_IMAGE_PATH}',
-                                                        f'epoch({str(epoch).zfill(len(str(EXP["EPOCH"])))}).jpg'))
+                                      pfld_benchmark,
+                                      save=os.path.join(f'{C.save_image_path}',
+                                                        f'epoch({str(epoch).zfill(len(str(C.experiment["epoch"])))}).jpg'))
 
         
-        log_list.append(f"     EPOCH : {epoch+1}/{EXP['EPOCH']}\tNME_MEAN : {mean_nme:.4f}\tVAL_LOSS : {val_loss:.4f}")
+        log_list.append(f"     EPOCH : {epoch+1}/{C.experiment['epoch']}\tNME_MEAN : {mean_nme:.4f}\tVAL_LOSS : {val_loss:.4f}")
         
-        torch.save(LMK_MODEL.state_dict(), os.path.join(SAVE_MODEL_PATH, f"{TYPE}_pfld_{epoch}.pt"))
-        torch.save(ANG_MODEL.state_dict(), os.path.join(SAVE_MODEL_PATH, f"{TYPE}_angle_{epoch}.pt"))
+        torch.save(pfld_benchmark.state_dict(), os.path.join(C.save_model_path, f"{C.log_dirs}_pfld_{epoch}.pt"))
+        torch.save(auxiliarynet.state_dict(), os.path.join(C.save_model_path, f"{C.log_dirs}_angle_{epoch}.pt"))
 
         if mean_nme < best_nme:
             best_nme = mean_nme
@@ -142,20 +117,20 @@ for epoch in range(EXP["EPOCH"]):
             best_loss = val_loss
             print(f'|   >> Saving model..  NME : {mean_nme:.4f}')
             log_list.append(f"|   >> Saving model..   NME : {mean_nme:.4f}")
-            torch.save(LMK_MODEL.state_dict(),
-                       os.path.join(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}", f"{TYPE}_pfld_best.pt"))
-            torch.save(ANG_MODEL.state_dict(),
-                       os.path.join(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}", f"{TYPE}_angle_best.pt"))
+            torch.save(pfld_benchmark.state_dict(),
+                       os.path.join(f"/data/komedi/logs/{C.experiment['day']}/{C.experiment['model']}_{C.log_dirs}", f"{C.log_dirs}_pfld_best.pt"))
+            torch.save(auxiliarynet.state_dict(),
+                       os.path.join(f"/data/komedi/logs/{C.experiment['day']}/{C.experiment['model']}_{C.log_dirs}", f"{C.log_dirs}_angle_best.pt"))
 
         
         else:
             early_cnt += 1
-            print(f"Early stopping cnt... {early_cnt}  Best_NME : {mean_nme:.4f}")
-            if early_cnt >= EARLY_STOPPING_CNT:
+            print(f"Early stopping cnt... {early_cnt}  Best_NME : {best_nme:.4f}")
+            if early_cnt >= C.experiment["early_stop"]:
                 break
 
         df = pd.DataFrame(log_list)
-        df.to_csv(f"{SAVE_PATH}/{TYPE}_validation.csv", index=None, header=None)
+        df.to_csv(f"{C.save_path}/{C.log_dirs}_validation.csv", index=None, header=None)
         
 print(f"best mean nme is : {best_nme:.4f}")
 
@@ -167,4 +142,4 @@ log_list.append("Training Complete")
 log_list.append("Total Elapsed Time : {} s".format(time.time()-start_time))
 
 df = pd.DataFrame(log_list)
-df.to_csv(f"{SAVE_PATH}/{TYPE}_validation.csv", index=None, header=None)
+df.to_csv(f"{C.save_path}/{C.log_dirs}_validation.csv", index=None, header=None)

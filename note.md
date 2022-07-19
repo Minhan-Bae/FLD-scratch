@@ -1,13 +1,17 @@
 # TODO FUTURE
-"""
-- landmark 인덱싱 -> 인덱싱한 landmark에서 축 당 2개씩 선정
-    - 코사인 값을 label로 하여 2 class 산정
-    - loss의 경우 cosine similarity로 설정 
-"""
+- train, valid 함수 및 모듈 화
+- log 삽입
+- 
+
+
 
 # TODO 22-07-19
     >> exp: v07 - dataset 단계에서 데이터 증대하기 시작
+    >> AFLW 데이터셋에 있는 axis를 가지고 사용. 즉, kface 미사용
     >> <CUDA_VISIBLE_DEVICES=2,3> 사용하기
+    >> 먼가 되는 것 같은데 안된다 ㅎ
+
+
 
 # TODO 22-07-18
     >> AFLW-2000 3D 데이터셋 Augmentation 완료

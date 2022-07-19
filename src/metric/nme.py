@@ -28,5 +28,4 @@ def NME(label_pd, label_gt):
 
     nme_list = np.array(nme_list, dtype=np.float32)
     mean_nme = np.mean(nme_list)*100
-    std_nme = np.std(nme_list, ddof=1)*100
-    return mean_nme, std_nme
+    return mean_nme

@@ -17,7 +17,7 @@ idx 10 ~ : landmark
 """
 
 class AFLWDatasets(Dataset):
-    def __init__(self, type="train", transform=None, aug_data_num=10):
+    def __init__(self, type="train", transform=None, aug_data_num=2):
         super().__init__()
         self.type = type
         
@@ -31,26 +31,23 @@ class AFLWDatasets(Dataset):
         
         # pluses dataset of train
         if self.type == "train":
-            self.data_list *=aug_data_num
+            self.data_list *= aug_data_num
 
     def __len__(self):
         return len(self.data_list)
 
 
     def __getitem__(self, idx):
-        # read data
         data_list = self.data_list
 
         # read image
-        image = cv2.imread(data_list[idx][2])
-        
         margin = 200
         crop_area = (data_list[idx][3]-margin//2, # get bbox area with margin
                     data_list[idx][4]-margin//2,
                     data_list[idx][5]+margin//2,
                     data_list[idx][6]+margin//2)
 
-        pil_image = Image.fromarray(image)
+        pil_image = Image.open(data_list[idx][2])
         image = pil_image.crop(crop_area)
         image = np.array(image)
         
@@ -65,14 +62,12 @@ class AFLWDatasets(Dataset):
             label_list.append((x,y))
         label = np.asarray(label_list, dtype=np.float32)
         
-        # transform : albumentations
         if self.transform:
             transformed = self.transform(image=image, keypoints=label)
             image = transformed['image']
             label = transformed['keypoints']
             
         image = torch.tensor(image, dtype=torch.float)
-        image = (2 * image) - 1
         image /= 255
         
         label = torch.tensor(label, dtype=torch.float)
