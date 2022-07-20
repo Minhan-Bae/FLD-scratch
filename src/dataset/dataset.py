@@ -2,38 +2,36 @@ import cv2
 import torch
 import numpy as np
 import pandas as pd
-
 from PIL import Image
 from torch.utils.data import Dataset
-
+import math
 """
 Dataset configuration
 
-0: image name
-1: accessory type
-2: light type
-3: image path
-4 ~ 7: bbox(left-top-x, left-top-y, left_low_x, left_low_y) # float
-8 ~ : landmarks(x, y) # str
-
+idx 0: file name
+idx 1: file type(aflw)
+idx 2: file path
+idx 3 ~ 6: bbox(left, top, width, height)
+idx 7 ~ 9: pose para
+idx 10 ~ : landmark
 """
 
-class kfacedataset(Dataset):
-    def __init__(self, type="train", transform=None, aug_data_num=2):
+class AFLWDatasets(Dataset):
+    def __init__(self, type="train", transform=None, aug_data_num=1):
         super().__init__()
         self.type = type
         
         if self.type == "train":
             self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/train_df.csv"
-        elif self.type == "valid_aflw":
-            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/valid_df_aflw.csv"
-        elif self.type == "valid_kface":
-            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/valid_df_kface.csv"
+        else:
+            self.data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/valid_df.csv"
         
         self.transform = transform
         self.data_list = pd.read_csv(self.data_path,header=None).values.tolist()
+        
+        # pluses dataset of train
         if self.type == "train":
-            self.data_list *=aug_data_num
+            self.data_list *= aug_data_num
 
     def __len__(self):
         return len(self.data_list)
@@ -41,16 +39,31 @@ class kfacedataset(Dataset):
 
     def __getitem__(self, idx):
         data_list = self.data_list
-        image = cv2.imread(data_list[idx][1])
+
+        # read image
+        margin = 200
+        crop_area = (data_list[idx][3]-margin//2, # get bbox area with margin
+                    data_list[idx][4]-margin//2,
+                    data_list[idx][5]+margin//2,
+                    data_list[idx][6]+margin//2)
+
+        image = cv2.imread(data_list[idx][2])
         pil_image = Image.fromarray(image)
-        image = np.array(pil_image)
         
-        labels = data_list[idx][2:]
+        image = pil_image.crop(crop_area)
+        image = np.array(image)
+        
+        # read pose
+        
+        euler_angle = np.asarray([data_list[idx][i]*math.pi/180 for i in (7,8,9)], dtype=np.float32)
+        
+        # read label
+        labels = data_list[idx][10:]
         label_list = []
         for label in labels:
             x,y = eval(label[1:-1])
             label_list.append((x,y))
-        label = np.array(label_list)
+        label = np.asarray(label_list, dtype=np.float32)
         
         if self.transform:
             transformed = self.transform(image=image, keypoints=label)
@@ -58,11 +71,11 @@ class kfacedataset(Dataset):
             label = transformed['keypoints']
             
         image = torch.tensor(image, dtype=torch.float)
-        image = (2 * image) - 1 #TODO 왜 2*image -1 인지 이해할 것
+        image = (2 * image) - 1 # contrast 조절
         image /= 255
         
         label = torch.tensor(label, dtype=torch.float)
         label /= 112
-        label = label.reshape(-1) - 0.5
+        landmark = label.reshape(-1) - 0.5
         
-        return image, label
+        return (image, landmark, euler_angle)

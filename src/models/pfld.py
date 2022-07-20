@@ -130,8 +130,7 @@ class PFLDInference(nn.Module):
         multi_scale = torch.cat([x1, x2, x3], 1)
         landmarks = self.fc(multi_scale)
         landmarks = self.fc2(landmarks)
-        return landmarks
-        # return out1, landmarks
+        return out1, landmarks
 
 
 class AuxiliaryNet(nn.Module):
@@ -143,7 +142,7 @@ class AuxiliaryNet(nn.Module):
         self.conv4 = conv_bn(32, 128, 7, 1)
         self.max_pool1 = nn.MaxPool2d(3)
         self.fc1 = nn.Linear(128, 32)
-        self.fc2 = nn.Linear(32, 2)
+        self.fc2 = nn.Linear(32, 3)
 
     def forward(self, x):
         x = self.conv1(x)
@@ -157,19 +156,15 @@ class AuxiliaryNet(nn.Module):
 
         return x
 
-def get_model(pretrained=None):
-    model = PFLDInference()
-    model.eval()
-    if pretrained:
-        checkpoint = torch.load(pretrained, map_location = 'cpu')
-        model.load_state_dict(checkpoint,strict=False)
-    return model
-
-#     input = torch.randn(1, 3, 112, 112)
-#     pfld_backbone = PFLDInference()
-#     auxiliarynet = AuxiliaryNet()
-#     features, landmarks = pfld_backbone(input)
-#     angle = auxiliarynet(features)
-#     print(len(features[0]))
-#     print("angle.shape:{0:}, landmarks.shape: {1:}".format(
-#         angle.shape, landmarks.shape))
+def get_model(pfld_pretrained, auxil_pretrained):
+    pfld_backbone = PFLDInference().cpu()
+    if pfld_pretrained:
+        checkpoint = torch.load(pfld_pretrained, map_location = 'cpu')
+        pfld_backbone.load_state_dict(checkpoint,strict=False)
+        print("pfld_backbone pretrained model is loaded")
+    auxiliarynet = AuxiliaryNet().cpu()
+    if auxil_pretrained:
+        checkpoint = torch.load(auxil_pretrained, map_location= 'cpu')
+        auxiliarynet.load_state_dict(checkpoint,strict=False)
+        print("auxiliarynet pretrained model is loaded")
+    return pfld_backbone, auxiliarynet

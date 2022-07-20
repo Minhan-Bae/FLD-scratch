@@ -1,29 +1,24 @@
-from dataset import augmentation, dataset
+from dataset.augmentation import get_augmentation
+from dataset.dataset import AFLWDatasets
 from torch.utils import data
 
-def kfacedataloader(batch_size, workers):
-    k_dataset_train = dataset.kfacedataset(
+def AFLWDataloader(batch_size, workers):
+    # set datasets
+    dataset_train = AFLWDatasets(
         type="train",
-        transform=augmentation.get_augmentation(data_type="train")
-        ) # normalize만 넣어서,
-
-    k_dataset_valid_kface = dataset.kfacedataset(
-        type="valid_kface",
-        transform=augmentation.get_augmentation(data_type="valid")
+        transform=get_augmentation(data_type="valid")
         )
 
-    k_dataset_valid_aflw = dataset.kfacedataset(
-        type="valid_aflw",
-        transform=augmentation.get_augmentation(data_type="valid")
+    dataset_valid = AFLWDatasets(
+        type="valid",
+        transform=get_augmentation(data_type="valid")
         )
 
+    # get loader(image, landmark, angle)
     train_loader = data.DataLoader(
-        k_dataset_train, batch_size=batch_size, shuffle=True, num_workers=workers)
+        dataset_train, batch_size=batch_size, shuffle=True, num_workers=workers, drop_last=False)
     
-    valid_loader_kface = data.DataLoader(
-        k_dataset_valid_kface, batch_size=64, shuffle=False, num_workers=workers)
-    
-    valid_loader_aflw = data.DataLoader(
-        k_dataset_valid_aflw, batch_size=64, shuffle=False, num_workers=workers) 
-    
-    return train_loader, valid_loader_kface, valid_loader_aflw
+    valid_loader = data.DataLoader(
+        dataset_valid, batch_size=64, shuffle=False, num_workers=workers, drop_last=False)
+
+    return train_loader, valid_loader

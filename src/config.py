@@ -1,50 +1,40 @@
-from datetime import date
-
 import os
-import torch.nn as nn
+from datetime import date
 import torch.optim as optim
-from torch.optim.lr_scheduler import CosineAnnealingWarmRestarts, ReduceLROnPlateau
+from torch.optim.lr_scheduler import ReduceLROnPlateau
 
-from models.timm_swin import timm_Net_54
 from models.pfld import *
+from loss.loss import PFLDLoss
 
-DEVICE = '0,1'
-EXP = {
-    "DAY": date.today().isoformat(),
-    "MODEL" : "pfld",
-    "EPOCH" : 500,
-    "LR" : 2e-5,
+device = '0,1'
+log_dirs = "v12_09_50" # v00_H_M
+experiment = {
+    "day": date.today().isoformat(),
+    "model" : "pfld",
+    "epoch" : 200,
+    "lr" : 1e-4,
+    "seed" : 2022,
+    "batch_size" : 1024,
+    "workers" : 4 * len(device.split(',')), # number of gpu * 4
+    "early_stop" : 999
 }
 
-SEED = 2022
+os.makedirs(f"/data/komedi/logs/{experiment['day']}/{experiment['model']}_{log_dirs}/image_logs", exist_ok=True)
+os.makedirs(f"/data/komedi/logs/{experiment['day']}/{experiment['model']}_{log_dirs}/model_logs",exist_ok=True)
 
-BATCH_SIZE = 1024
-WORKERS = 16 # number of gpu * 4
+save_path = f"/data/komedi/logs/{experiment['day']}/{experiment['model']}_{log_dirs}"
+save_image_path = os.path.join(save_path,"image_logs")
+save_model_path = os.path.join(save_path,"model_logs")
+save_best_model = os.path.join(f"/data/komedi/logs/{experiment['day']}/{experiment['model']}_{log_dirs}", f"{log_dirs}_{experiment['model']}_best.pt")
 
-TYPE = "v07_10_00" # v00_H_M
+pfld_pretrained_path = "/data/komedi/logs/2022-07-19/pfld_v09_17_00/v09_17_00_pfld_best.pt"
+auxil_pretrained_path = "/data/komedi/logs/2022-07-19/pfld_v09_17_00/v09_17_00_angle_best.pt"
 
-MODEL_NAME = EXP["MODEL"]
-
-if MODEL_NAME == "pfld":
-    PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-18/pfld_v05_19_00/v05_19_00_pfld_best.pt"
-    MODEL = get_model(pretrained=PRETRAINED_WEIGHT_PATH)
+pfld_benchmark, auxiliarynet = get_model(pfld_pretrained=pfld_pretrained_path,
+                                         auxil_pretrained=auxil_pretrained_path)
     
-elif MODEL_NAME == "swin_base_patch4_window7_224":
-    PRETRAINED_WEIGHT_PATH = "/data/komedi/logs/2022-07-15/swin_v15/v15_swin_base_patch4_window7_224_best.pt"    
-    MODEL = timm_Net_54(model_name=MODEL_NAME, pretrained=PRETRAINED_WEIGHT_PATH)
-
-os.makedirs(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}/image_logs/kface", exist_ok=True)
-os.makedirs(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}/image_logs/aflw", exist_ok=True)
-os.makedirs(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}/model_logs",exist_ok=True)
-
-SAVE_PATH = f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}"
-SAVE_IMAGE_PATH = os.path.join(SAVE_PATH,"image_logs")
-SAVE_MODEL_PATH = os.path.join(SAVE_PATH,"model_logs")
-
-SAVE_MODEL = os.path.join(f"/data/komedi/logs/{EXP['DAY']}/{EXP['MODEL']}_{TYPE}", f"{TYPE}_{MODEL_NAME}_best.pt")
-
-LOSS = nn.MSELoss()
-OPTIMIZER = optim.Adam(MODEL.parameters(), lr = EXP["LR"], weight_decay=1e-6)
-SCHEDULER = ReduceLROnPlateau(OPTIMIZER, mode='min', patience=40, verbose=True)
-
-EARLY_STOPPING_CNT = 50
+criterion = PFLDLoss()
+optimizer = optim.Adam([{'params': pfld_benchmark.parameters()},
+                        {'params': auxiliarynet.parameters()}],
+                        lr = experiment["lr"], weight_decay=1e-6)
+scheduler = ReduceLROnPlateau(optimizer, mode='min', patience=40, verbose=True)
