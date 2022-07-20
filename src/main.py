@@ -30,26 +30,29 @@ from validation import validate
 import torch.backends.cudnn as cudnn
 cudnn.benchmark=True
 
-# check start time
-start_time = time.time()
-print(f"exp model : {C.experiment['model']}     version : {C.log_dirs}\n")
-# Fix seed
-seed_everything(C.experiment["seed"])
+# init parameters & logs
+log_list = list()
 
-# Set dataloader
-print("Set dataloader")
-train_loader, valid_loader = AFLWDataloader(batch_size=C.experiment["batch_size"],
-                                            workers=C.experiment["workers"])
-
-# initialize earlystopping count, best_score
 best_loss = np.inf
 best_nme = np.inf
 early_cnt = 0
 
-log_list = list()
+def logging(text):
+    global log_list
+    print(text)
+    log_list.append(text)
 
+# Fix seed
+seed_everything(C.experiment["seed"])
 
-C.optimizer.zero_grad()
+# check start time
+start_time = time.time()
+logging(f"exp model : {C.experiment['model']}     version : {C.log_dirs}\n")
+
+# Set dataloader
+logging("Set dataloader")
+train_loader, valid_loader = AFLWDataloader(batch_size=C.experiment["batch_size"],
+                                            workers=C.experiment["workers"])
 
 # load model
 devices_id = [int(d) for d in C.device.split(',')]
@@ -58,9 +61,48 @@ torch.cuda.set_device(devices_id[0])
 pfld_benchmark = nn.DataParallel(C.pfld_benchmark, device_ids=devices_id).cuda()
 auxiliarynet = nn.DataParallel(C.auxiliarynet, device_ids=devices_id).cuda()
 
+C.optimizer.zero_grad()
+
+# set validate
+def validate(valid_loader, pfld_benchmark, auxiliarynet, save = None):
+    pfld_benchmark.eval()
+    auxiliarynet.eval()
+    
+    nme = []
+    nme_20 = []
+    losses = []
+    
+    with torch.no_grad():
+        for img, landmark_gt, euler_angle_gt in valid_loader:
+            img = img.cuda()
+            landmark_gt = landmark_gt.cuda()
+            euler_angle_gt = euler_angle_gt.cuda()
+            
+            pfld_benchmark.cuda()
+            auxiliarynet.cuda()
+            
+            _, landmark = pfld_benchmark(img)
+                
+            mean_nme = NME(landmark, landmark_gt)
+            mean_nme_20 = NME_20(landmark, landmark_gt)
+            loss = torch.mean(torch.sum((landmark_gt - landmark)**2, axis=1))
+            
+            nme.append(mean_nme)
+            nme_20.append(mean_nme_20)
+            losses.append(loss.cpu().numpy())
+            
+        visualize_batch(img[:16].cpu(), landmark[:16].cpu(), landmark_gt[:16].cpu(),
+                    shape = (4, 4), size = 16, title = None, save = save)
+
+    logging("|     ===> Evaluate:")
+    logging('|          Eval set: Normalize Mean Error_20 : {:.4f} '.format(np.mean(nme_20)))          
+    logging('|          Eval set: Normalize Mean Error: {:.4f} '.format(np.mean(nme)))
+    logging('|          Eval set: Average loss: {:.4f} '.format(np.mean(losses)))    
+    return np.mean(nme), np.mean(losses)
+
 # run
-print("Start train")
-for epoch in range(C.experiment["epoch"]):
+logging("Start train")
+for epoch in range(1, C.experiment["epoch"]+1):
     cum_loss = 0.0 # define current loss
     scaler = GradScaler() 
     
@@ -84,63 +126,55 @@ for epoch in range(C.experiment["epoch"]):
         
         scaler.scale(weighted_loss).backward()
         scaler.step(C.optimizer)
-        scaler.update(loss.item())
+        scaler.update(weighted_loss.item())
         
         C.optimizer.zero_grad()
 
         cum_loss += loss.item()
         
-        description_train = f"| # Epoch: {epoch+1}/{C.experiment['epoch']}, Loss: {cum_loss/(idx+1):.4f}"
+        description_train = f"| # Epoch: {epoch}/{C.experiment['epoch']}, Loss: {cum_loss/(idx+1):.4f}"
         pbar.set_description(description_train)
 
     C.scheduler.step(cum_loss)
-    log_list.append(f"| # Epoch: {epoch+1}/{C.experiment['epoch']}, Loss: {cum_loss/(idx+1):.4f}")
-    
-    if epoch%5==0: 
+
+    if epoch%C.validation_term == 0: 
         # valid mode
-        pfld_benchmark.eval()
         mean_nme, val_loss = validate(valid_loader,
                                       pfld_benchmark,
+                                      auxiliarynet,
                                       save=os.path.join(f'{C.save_image_path}',
                                                         f'epoch({str(epoch).zfill(len(str(C.experiment["epoch"])))}).jpg'))
 
-        
-        log_list.append(f"     EPOCH : {epoch+1}/{C.experiment['epoch']}\tNME_MEAN : {mean_nme:.4f}\tVAL_LOSS : {val_loss:.4f}")
-        
         torch.save(pfld_benchmark.state_dict(), os.path.join(C.save_model_path, f"{C.log_dirs}_pfld_{epoch}.pt"))
         torch.save(auxiliarynet.state_dict(), os.path.join(C.save_model_path, f"{C.log_dirs}_angle_{epoch}.pt"))
 
+        # update nme
         if mean_nme < best_nme:
             best_nme = mean_nme
-
+        
+        # early-stopping part
         if val_loss < best_loss:
             early_cnt = 0
             best_loss = val_loss
-            print(f'|           >> Saving model..  NME : {mean_nme:.4f}')
-            log_list.append(f"|   >> Saving model..   NME : {mean_nme:.4f}")
+            logging(f"           >> Saving model..   Best_NME : {best_nme:.4f}")
+            
             torch.save(pfld_benchmark.state_dict(),
                        os.path.join(f"/data/komedi/logs/{C.experiment['day']}/{C.experiment['model']}_{C.log_dirs}", f"{C.log_dirs}_pfld_best.pt"))
             torch.save(auxiliarynet.state_dict(),
                        os.path.join(f"/data/komedi/logs/{C.experiment['day']}/{C.experiment['model']}_{C.log_dirs}", f"{C.log_dirs}_angle_best.pt"))
-
-        
         else:
             early_cnt += 1
-            print(f"Early stopping cnt... {early_cnt}  Best_NME : {best_nme:.4f}")
+            logging(f"           >> Early stopping cnt... {early_cnt}  Best_NME : {best_nme:.4f}")
             if early_cnt >= C.experiment["early_stop"]:
                 break
 
+        # save log
         df = pd.DataFrame(log_list)
-        df.to_csv(f"{C.save_path}/{C.log_dirs}_validation.csv", index=None, header=None)
+        df.to_csv(f"{C.save_path}/{C.log_dirs}_logs.csv", index=None, header=None)
         
-print(f"best mean nme is : {best_nme:.4f}")
-
-print('Training Complete')
-print("Total Elapsed Time : {} s".format(time.time()-start_time))    
-
-log_list.append(f"best mean nme is : {best_nme:.4f}")
-log_list.append("Training Complete")
-log_list.append("Total Elapsed Time : {} s".format(time.time()-start_time))
+logging(f"best mean nme is : {best_nme:.4f}")
+logging('Training Complete')
+logging("Total Elapsed Time : {} s".format(time.time()-start_time))    
 
 df = pd.DataFrame(log_list)
-df.to_csv(f"{C.save_path}/{C.log_dirs}_validation.csv", index=None, header=None)
+df.to_csv(f"{C.save_path}/{C.log_dirs}_logs.csv", index=None, header=None)

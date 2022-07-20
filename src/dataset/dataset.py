@@ -55,7 +55,7 @@ class AFLWDatasets(Dataset):
         
         # read pose
         
-        euler_angle = np.asarray([data_list[idx][i]*math.pi/180 for i in (7,8,9)], dtype=np.float32)
+        euler_angle = np.asarray([data_list[idx][i]/180 for i in (7,8,9)], dtype=np.float32)
         
         # read label
         labels = data_list[idx][10:]

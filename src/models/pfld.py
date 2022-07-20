@@ -161,10 +161,10 @@ def get_model(pfld_pretrained, auxil_pretrained):
     if pfld_pretrained:
         checkpoint = torch.load(pfld_pretrained, map_location = 'cpu')
         pfld_backbone.load_state_dict(checkpoint,strict=False)
-        print("pfld_backbone pretrained model is loaded")
+    
     auxiliarynet = AuxiliaryNet().cpu()
     if auxil_pretrained:
         checkpoint = torch.load(auxil_pretrained, map_location= 'cpu')
         auxiliarynet.load_state_dict(checkpoint,strict=False)
-        print("auxiliarynet pretrained model is loaded")
+    
     return pfld_backbone, auxiliarynet
