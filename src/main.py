@@ -58,15 +58,17 @@ train_loader, valid_loader = AFLWDataloader(batch_size=C.experiment["batch_size"
 devices_id = [int(d) for d in C.device.split(',')]
 torch.cuda.set_device(devices_id[0])
 
-pfld_benchmark = nn.DataParallel(C.pfld_benchmark, device_ids=devices_id).cuda()
-auxiliarynet = nn.DataParallel(C.auxiliarynet, device_ids=devices_id).cuda()
-
+if C.experiment['model'] == "pfld":
+    flmk_model = nn.DataParallel(C.pfld_benchmark, device_ids=devices_id).cuda()
+    angl_model = nn.DataParallel(C.auxiliarynet, device_ids=devices_id).cuda()
+elif C.experiment['model']:
+    flmk_model = nn.DataParallel(C.swin_net, device_ids=devices_id).cuda()
+    angl_model = None
 C.optimizer.zero_grad()
 
 # set validate
-def validate(valid_loader, pfld_benchmark, auxiliarynet, save = None):
-    pfld_benchmark.eval()
-    auxiliarynet.eval()
+def validate(valid_loader, save = None):
+    flmk_model.eval()
     
     nme = []
     nme_20 = []
@@ -78,10 +80,9 @@ def validate(valid_loader, pfld_benchmark, auxiliarynet, save = None):
             landmark_gt = landmark_gt.cuda()
             euler_angle_gt = euler_angle_gt.cuda()
             
-            pfld_benchmark.cuda()
-            auxiliarynet.cuda()
+            flmk_model.cuda()
             
-            _, landmark = pfld_benchmark(img)
+            landmark = flmk_model(img)
                 
             mean_nme = NME(landmark, landmark_gt)
             mean_nme_20 = NME_20(landmark, landmark_gt)
@@ -107,8 +108,9 @@ for epoch in range(1, C.experiment["epoch"]+1):
     scaler = GradScaler() 
     
     # train mode
-    pfld_benchmark.train()
-    auxiliarynet.train()
+    flmk_model.train()
+    if angl_model:
+        angl_model.train()
     
     pbar = tqdm(enumerate(train_loader),total=len(train_loader))
     for idx, (features, landmarks_gt, euler_angle_gt) in pbar:
@@ -117,13 +119,21 @@ for epoch in range(1, C.experiment["epoch"]+1):
         landmarks_gt = landmarks_gt.cuda()
         euler_angle_gt = euler_angle_gt.cuda()
 
-        with autocast(enabled=True):            
-            out, predicts = pfld_benchmark(features)
-            angle = auxiliarynet(out)
-            
-            weighted_loss, loss = C.criterion(predicts, landmarks_gt,
-                                              angle, euler_angle_gt)
-        
+        with autocast(enabled=True):         
+               
+            if angl_model:
+                out, predicts = flmk_model(features)
+                angle = angl_model(out)
+            else:
+                predicts = flmk_model(features)
+                
+            if C.experiment['model'] == 'pfld':
+                weighted_loss, loss = C.criterion(predicts, landmarks_gt,
+                                                  angle, euler_angle_gt)
+            elif C.experiment['model'] == 'swin':
+                weighted_loss = C.criterion(predicts, landmarks_gt)
+                loss = weighted_loss
+    
         scaler.scale(weighted_loss).backward()
         scaler.step(C.optimizer)
         scaler.update(weighted_loss.item())
@@ -134,19 +144,21 @@ for epoch in range(1, C.experiment["epoch"]+1):
         
         description_train = f"| # Epoch: {str(epoch).zfill(len(str(C.experiment['epoch'])))}/{C.experiment['epoch']}, Loss: {cum_loss/(idx+1):.4f}"
         pbar.set_description(description_train)
-
+        
+    
     C.scheduler.step(cum_loss)
+    
+    logging(f"| # Epoch: {str(epoch).zfill(len(str(C.experiment['epoch'])))}/{C.experiment['epoch']}, Loss: {cum_loss/(idx+1):.4f}")
 
     if epoch%C.validation_term == 0: 
         # valid mode
         mean_nme, val_loss = validate(valid_loader,
-                                      pfld_benchmark,
-                                      auxiliarynet,
                                       save=os.path.join(f'{C.save_image_path}',
                                                         f'epoch({str(epoch).zfill(len(str(C.experiment["epoch"])))}).jpg'))
 
-        torch.save(pfld_benchmark.state_dict(), os.path.join(C.save_model_path, f"{C.log_dirs}_pfld_{epoch}.pt"))
-        torch.save(auxiliarynet.state_dict(), os.path.join(C.save_model_path, f"{C.log_dirs}_angle_{epoch}.pt"))
+        torch.save(flmk_model.state_dict(), os.path.join(C.save_model_path, f"{C.log_dirs}_flmk_{epoch}.pt"))
+        if angl_model:        
+            torch.save(angl_model.state_dict(), os.path.join(C.save_model_path, f"{C.log_dirs}_angl_{epoch}.pt"))
 
         # update nme
         if mean_nme < best_nme:
@@ -158,9 +170,10 @@ for epoch in range(1, C.experiment["epoch"]+1):
             best_loss = val_loss
             logging(f"           >> Saving model..   Best_NME : {best_nme:.4f}")
             
-            torch.save(pfld_benchmark.state_dict(),
+            torch.save(flmk_model.state_dict(),
                        os.path.join(f"/data/komedi/logs/{C.experiment['day']}/{C.experiment['model']}_{C.log_dirs}", f"{C.log_dirs}_pfld_best.pt"))
-            torch.save(auxiliarynet.state_dict(),
+            if angl_model:        
+                torch.save(angl_model.state_dict(),
                        os.path.join(f"/data/komedi/logs/{C.experiment['day']}/{C.experiment['model']}_{C.log_dirs}", f"{C.log_dirs}_angle_best.pt"))
         else:
             early_cnt += 1

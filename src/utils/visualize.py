@@ -6,7 +6,7 @@ def visualize_image(image, landmarks):
     plt.figure(figsize = (6, 6))
 
     landmarks = landmarks.view(-1, 2)
-    landmarks = (landmarks+0.5) * 112
+    landmarks = (landmarks+0.5) * 224
 
     plt.imshow(image[0], cmap ='gray')
     plt.scatter(landmarks[:, 0], landmarks[:, 1], s = 25, c = 'dodgerblue')
@@ -20,12 +20,12 @@ def visualize_batch(images_list, landmarks_list, gt_list, size = 6, shape = (10,
         image = (image - image.min())/(image.max() - image.min())
         landmarks = landmarks
         landmarks = landmarks.view(-1, 2)
-        landmarks = (landmarks+0.5) * 112
+        landmarks = (landmarks+0.5) * 224
         landmarks = landmarks.detach().numpy().tolist()
         landmarks = np.array([(x, y) for (x, y) in landmarks if 0 <= x and 0 <= y])
 
         gt = gt.view(-1, 2)
-        gt = (gt+0.5) * 112
+        gt = (gt+0.5) * 224
         gt = gt.numpy().tolist()
         gt = np.array([(x, y) for (x, y) in gt if 0 <= x  and 0 <= y])
 
