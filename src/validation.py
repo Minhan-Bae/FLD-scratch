@@ -2,7 +2,7 @@ import torch
 from utils.visualize import visualize_batch
 from metric.nme import NME
 
-def validate(valid_loader, landmark_model, save = None):
+def validate(valid_loader, landmark_model, save):
     cum_loss = 0.0
     cum_nme = 0.0
     

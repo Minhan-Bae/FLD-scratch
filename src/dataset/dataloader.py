@@ -6,7 +6,7 @@ def AFLWDataloader(batch_size, workers):
     # set datasets
     dataset_train = AFLWDatasets(
         type="train",
-        transform=get_augmentation(data_type="train")
+        transform=get_augmentation(data_type="valid")
         )
 
     dataset_valid = AFLWDatasets(

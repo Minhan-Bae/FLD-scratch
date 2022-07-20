@@ -6,17 +6,17 @@ from torch.optim.lr_scheduler import ReduceLROnPlateau
 from models.pfld import *
 from loss.loss import PFLDLoss
 
-device = '0,2,3'
-log_dirs = "v10_19_00" # v00_H_M
+device = '0,1'
+log_dirs = "v12_09_50" # v00_H_M
 experiment = {
     "day": date.today().isoformat(),
     "model" : "pfld",
-    "epoch" : 500,
+    "epoch" : 200,
     "lr" : 1e-4,
     "seed" : 2022,
-    "batch_size" : 256,
+    "batch_size" : 1024,
     "workers" : 4 * len(device.split(',')), # number of gpu * 4
-    "early_stop" : 25
+    "early_stop" : 999
 }
 
 os.makedirs(f"/data/komedi/logs/{experiment['day']}/{experiment['model']}_{log_dirs}/image_logs", exist_ok=True)
@@ -27,8 +27,8 @@ save_image_path = os.path.join(save_path,"image_logs")
 save_model_path = os.path.join(save_path,"model_logs")
 save_best_model = os.path.join(f"/data/komedi/logs/{experiment['day']}/{experiment['model']}_{log_dirs}", f"{log_dirs}_{experiment['model']}_best.pt")
 
-pfld_pretrained_path = "/data/komedi/logs/2022-07-19/pfld_v08_14_30/v08_14_30_angle_best.pt"
-auxil_pretrained_path = "/data/komedi/logs/2022-07-19/pfld_v08_14_30/v08_14_30_angle_best.pt"
+pfld_pretrained_path = "/data/komedi/logs/2022-07-19/pfld_v09_17_00/v09_17_00_pfld_best.pt"
+auxil_pretrained_path = "/data/komedi/logs/2022-07-19/pfld_v09_17_00/v09_17_00_angle_best.pt"
 
 pfld_benchmark, auxiliarynet = get_model(pfld_pretrained=pfld_pretrained_path,
                                          auxil_pretrained=auxil_pretrained_path)

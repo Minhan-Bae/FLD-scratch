@@ -1,7 +1,6 @@
 # TODO FUTURE
-- train, valid 함수 및 모듈 화
-- log 삽입
-- 
+- 기학습 angle 모델 넣어서 학습해보기
+- 구축했었던 데이터셋을 이용해서 pitch, yaw 만 추출해서 해보기
 
 
 

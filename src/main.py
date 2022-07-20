@@ -32,7 +32,7 @@ cudnn.benchmark=True
 
 # check start time
 start_time = time.time()
-
+print(f"exp model : {C.experiment['model']}     version : {C.log_dirs}\n")
 # Fix seed
 seed_everything(C.experiment["seed"])
 
@@ -91,11 +91,12 @@ for epoch in range(C.experiment["epoch"]):
         cum_loss += loss.item()
         
         description_train = f"| # Epoch: {epoch+1}/{C.experiment['epoch']}, Loss: {cum_loss/(idx+1):.4f}"
-        pbar.set_description(description_train)   
+        pbar.set_description(description_train)
+
     C.scheduler.step(cum_loss)
     log_list.append(f"| # Epoch: {epoch+1}/{C.experiment['epoch']}, Loss: {cum_loss/(idx+1):.4f}")
     
-    if epoch%10==0: 
+    if epoch%5==0: 
         # valid mode
         pfld_benchmark.eval()
         mean_nme, val_loss = validate(valid_loader,
@@ -115,7 +116,7 @@ for epoch in range(C.experiment["epoch"]):
         if val_loss < best_loss:
             early_cnt = 0
             best_loss = val_loss
-            print(f'|   >> Saving model..  NME : {mean_nme:.4f}')
+            print(f'|           >> Saving model..  NME : {mean_nme:.4f}')
             log_list.append(f"|   >> Saving model..   NME : {mean_nme:.4f}")
             torch.save(pfld_benchmark.state_dict(),
                        os.path.join(f"/data/komedi/logs/{C.experiment['day']}/{C.experiment['model']}_{C.log_dirs}", f"{C.log_dirs}_pfld_best.pt"))

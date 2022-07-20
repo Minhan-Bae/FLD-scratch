@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from PIL import Image
 from torch.utils.data import Dataset
-
+import math
 """
 Dataset configuration
 
@@ -17,7 +17,7 @@ idx 10 ~ : landmark
 """
 
 class AFLWDatasets(Dataset):
-    def __init__(self, type="train", transform=None, aug_data_num=2):
+    def __init__(self, type="train", transform=None, aug_data_num=1):
         super().__init__()
         self.type = type
         
@@ -47,12 +47,15 @@ class AFLWDatasets(Dataset):
                     data_list[idx][5]+margin//2,
                     data_list[idx][6]+margin//2)
 
-        pil_image = Image.open(data_list[idx][2])
+        image = cv2.imread(data_list[idx][2])
+        pil_image = Image.fromarray(image)
+        
         image = pil_image.crop(crop_area)
         image = np.array(image)
         
-        # read pose        
-        euler_angle = np.asarray(data_list[idx][7:10], dtype=np.float32)
+        # read pose
+        
+        euler_angle = np.asarray([data_list[idx][i]*math.pi/180 for i in (7,8,9)], dtype=np.float32)
         
         # read label
         labels = data_list[idx][10:]
@@ -68,6 +71,7 @@ class AFLWDatasets(Dataset):
             label = transformed['keypoints']
             
         image = torch.tensor(image, dtype=torch.float)
+        image = (2 * image) - 1 # contrast 조절
         image /= 255
         
         label = torch.tensor(label, dtype=torch.float)
