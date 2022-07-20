@@ -132,7 +132,7 @@ for epoch in range(1, C.experiment["epoch"]+1):
 
         cum_loss += loss.item()
         
-        description_train = f"| # Epoch: {epoch}/{C.experiment['epoch']}, Loss: {cum_loss/(idx+1):.4f}"
+        description_train = f"| # Epoch: {str(epoch).zfill(len(str(C.experiment['epoch'])))}/{C.experiment['epoch']}, Loss: {cum_loss/(idx+1):.4f}"
         pbar.set_description(description_train)
 
     C.scheduler.step(cum_loss)

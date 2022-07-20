@@ -8,6 +8,8 @@ class PFLDLoss(nn.Module):
     def forward(self, 
                 landmarks, landmark_gt,
                 angle, euler_angle_gt):
+        angle*=180
+        euler_angle_gt*=180
         
         weight_angle = torch.sum(1 - torch.cos(angle - euler_angle_gt), axis=1)
         l2_distant = torch.sum((landmark_gt - landmarks) * (landmark_gt - landmarks), axis=1)
