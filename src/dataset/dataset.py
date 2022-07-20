@@ -47,7 +47,7 @@ class AFLWDatasets(Dataset):
                     data_list[idx][5]+margin//2,
                     data_list[idx][6]+margin//2)
 
-        image = cv2.imread(data_list[idx][2])
+        image = cv2.imread(data_list[idx][2],0)
         pil_image = Image.fromarray(image)
         
         image = pil_image.crop(crop_area)
@@ -75,7 +75,7 @@ class AFLWDatasets(Dataset):
         image /= 255
         
         label = torch.tensor(label, dtype=torch.float)
-        label /= 112
+        label /= 128
         landmark = label.reshape(-1) - 0.5
         
         return (image, landmark, euler_angle)

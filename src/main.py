@@ -61,9 +61,13 @@ torch.cuda.set_device(devices_id[0])
 if C.experiment['model'] == "pfld":
     flmk_model = nn.DataParallel(C.pfld_benchmark, device_ids=devices_id).cuda()
     angl_model = nn.DataParallel(C.auxiliarynet, device_ids=devices_id).cuda()
-elif C.experiment['model']:
+elif C.experiment['model'] == "swin":
     flmk_model = nn.DataParallel(C.swin_net, device_ids=devices_id).cuda()
     angl_model = None
+elif C.experiment['model'] == "xception":
+    flmk_model = nn.DataParallel(C.xception_Net, device_ids=devices_id).cuda()
+    angl_model = None
+
 C.optimizer.zero_grad()
 
 # set validate
@@ -130,7 +134,7 @@ for epoch in range(1, C.experiment["epoch"]+1):
             if C.experiment['model'] == 'pfld':
                 weighted_loss, loss = C.criterion(predicts, landmarks_gt,
                                                   angle, euler_angle_gt)
-            elif C.experiment['model'] == 'swin':
+            else:
                 weighted_loss = C.criterion(predicts, landmarks_gt)
                 loss = weighted_loss
     

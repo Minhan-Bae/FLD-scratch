@@ -5,17 +5,18 @@ from torch.optim.lr_scheduler import ReduceLROnPlateau
 
 from models.pfld import *
 from models.timm_swin import *
+from models.xception import *
 from loss.loss import PFLDLoss
 
 device = '0,1'
 log_dirs = "v13_15_00" # v00_H_M
 experiment = {
     "day": date.today().isoformat(),
-    "model" : "swin",
+    "model" : "xception",
     "epoch" : 200,
     "lr" : float(1e-4),
     "seed" : 2022,
-    "batch_size" : 128,
+    "batch_size" : 256,
     "workers" : 4 * len(device.split(',')), # number of gpu * 4
     "early_stop" : 999
 }
@@ -45,9 +46,19 @@ elif experiment['model'] == 'swin':
     
     swin_net = timm_Net_54(model_name = 'swin_base_patch4_window7_224',
                            pretrained=swin_pretrained_path)
-    
     criterion = nn.MSELoss()
     optimizer = optim.Adam(swin_net.parameters(), lr = experiment["lr"], weight_decay = 1e-6) 
+    
+elif experiment['model'] == 'xception':
+    pretrained_path = None
+    xception_Net =  XceptionNet(num_classes=27*2)
+
+    if pretrained_path:
+        xception_Net.eval()
+        xception_Net.load_state_dict(torch.load(pretrained_path, map_location = 'cpu'), strict=False)
+    
+    criterion = nn.MSELoss()
+    optimizer = optim.Adam(xception_Net.parameters(), lr = experiment["lr"], weight_decay = 1e-6) 
 
 scheduler = ReduceLROnPlateau(optimizer, mode='min', patience=40, verbose=True)
 validation_term = 1

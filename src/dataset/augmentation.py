@@ -54,24 +54,24 @@ def get_augmentation(data_type):
         ],p=1.0),
         A.ColorJitter (brightness=0.2, contrast=0.2, saturation=0.2, hue=0.2, always_apply=False, p=0.5),
         # A.ShiftScaleRotate(shift_limit=0.0625, scale_limit=(-0.5, 0),rotate_limit=30, border_mode=0 ,p=0.8,),
-        A.Normalize(
-            mean=[0.4897,0.4897,0.4897],
-            std = [0.2330,0.2330,0.2330],
-            max_pixel_value=255.0,
-        ),
-        A.Resize(width = 112,height = 112),
+        # A.Normalize(
+        #     mean=[0.4897,0.4897,0.4897],
+        #     std = [0.2330,0.2330,0.2330],
+        #     max_pixel_value=255.0,
+        # ),
+        A.Resize(width = 128,height = 128),
         ToTensorV2(),
         ],keypoint_params = A.KeypointParams(format="xy",remove_invisible = False)
     )
     
     elif data_type=="valid":
         return A.Compose([ 
-        A.Normalize(
-            mean=[0.4897,0.4897,0.4897],
-            std = [0.2330,0.2330,0.2330],
-            max_pixel_value=255.0,
-        ),
-        A.Resize(height=224,width=224),
+        # A.Normalize(
+        #     mean=[0.4897,0.4897,0.4897],
+        #     std = [0.2330,0.2330,0.2330],
+        #     max_pixel_value=255.0,
+        # ),
+        A.Resize(height=128,width=128),
         ToTensorV2(),    
         ],keypoint_params = A.KeypointParams(format="xy",remove_invisible = False)
     )
