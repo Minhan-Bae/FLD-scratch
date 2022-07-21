@@ -160,9 +160,9 @@ for epoch in range(1, C.experiment["epoch"]+1):
                                       save=os.path.join(f'{C.save_image_path}',
                                                         f'epoch({str(epoch).zfill(len(str(C.experiment["epoch"])))}).jpg'))
 
-        torch.save(flmk_model.state_dict(), os.path.join(C.save_model_path, f"{C.log_dirs}_flmk_{epoch}.pt"))
+        torch.save(flmk_model.module.state_dict(), os.path.join(C.save_model_path, f"{C.log_dirs}_flmk_{epoch}.pt"))
         if angl_model:        
-            torch.save(angl_model.state_dict(), os.path.join(C.save_model_path, f"{C.log_dirs}_angl_{epoch}.pt"))
+            torch.save(angl_model.module.state_dict(), os.path.join(C.save_model_path, f"{C.log_dirs}_angl_{epoch}.pt"))
 
         # update nme
         if mean_nme < best_nme:
@@ -174,7 +174,7 @@ for epoch in range(1, C.experiment["epoch"]+1):
             best_loss = val_loss
             logging(f"           >> Saving model..   Best_NME : {best_nme:.4f}")
             
-            torch.save(flmk_model.state_dict(),
+            torch.save(flmk_model.module.state_dict(),
                        os.path.join(f"/data/komedi/logs/{C.experiment['day']}/{C.experiment['model']}_{C.log_dirs}", f"{C.log_dirs}_pfld_best.pt"))
             if angl_model:        
                 torch.save(angl_model.state_dict(),
