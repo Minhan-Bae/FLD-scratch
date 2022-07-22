@@ -1,5 +1,6 @@
 import cv2
 import torch
+import random
 import numpy as np
 import pandas as pd
 from PIL import Image
@@ -21,7 +22,7 @@ class Datasets(Dataset):
         self.type = type
         self.transform = transform
         self.data_list = pd.read_csv(data_path,header=None).values.tolist()
-        
+        random.shuffle(self.data_list)
         # (Optional) add dataset of train
         if self.type == "train":
             self.data_list *= aug_data_num
@@ -34,16 +35,20 @@ class Datasets(Dataset):
 
         landmarks = []
         x_list, y_list = [], []
+        
+        for label in data[10:]:
+            x,y = eval(label[1:-1])
+            x_list.append(x+data[3])
+            y_list.append(y+data[4])
+
         for label in data[10:]:
             x,y = eval(label[1:-1])
             if self.type=='valid': 
-                x = int(x+data[3])
-                y = int(y+data[4])
-            x_list.append(x)
-            y_list.append(y)
+                x = int(x+data[3]-np.min(x_list))
+                y = int(y+data[4]-np.min(y_list))
             landmarks.append([x,y])
         landmarks = np.array(landmarks).astype('float32')
-        
+
 
         image = cv2.imread(data[2],0)
         pil_image = Image.fromarray(image)
