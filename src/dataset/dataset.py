@@ -38,26 +38,23 @@ class Datasets(Dataset):
         
         for label in data[10:]:
             x,y = eval(label[1:-1])
-            x_list.append(x+data[3])
-            y_list.append(y+data[4])
-
-        for label in data[10:]:
-            x,y = eval(label[1:-1])
-            if self.type=='valid': 
-                x = int(x+data[3]-np.min(x_list))
-                y = int(y+data[4]-np.min(y_list))
-            landmarks.append([x,y])
-        landmarks = np.array(landmarks).astype('float32')
-
+            x_list.append(x)
+            y_list.append(y)
 
         image = cv2.imread(data[2],0)
         pil_image = Image.fromarray(image)
-        crops = [np.min(x_list), 
-                 np.min(y_list),
-                 np.max(x_list),
-                 np.max(y_list)]
+        offset = 10
+        crops = [np.min(x_list)-offset, 
+                 np.min(y_list)-offset,
+                 np.max(x_list)+offset,
+                 np.max(y_list)+offset]
         image = pil_image.crop(crops)
         image = np.array(image)
+
+        for label in data[10:]:
+            x,y = eval(label[1:-1])
+            landmarks.append([x-np.min(x_list)+offset,y-np.min(y_list)+offset])
+        landmarks = np.array(landmarks).astype('float32')
         
         if self.transform:
             transformed = self.transform(image=image, keypoints=landmarks)

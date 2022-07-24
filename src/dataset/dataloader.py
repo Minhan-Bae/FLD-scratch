@@ -5,19 +5,19 @@ from torch.utils import data
 def Dataloader(batch_size, workers):
     # set datasets
     dataset_train = Datasets(
-        data_path = "/data/komedi/komedi/dataset/versioning/22-07-22-1200-train.csv",
+        data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/train_df.csv",
         type="train",
         transform=get_augmentation(data_type="train")
         )
 
     dataset_valid_aflw = Datasets(
-        data_path = "/data/komedi/komedi/dataset/versioning/22-07-22-1200-valid-aflw.csv",
+        data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/valid_aflw_df.csv",
         type="valid",
         transform=get_augmentation(data_type="valid")
         )
     
     dataset_valid_face = Datasets(
-        data_path = "/data/komedi/komedi/dataset/versioning/22-07-22-1200-valid-kface.csv",
+        data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/valid_kface_df.csv",
         type="valid",
         transform=get_augmentation(data_type="valid")
         )

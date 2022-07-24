@@ -3,12 +3,11 @@ torch.cuda.empty_cache()
 
 from tqdm import tqdm
 
-from torch.cuda.amp import autocast, GradScaler
 from utils.visualize import *
 from utils.logging import *
 from metric.nme import NME
 
-def validate(types, valid_loader, model, criterion, log_list, save = None):
+def validate(types, valid_loader, model, criterion, save = None):
     cum_loss = 0.0
     cum_nme = 0.0
     model.eval()
@@ -26,10 +25,10 @@ def validate(types, valid_loader, model, criterion, log_list, save = None):
             cum_loss += loss.item()
             break
             
-    visualize_batch(features[:16].cpu(), outputs[:16].cpu(), labels[:16].cpu(), shape = (4, 4), size = 16, title = 'Validation sample predictions', save = save)
+    visualize_batch(features[:16].cpu(), outputs[:16].cpu(), labels[:16].cpu(), shape = (4, 4), size = 16, save = save)
 
-    log_list = logging(f"|     ===> Evaluate {types}:",log_list)
-    log_list = logging(f'|          Eval set: Normalize Mean Error: {cum_nme/len(valid_loader):.4f}',log_list)
-    log_list = logging(f'|          Eval set: Average loss: {cum_loss/len(valid_loader):.4f}',log_list)    
+    logging(f"|     ===> Evaluate {types}:")
+    logging(f'|          Eval set: Normalize Mean Error: {cum_nme/len(valid_loader):.4f}')
+    logging(f'|          Eval set: Average loss: {cum_loss/len(valid_loader):.4f}')    
 
-    return cum_loss/len(valid_loader), cum_nme/len(valid_loader), log_list
+    return cum_loss/len(valid_loader), cum_nme/len(valid_loader)

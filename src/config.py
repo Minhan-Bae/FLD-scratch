@@ -9,14 +9,14 @@ from loss.loss import PFLDLoss
 device = '0,1,2'
 devices_id = [int(d) for d in device.split(',')]
 
-log_dirs = "v20_13_00" # v00_H_M
+log_dirs = "24_00" # H_M
 experiment = {
     "day": date.today().isoformat(),
     "model" : "xception",
-    "epoch" : 100,
-    "lr" : 1e-4,
+    "epoch" : 60,
+    "lr" : 4e-4,
     "seed" : 2022,
-    "batch_size" : 64,
+    "batch_size" : 256,
     "workers" : 4 * len(device.split(',')), # number of gpu * 4
     "early_stop" : 999
 }
@@ -32,7 +32,7 @@ save_model_path = os.path.join(save_path,"model_logs")
 save_best_model = os.path.join(f"/data/komedi/komedi/logs/{experiment['day']}/{experiment['model']}_{log_dirs}", f"{log_dirs}_{experiment['model']}_best.pt")
 
 
-pretrained_path = None
+pretrained_path = "/data/komedi/komedi/logs/2022-07-24/xception_23_00/23_00_best.pt"
 xception_Net = XceptionNet(num_classes=27*2)
 if len(devices_id) != 1:
     xception_Net = nn.DataParallel(xception_Net, device_ids=devices_id)
@@ -41,7 +41,7 @@ if pretrained_path:
     xception_Net.eval()
     xception_Net.module.load_state_dict(torch.load(pretrained_path, map_location = 'cpu'), strict=False)
     
-validation_term = 1
+validation_term = 5
 
 
 # run CUDA_VISIBLE_DEVICES=0,0 python ~/main.py
