@@ -6,19 +6,19 @@ from models.timm_swin import *
 from models.xception import *
 from loss.loss import PFLDLoss
 
-device = '0,1,2'
+device = '0,1'
 devices_id = [int(d) for d in device.split(',')]
 
-log_dirs = "24_00" # H_M
+log_dirs = "17_00" # H_M
 experiment = {
     "day": date.today().isoformat(),
     "model" : "xception",
-    "epoch" : 60,
-    "lr" : 4e-4,
+    "epoch" : 500,
+    "lr" : 8e-5,
     "seed" : 2022,
     "batch_size" : 256,
     "workers" : 4 * len(device.split(',')), # number of gpu * 4
-    "early_stop" : 999
+    "early_stop" : 20
 }
 
 os.makedirs(f"/data/komedi/komedi/logs/{experiment['day']}/{experiment['model']}_{log_dirs}/image_logs/kface", exist_ok=True)

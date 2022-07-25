@@ -64,7 +64,7 @@ def validate(types, valid_loader, model, criterion, save = None):
             
     visualize_batch(features[:16].cpu(), outputs[:16].cpu(), labels[:16].cpu(), shape = (4, 4), size = 16, save = save)
 
-    logging(f"|     ===> Evaluate {types}:")
+    logging(f'|     ===> Evaluate {types}:')
     logging(f'|          Eval set: Normalize Mean Error: {cum_nme/len(valid_loader):.4f}')
     logging(f'|          Eval set: Average loss: {cum_loss/len(valid_loader):.8f}')    
 
@@ -155,7 +155,9 @@ for epoch in range(1, C.experiment["epoch"]+1):
                                  criterion = criterion,
                                  save=os.path.join(f'{C.save_image_path}/aflw',
                                                    f'epoch({str(epoch).zfill(len(str(C.experiment["epoch"])))}).jpg'))
-        ratio = [398/(398+387), 387/(398+387)]
+
+        ratio = [len(valid_loader_aflw)/(len(valid_loader_aflw)+len(valid_loader_face)),
+                 len(valid_loader_face)/(len(valid_loader_aflw)+len(valid_loader_face))]
         mean_nme = a_nme*ratio[0]+k_nme*ratio[1]
         val_loss= a_loss*ratio[0]+k_loss*ratio[1]
         
