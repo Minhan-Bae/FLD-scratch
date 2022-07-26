@@ -9,7 +9,7 @@ from loss.loss import PFLDLoss
 device = '0,1'
 devices_id = [int(d) for d in device.split(',')]
 
-log_dirs = "10_00" # H_M
+log_dirs = "19_00" # H_M
 experiment = {
     "day": date.today().isoformat(),
     "model" : "xception",
@@ -18,7 +18,7 @@ experiment = {
     "seed" : 2022,
     "batch_size" : 256,
     "workers" : 4 * len(device.split(',')), # number of gpu * 4
-    "early_stop" : 20
+    "early_stop" : 50
 }
 
 os.makedirs(f"/data/komedi/komedi/logs/{experiment['day']}/{experiment['model']}_{log_dirs}/image_logs/kface", exist_ok=True)
@@ -44,4 +44,4 @@ if pretrained_path:
 validation_term = 5
 
 
-# run CUDA_VISIBLE_DEVICES=0,0 python ~/main.py
+# CUDA_VISIBLE_DEVICES=1,2,3 python /home/ubuntu/workspace/FLD-scratch/src/main.py

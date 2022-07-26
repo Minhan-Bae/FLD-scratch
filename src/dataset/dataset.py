@@ -17,7 +17,7 @@ idx 10 ~ : landmark
 """
 
 class Datasets(Dataset):
-    def __init__(self, data_path, type="train", transform=None, aug_data_num=1):
+    def __init__(self, data_path, type="train", transform=None, aug_data_num=2):
         super().__init__()
         self.type = type
         self.transform = transform
@@ -62,11 +62,12 @@ class Datasets(Dataset):
             landmarks = transformed['keypoints']
             
         image = torch.tensor(image, dtype=torch.float)
-        image = (2 * image) - 1 # contrast 조절
-        image /= 255
+        image = (image - image.min())/(image.max() - image.min())
+        image = (2 * image) - 1 # set image value (-1, 1)
+        
         
         label = torch.tensor(landmarks, dtype=torch.float)
-        label /= 128
+        label = (label - label.min())/(label.max() - label.min())
         landmark = label.reshape(-1) - 0.5
         
         return image, landmark
