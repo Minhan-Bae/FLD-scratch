@@ -9,12 +9,12 @@ from loss.loss import PFLDLoss
 device = '0,1'
 devices_id = [int(d) for d in device.split(',')]
 
-log_dirs = "17_00" # H_M
+log_dirs = "10_00" # H_M
 experiment = {
     "day": date.today().isoformat(),
     "model" : "xception",
     "epoch" : 500,
-    "lr" : 8e-5,
+    "lr" : 2e-4,
     "seed" : 2022,
     "batch_size" : 256,
     "workers" : 4 * len(device.split(',')), # number of gpu * 4
@@ -32,7 +32,7 @@ save_model_path = os.path.join(save_path,"model_logs")
 save_best_model = os.path.join(f"/data/komedi/komedi/logs/{experiment['day']}/{experiment['model']}_{log_dirs}", f"{log_dirs}_{experiment['model']}_best.pt")
 
 
-pretrained_path = "/data/komedi/komedi/logs/2022-07-24/xception_23_00/23_00_best.pt"
+pretrained_path = "/data/komedi/tools/visualization/src/pretrained/xception/model_07-25-14-00.pt"
 xception_Net = XceptionNet(num_classes=27*2)
 if len(devices_id) != 1:
     xception_Net = nn.DataParallel(xception_Net, device_ids=devices_id)
