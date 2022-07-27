@@ -13,14 +13,14 @@ import torch.optim as optim
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 
 torch.cuda.empty_cache()
-
 import os
 import time
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
 from torch.cuda.amp import autocast, GradScaler
-
+from torch import autograd
+# autograd.set_detect_anomaly(True)
 import config as C
 # from validate import *
 from loss.loss import *
@@ -89,7 +89,7 @@ torch.cuda.set_device(devices_id[0])
 model = C.xception_Net.cuda()
 
 
-criterion = nn.MSELoss()
+criterion = torch.nn.MSELoss()
 optimizer = optim.Adam(model.parameters(), lr = C.experiment["lr"], weight_decay = 1e-6) 
 scheduler = ReduceLROnPlateau(optimizer, mode='min', patience=40, verbose=True)
 
@@ -126,13 +126,13 @@ for epoch in range(1, C.experiment["epoch"]+1):
         with autocast(enabled=True):         
             predicts = model(features)
             loss = criterion(predicts, landmarks_gt)
-    
         scaler.scale(loss).backward()
         scaler.step(optimizer)
         scaler.update()
         
         optimizer.zero_grad()
-
+        # loss = torch.nan_to_num(loss)
+        
         cum_loss += loss.item()
         
         description_train = f"| # Epoch: {str(epoch).zfill(len(str(C.experiment['epoch'])))}/{C.experiment['epoch']}, Loss: {cum_loss/(idx+1):.8f}"

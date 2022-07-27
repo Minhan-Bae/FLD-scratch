@@ -17,7 +17,7 @@ idx 10 ~ : landmark
 """
 
 class Datasets(Dataset):
-    def __init__(self, data_path, type="train", transform=None, aug_data_num=2):
+    def __init__(self, data_path, type="train", transform=None, aug_data_num=1):
         super().__init__()
         self.type = type
         self.transform = transform
@@ -49,12 +49,12 @@ class Datasets(Dataset):
                  np.max(x_list)+offset,
                  np.max(y_list)+offset]
         image = pil_image.crop(crops)
-        image = np.array(image)
+        image = np.array(image).astype(float)
 
         for label in data[10:]:
             x,y = eval(label[1:-1])
             landmarks.append([x-np.min(x_list)+offset,y-np.min(y_list)+offset])
-        landmarks = np.array(landmarks).astype('float32')
+        landmarks = np.array(landmarks).astype(float)
         
         if self.transform:
             transformed = self.transform(image=image, keypoints=landmarks)
@@ -67,7 +67,7 @@ class Datasets(Dataset):
         
         
         label = torch.tensor(landmarks, dtype=torch.float)
-        label = (label - label.min())/(label.max() - label.min())
+        label /= 128
         landmark = label.reshape(-1) - 0.5
         
         return image, landmark

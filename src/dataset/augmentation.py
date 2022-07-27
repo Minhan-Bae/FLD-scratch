@@ -6,7 +6,7 @@ def get_augmentation(data_type):
         return A.Compose([
         A.Rotate(limit = 15,border_mode =0, p=0.8),
         # A.RandomBrightnessContrast(contrast_limit=0.5,brightness_limit=0.5,p=0.2),
-        A.CLAHE(p=0.8),
+        # A.CLAHE(p=0.8),
         # A.OneOf([
         #     A.GaussNoise(p=0.8),
         #     A.ImageCompression(p=0.8),

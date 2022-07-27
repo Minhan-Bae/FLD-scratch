@@ -9,12 +9,12 @@ from loss.loss import PFLDLoss
 device = '0,1'
 devices_id = [int(d) for d in device.split(',')]
 
-log_dirs = "19_00" # H_M
+log_dirs = "18_00" # H_M
 experiment = {
     "day": date.today().isoformat(),
     "model" : "xception",
     "epoch" : 500,
-    "lr" : 2e-4,
+    "lr" : 1e-5,
     "seed" : 2022,
     "batch_size" : 256,
     "workers" : 4 * len(device.split(',')), # number of gpu * 4
