@@ -155,7 +155,7 @@ class ExitBlock(nn.Module):
         return x
     
 class XceptionNet(nn.Module):
-    def __init__(self, num_classes, num_middle_blocks = 6):
+    def __init__(self, num_classes=54, num_middle_blocks = 6):
         super(XceptionNet, self).__init__()
 
         self.num_classes = num_classes
