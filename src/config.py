@@ -14,7 +14,7 @@ experiment = {
     "day": date.today().isoformat(),
     "model" : "xception",
     "epoch" : 500,
-    "lr" : 2e-4,
+    "lr" : 1e-4,
     "seed" : 2022,
     "batch_size" : 256,
     "workers" : 4 * len(device.split(',')), # number of gpu * 4

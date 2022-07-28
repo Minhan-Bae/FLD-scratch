@@ -17,15 +17,13 @@ idx 10 ~ : landmark
 """
 
 class Datasets(Dataset):
-    def __init__(self, data_path, type="train", transform=None, aug_data_num=1):
+    def __init__(self, data_path, type="train", transform=None):
         super().__init__()
         self.type = type
         self.transform = transform
         self.data_list = pd.read_csv(data_path,header=None).values.tolist()
         random.shuffle(self.data_list)
         # (Optional) add dataset of train
-        if self.type == "train":
-            self.data_list *= aug_data_num
 
     def __len__(self):
         return len(self.data_list)

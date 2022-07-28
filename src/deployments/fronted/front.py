@@ -30,10 +30,10 @@ if uploaded_file:
     
     cropped_img = st_cropper(
         image,
-        realtime_update=False,
+        realtime_update=True,
         aspect_ratio=None,
         box_algorithm=return_box,
-        return_type="image",
+        return_type="image"
     )
         
     _ = cropped_img.thumbnail((256, 256))
@@ -46,8 +46,9 @@ if uploaded_file:
     files = ['files', (uploaded_file.name, cropped_img_byte, uploaded_file.type)]
 
     start_time = time.time()
-    pil_image, landmarks = run_detect(cropped_img_byte,
-                                      pretrained="/data/komedi/komedi/logs/2022-07-28/xception_14_55/14_55_best.pt")
+    pil_image, landmarks = run_detect(
+        cropped_img_byte,
+        pretrained="/data/komedi/komedi/logs/2022-07-28/xception_14_55/14_55_best.pt")
     
     landmark_result = []
     for x,y in landmarks:
@@ -94,11 +95,18 @@ if uploaded_file:
         csv_lists = pd.read_csv("/data/komedi/streamlit_logs/result.csv",header=None).values.tolist()
         
         csv_list = []
-        csv_list.append(time)
         csv_list.append(f"{Path(image_name).stem}.jpg")
-        csv_list.append(f"{save_raw_image_dir}/{time}.jpg")
-        csv_list.append(f"{save_crop_image_dir}/{time}.jpg")
-        
+        csv_list.append("streamlit")
+        # csv_list.append(f"{save_raw_image_dir}/{Path(image_name).stem}.jpg")
+        csv_list.append(f"{save_crop_image_dir}/{Path(image_name).stem}.jpg")
+        csv_list.append("")
+        csv_list.append("")
+        csv_list.append("")
+        csv_list.append("")                        
+        csv_list.append(time)
+        csv_list.append("")
+        csv_list.append("")        
+                
         for landmark in landmark_result:
             x,y = landmark
             csv_list.append((x,y))
@@ -106,3 +114,4 @@ if uploaded_file:
         df = pd.DataFrame(csv_lists)
         
         df.to_csv(f"{save_dir}/result.csv", index=None, header=None)
+        st.write("감사합니다.")
