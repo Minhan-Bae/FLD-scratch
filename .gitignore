@@ -5,6 +5,7 @@ __pycache__
 *.pt
 *.pth
 *.ckpt
+*.out
 
 *.json
 
