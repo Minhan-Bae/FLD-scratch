@@ -6,7 +6,8 @@ from PIL import Image
 from utils.transforms import transform_function
 from utils.xception import xception_Net_54
 
-def run_detect(cropped_img_byte,
+def run_detect(image,
+               cropped_img_byte,
                pretrained=None,
                rotation=False):
     pil_image = Image.open(io.BytesIO(cropped_img_byte))
@@ -27,8 +28,11 @@ def run_detect(cropped_img_byte,
         if angle > 30:
             if p1[0]<p2[0]:
                 pil_image = pil_image.rotate(-angle)
+                image = image.rotate(-angle)
+                angle = -angle
             else:
                 pil_image = pil_image.rotate(angle)
+                image = image.rotate(angle)                
             
             new_image_tensor = transform_function(pil_image)
             model = xception_Net_54(pretrained=pretrained)
@@ -37,5 +41,6 @@ def run_detect(cropped_img_byte,
 
             landmarks = ((new_predict.view(-1,2)+0.5)).detach().numpy().tolist()
             landmarks = np.array([(x, y) for (x, y) in landmarks if 0 <= x and 0 <= y])
-            
-    return pil_image, landmarks
+        else:
+            angle = 0
+    return image, pil_image, landmarks, angle

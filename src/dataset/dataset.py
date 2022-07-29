@@ -23,7 +23,6 @@ class Datasets(Dataset):
         self.transform = transform
         self.data_list = pd.read_csv(data_path,header=None).values.tolist()
         random.shuffle(self.data_list)
-        # (Optional) add dataset of train
 
     def __len__(self):
         return len(self.data_list)
