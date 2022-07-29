@@ -32,7 +32,7 @@ save_model_path = os.path.join(save_path,"model_logs")
 save_best_model = os.path.join(f"/data/komedi/komedi/logs/{experiment['day']}/{experiment['model']}_{log_dirs}", f"{log_dirs}_{experiment['model']}_best.pt")
 
 
-pretrained_path = "/data/komedi/komedi/logs/2022-07-28/xception_18_05/18_05_best.pt"
+pretrained_path = "/data/komedi/komedi/logs/2022-07-28/xception_22_36/22_36_best.pt"
 xception_Net = XceptionNet(num_classes=27*2)
 if len(devices_id) != 1:
     xception_Net = nn.DataParallel(xception_Net, device_ids=devices_id)
