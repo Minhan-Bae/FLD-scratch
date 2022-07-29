@@ -18,7 +18,7 @@ experiment = {
     "seed" : 2022,
     "batch_size" : 256,
     "workers" : 4 * len(device.split(',')), # number of gpu * 4
-    "early_stop" : 20
+    "early_stop" : 999
 }
 
 os.makedirs(f"/data/komedi/komedi/logs/{experiment['day']}/{experiment['model']}_{log_dirs}/image_logs/kface", exist_ok=True)
@@ -32,7 +32,7 @@ save_model_path = os.path.join(save_path,"model_logs")
 save_best_model = os.path.join(f"/data/komedi/komedi/logs/{experiment['day']}/{experiment['model']}_{log_dirs}", f"{log_dirs}_{experiment['model']}_best.pt")
 
 
-pretrained_path = "/data/komedi/tools/visualization/src/pretrained/xception/model-07-28-22-00.pt"
+pretrained_path = "/data/komedi/komedi/logs/2022-07-28/xception_18_05/18_05_best.pt"
 xception_Net = XceptionNet(num_classes=27*2)
 if len(devices_id) != 1:
     xception_Net = nn.DataParallel(xception_Net, device_ids=devices_id)
