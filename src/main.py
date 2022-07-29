@@ -92,10 +92,10 @@ model = C.xception_Net.cuda()
 criterion = torch.nn.MSELoss()
 
 def custom_loss(preds, labels):
-    loss1 = criterion(preds[:18], labels[:18])
-    loss2 = criterion(preds[18:36], labels[18:36])
-    loss3 = criterion(preds[36:], labels[36:])
-    return 0.25*loss1+0.5*loss2+0.25*loss3
+    loss1 = criterion(preds[:24], labels[:24])
+    loss2 = criterion(preds[24:], labels[24:])
+    # loss3 = criterion(preds[36:], labels[36:])
+    return 0.7*loss1+0.3*loss2
 
 optimizer = optim.Adam(model.parameters(), lr = C.experiment["lr"], weight_decay = 1e-6) 
 scheduler = ReduceLROnPlateau(optimizer, mode='min', patience=40, verbose=True)
@@ -146,7 +146,7 @@ for epoch in range(1, C.experiment["epoch"]+1):
         pbar.set_description(description_train)
         
     scheduler.step(cum_loss/len(train_loader))
-    logging(f"| # Epoch: {str(epoch).zfill(len(str(C.experiment['epoch'])))}/{C.experiment['epoch']}, Loss: {cum_loss/(idx+1):.8f}")
+    log_list.append(f"| # Epoch: {str(epoch).zfill(len(str(C.experiment['epoch'])))}/{C.experiment['epoch']}, Loss: {cum_loss/(idx+1):.8f}")
 
     if epoch%C.validation_term == 0: 
         # valid mode
