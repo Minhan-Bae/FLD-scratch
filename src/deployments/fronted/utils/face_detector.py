@@ -10,8 +10,8 @@ def mtcnn(image, margin=20): #PIL
     )
     
     bbox, _ = mtcnn.detect(numpy_image)
-    # offset = ((bbox[0][2]-bbox[0][0])//10, (bbox[0][3]-bbox[0][1])//10)
-    offset = (10,10)
+    offset = ((bbox[0][2]-bbox[0][0])//20, (bbox[0][3]-bbox[0][1])//20)
+    # offset = (5,5)
     x,y = bbox[0][0]-offset[0], bbox[0][1]-offset[1]
     w,h = bbox[0][2]+offset[0] - x, bbox[0][3]+offset[1] - y
     box = {"left": x, "top":y, "width":w, "height":h}
