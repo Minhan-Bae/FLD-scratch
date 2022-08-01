@@ -32,7 +32,7 @@ save_model_path = os.path.join(save_path,"model_logs")
 save_best_model = os.path.join(f"/data/komedi/komedi/logs/{experiment['day']}/{experiment['model']}_{log_dirs}", f"{log_dirs}_{experiment['model']}_best.pt")
 
 
-pretrained_path = "/data/komedi/komedi/logs/2022-07-29/xception_13_16/model_logs/13_16_flmk_500.pt"
+pretrained_path = "/data/komedi/komedi/logs/2022-07-29/xception_16_53_07224/16_53_best.pt"
 # pretrained_path = None
 xception_Net = XceptionNet(num_classes=27*2)
 if len(devices_id) != 1:
