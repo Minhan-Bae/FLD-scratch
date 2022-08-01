@@ -18,13 +18,13 @@ def run_detect(image,
     
     landmarks = ((predict.view(-1,2)+0.5)).detach().numpy().tolist()
     landmarks = np.array([(x, y) for (x, y) in landmarks if 0 <= x and 0 <= y])
+
+    p1 = np.array(landmarks[18])
+    p2 = np.array(landmarks[5])
     
+    angle = 90-(math.degrees(math.asin(abs(p2[1]-p1[1])/np.linalg.norm(p2-p1))))
+        
     if rotation:
-        p1 = np.array(landmarks[18])
-        p2 = np.array(landmarks[5])
-        
-        angle = 90-(math.degrees(math.asin(abs(p2[1]-p1[1])/np.linalg.norm(p2-p1))))
-        
         if angle > 30:
             if p1[0]<p2[0]:
                 pil_image = pil_image.rotate(-angle)

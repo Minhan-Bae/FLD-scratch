@@ -14,17 +14,27 @@ from streamlit_cropper import st_cropper
 from utils.face_detector import return_box
 from landmark_detector import run_detect
 from utils.index import *
+
+
 st.set_option('deprecation.showfileUploaderEncoding', False)
 st.set_page_config(page_title="[Demo] 코메디클럽 안면 랜드마크 탐지", page_icon="random", layout="centered")
 
 st.header("😀 [Demo] 코메디클럽 안면 랜드마크 탐지")
 
-pretrained_model = "/data/komedi/komedi/logs/2022-07-29/xception_13_16/13_16_best.pt"
+# pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_14_06772/11_14_best.pt"
+# pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_29_06801/11_29_best.pt"
+# pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_42_09346/11_42_best.pt"
+# pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_55_09450/11_55_best.pt"
+# pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_12_09_07272/12_09_best.pt"
+# pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_12_23_09279/12_23_best.pt"
+# pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_12_37_07365/12_37_best.pt"
+# pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_12_54_09355/12_54_best.pt"
+pretrained_model = "/data/komedi/komedi/logs/2022-07-29/xception_16_53_07224/16_53_best.pt"
 
 uploaded_file = st.sidebar.file_uploader(label='파일 업로드', type=['png', 'jpg'])
 
 rotation_check = st.sidebar.checkbox(label="자동 안면 회전 기능(30도 이상)", value=True)
-show_in_input = st.sidebar.checkbox(label="원본 이미지에서 보기", value=True)
+show_in_input = st.sidebar.checkbox(label="원본 이미지에서 보기", value=False)
 show_annotate = st.sidebar.checkbox(label="인덱스 보기", value=True)
 box_color = st.sidebar.color_picker(label="박스 색상", value='#0000FF')
 point_color = st.sidebar.color_picker(label="포인트 색상", value='#F70101')

@@ -55,7 +55,7 @@ def validate(types, valid_loader, model, criterion, save = None):
 
             outputs = model(features).cuda()
 
-            loss = custom_loss(outputs, labels)
+            loss = criterion(outputs, labels)
             nme=NME(outputs, labels)
             
             cum_nme += nme.item()
@@ -95,7 +95,7 @@ def custom_loss(preds, labels):
     loss1 = criterion(preds[:24], labels[:24])
     loss2 = criterion(preds[24:], labels[24:])
     # loss3 = criterion(preds[36:], labels[36:])
-    return 0.8*loss1+0.2*loss2
+    return 0.7*loss1+0.3*loss2
 
 optimizer = optim.Adam(model.parameters(), lr = C.experiment["lr"], weight_decay = 1e-6) 
 scheduler = ReduceLROnPlateau(optimizer, mode='min', patience=40, verbose=True)
@@ -132,7 +132,7 @@ for epoch in range(1, C.experiment["epoch"]+1):
 
         with autocast(enabled=True):         
             predicts = model(features)
-            loss = custom_loss(predicts, landmarks_gt)
+            loss = criterion(predicts, landmarks_gt)
         scaler.scale(loss).backward()
         scaler.step(optimizer)
         scaler.update()

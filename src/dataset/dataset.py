@@ -22,7 +22,7 @@ class Datasets(Dataset):
         self.type = type
         self.transform = transform
         self.data_list = pd.read_csv(data_path,header=None).values.tolist()
-        random.shuffle(self.data_list)
+        # random.shuffle(self.data_list)
 
     def __len__(self):
         return len(self.data_list)
@@ -59,12 +59,12 @@ class Datasets(Dataset):
             landmarks = transformed['keypoints']
             
         image = torch.tensor(image, dtype=torch.float)
-        image = (image - image.min())/(image.max() - image.min())
+        image = (image - image.min())/(image.max() - image.min()) # set image value (0, 1)
         image = (2 * image) - 1 # set image value (-1, 1)
         
         
         label = torch.tensor(landmarks, dtype=torch.float)
-        label /= 128
-        landmark = label.reshape(-1) - 0.5
+        label /= 128 # set landmark value (0,1)
+        landmark = label.reshape(-1) - 0.5 # set landmark value(-0.5, 0.5)
         
         return image, landmark

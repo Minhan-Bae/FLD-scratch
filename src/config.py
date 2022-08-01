@@ -13,7 +13,7 @@ log_dirs = f"{datetime.now().hour}".zfill(2)+'_'+f"{datetime.now().minute}".zfil
 experiment = {
     "day": date.today().isoformat(),
     "model" : "xception",
-    "epoch" : 500,
+    "epoch" : 100,
     "lr" : 1e-4,
     "seed" : 2022,
     "batch_size" : 256,
@@ -33,6 +33,7 @@ save_best_model = os.path.join(f"/data/komedi/komedi/logs/{experiment['day']}/{e
 
 
 pretrained_path = "/data/komedi/komedi/logs/2022-07-29/xception_13_16/model_logs/13_16_flmk_500.pt"
+# pretrained_path = None
 xception_Net = XceptionNet(num_classes=27*2)
 if len(devices_id) != 1:
     xception_Net = nn.DataParallel(xception_Net, device_ids=devices_id)

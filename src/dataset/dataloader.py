@@ -5,7 +5,7 @@ from torch.utils import data
 def Dataloader(batch_size, workers):
     # set datasets
     dataset_train = Datasets(
-        data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/train_df.csv",
+        data_path = "/home/ubuntu/workspace/FLD-scratch/src/data/train_df_raw_aflw_float_aug.csv",
         type="train",
         transform=get_augmentation(data_type="train")
         )
