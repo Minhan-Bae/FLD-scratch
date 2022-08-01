@@ -6,11 +6,11 @@ def NME(label_pd, label_gt):
     for i in range(label_gt.shape[0]):
         
         landmarks_gt = label_gt[i].view(-1,2)
-        landmarks_gt = (landmarks_gt+0.5) * 128
+        landmarks_gt = (landmarks_gt+0.5) * 256
         landmarks_gt = landmarks_gt.detach().cpu().numpy()
         
         landmarks_pv = label_pd[i].view(-1,2)
-        landmarks_pv = (landmarks_pv+0.5) * 128
+        landmarks_pv = (landmarks_pv+0.5) * 256
         landmarks_pv = landmarks_pv.detach().cpu().numpy()
         
         minx, maxx = np.min(landmarks_gt[0,:]), np.max(landmarks_gt[0,:])

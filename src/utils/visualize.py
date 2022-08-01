@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import ImageGrid
 
 def visualize_batch(images_list, landmarks_list, gt_list,
-                    imgdim = 128, size = 6, shape = (10, 10), save = None):
+                    imgdim = 256, size = 6, shape = (10, 10), save = None):
     fig = plt.figure(figsize = (size, size))
     grid = ImageGrid(fig, 111, nrows_ncols = shape, axes_pad = 0.08)
     for ax, image, landmarks, gt in zip(grid, images_list, landmarks_list, gt_list):

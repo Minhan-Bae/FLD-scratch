@@ -21,15 +21,12 @@ st.set_page_config(page_title="[Demo] 코메디클럽 안면 랜드마크 탐지
 
 st.header("😀 [Demo] 코메디클럽 안면 랜드마크 탐지")
 
-# pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_14_06772/11_14_best.pt"
+pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_14_06772/11_14_best.pt"
 # pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_29_06801/11_29_best.pt"
 # pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_42_09346/11_42_best.pt"
-# pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_55_09450/11_55_best.pt"
 # pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_12_09_07272/12_09_best.pt"
-# pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_12_23_09279/12_23_best.pt"
-# pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_12_37_07365/12_37_best.pt"
-# pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_12_54_09355/12_54_best.pt"
-pretrained_model = "/data/komedi/komedi/logs/2022-07-29/xception_16_53_07224/16_53_best.pt"
+
+# pretrained_model = "/data/komedi/komedi/logs/2022-07-29/xception_16_53_07224/16_53_best.pt"
 
 uploaded_file = st.sidebar.file_uploader(label='파일 업로드', type=['png', 'jpg'])
 

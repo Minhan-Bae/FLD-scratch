@@ -110,7 +110,7 @@ class MiddleBasicBlock(nn.Module):
             DepthewiseSeperableConv2d(512, 512, 3, padding = 1),
             nn.BatchNorm2d(512)
         )
-
+        
     def forward(self, x):
         residual = self.conv1(x)
         residual = self.conv2(residual)

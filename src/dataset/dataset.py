@@ -64,7 +64,7 @@ class Datasets(Dataset):
         
         
         label = torch.tensor(landmarks, dtype=torch.float)
-        label /= 128 # set landmark value (0,1)
+        label /= 256 # set landmark value (0,1)
         landmark = label.reshape(-1) - 0.5 # set landmark value(-0.5, 0.5)
         
         return image, landmark

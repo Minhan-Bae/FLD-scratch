@@ -23,7 +23,7 @@ def get_augmentation(data_type):
         # ],p=1.0),
         # A.ColorJitter (brightness=0.2, contrast=0.2, saturation=0.2, hue=0.2, always_apply=False, p=0.5),
         # A.ShiftScaleRotate(shift_limit=0.0625, scale_limit=(-0.5, 0),rotate_limit=30, border_mode=0 ,p=0.8,),
-        A.Resize(width = 128,height = 128),
+        A.Resize(width = 256,height = 256),
         A.ToGray(always_apply=True),
         ToTensorV2(),
         ],keypoint_params = A.KeypointParams(format="xy",remove_invisible = False)
@@ -31,7 +31,7 @@ def get_augmentation(data_type):
     
     elif data_type=="valid":
         return A.Compose([ 
-        A.Resize(height=128,width=128),
+        A.Resize(height=256,width=256),
         A.ToGray(always_apply=True),
         ToTensorV2(),    
         ],keypoint_params = A.KeypointParams(format="xy",remove_invisible = False)
