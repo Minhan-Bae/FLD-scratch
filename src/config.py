@@ -6,17 +6,17 @@ from models.timm_swin import *
 from models.xception import *
 from loss.loss import PFLDLoss
 
-device = '0,1'
+device = '0,1,2,3'
 devices_id = [int(d) for d in device.split(',')]
 
 log_dirs = f"{datetime.now().hour}".zfill(2)+'_'+f"{datetime.now().minute}".zfill(2) # H_M
 experiment = {
     "day": date.today().isoformat(),
     "model" : "xception",
-    "epoch" : 60,
-    "lr" : 8e-4,
+    "epoch" : 500,
+    "lr" : 1e-4,
     "seed" : 2022,
-    "batch_size" : 64,
+    "batch_size" : 512,
     "workers" : 4 * len(device.split(',')), # number of gpu * 4
     "early_stop" : 999
 }

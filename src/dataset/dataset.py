@@ -46,7 +46,7 @@ class Datasets(Dataset):
                  np.max(x_list)+offset,
                  np.max(y_list)+offset]
         image = pil_image.crop(crops)
-        image = np.array(image).astype(float)
+        image = np.array(image)
 
         for label in data[10:]:
             x,y = eval(label[1:-1])

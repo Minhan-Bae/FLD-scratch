@@ -28,7 +28,7 @@ st.header("😀 [Demo] 코메디클럽 안면 랜드마크 탐지")
 # pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_12_09_07272/12_09_best.pt"
 
 pretrained_model = "/data/komedi/komedi/logs/2022-07-28/xception_13_51_09336/13_51_best.pt" ######
-
+# pretrained_model = "/data/komedi/komedi/logs/2022-08-02/xception_13_05/13_05_best.pt"
 
 
 uploaded_file = st.sidebar.file_uploader(label='파일 업로드', type=['png', 'jpg'])
