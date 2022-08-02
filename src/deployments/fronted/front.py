@@ -21,12 +21,15 @@ st.set_page_config(page_title="[Demo] 코메디클럽 안면 랜드마크 탐지
 
 st.header("😀 [Demo] 코메디클럽 안면 랜드마크 탐지")
 
-pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_14_06772/11_14_best.pt"
+# pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_14_06772/11_14_best.pt"
 # pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_29_06801/11_29_best.pt"
 # pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_42_09346/11_42_best.pt"
 # pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_12_09_07272/12_09_best.pt"
+pretrained_model = "/data/komedi/komedi/logs/2022-07-29/xception_16_53_07224/16_53_best.pt"
+# pretrained_model = "/data/komedi/tools/visualization/src/pretrained/xception/model-07-28-22-00.pt"
+pretrained_model = "/data/komedi/komedi/logs/2022-07-31/xception_22_42_07393/22_42_best.pt"
 
-# pretrained_model = "/data/komedi/komedi/logs/2022-07-29/xception_16_53_07224/16_53_best.pt"
+
 
 uploaded_file = st.sidebar.file_uploader(label='파일 업로드', type=['png', 'jpg'])
 
@@ -43,7 +46,7 @@ if uploaded_file:
     image_bytes = uploaded_file.getvalue()
     image = Image.open(io.BytesIO(image_bytes))
     image = image.convert("RGB")
-    image.resize([2*image.width,2*image.height])
+    # image.resize([2*image.width,2*image.height])
     st.write(f"__입력 이미지 사이즈__ : {image.width} x {image.height}")
     
     cons = st.container()
