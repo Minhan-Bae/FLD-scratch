@@ -29,7 +29,7 @@ st.header("😀 [Demo] 코메디클럽 안면 랜드마크 탐지")
 
 pretrained_model = "/data/komedi/komedi/logs/2022-07-28/xception_13_51_09336/13_51_best.pt" ######
 # pretrained_model = "/data/komedi/komedi/logs/2022-08-02/xception_13_05/13_05_best.pt"
-
+pretrained_model = "/data/komedi/komedi/logs/2022-08-02/xception_16_53/16_53_best.pt"
 
 uploaded_file = st.sidebar.file_uploader(label='파일 업로드', type=['png', 'jpg'])
 
@@ -139,7 +139,7 @@ if uploaded_file:
         os.makedirs(save_crop_image_dir, exist_ok=True)
         os.makedirs(save_result_image_dir, exist_ok=True)
         
-        fig1 = plt.figure(figsize=(11,33))
+        fig1 = plt.figure(figsize=(5,10))
         plt.subplot(1,2,1)
         plt.axis("off")
         plt.imshow(image)
