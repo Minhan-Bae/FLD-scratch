@@ -21,13 +21,13 @@ st.set_page_config(page_title="[Demo] 코메디클럽 안면 랜드마크 탐지
 
 st.header("😀 [Demo] 코메디클럽 안면 랜드마크 탐지")
 
+## Just Test
 # pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_14_06772/11_14_best.pt"
 # pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_29_06801/11_29_best.pt"
 # pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_42_09346/11_42_best.pt"
 # pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_12_09_07272/12_09_best.pt"
-pretrained_model = "/data/komedi/komedi/logs/2022-07-29/xception_16_53_07224/16_53_best.pt"
-# pretrained_model = "/data/komedi/tools/visualization/src/pretrained/xception/model-07-28-22-00.pt"
-pretrained_model = "/data/komedi/komedi/logs/2022-07-31/xception_22_42_07393/22_42_best.pt"
+
+pretrained_model = "/data/komedi/komedi/logs/2022-07-28/xception_13_51_09336/13_51_best.pt" ######
 
 
 
@@ -45,41 +45,47 @@ if uploaded_file:
 
     image_bytes = uploaded_file.getvalue()
     image = Image.open(io.BytesIO(image_bytes))
+    # RGBA to RGB
     image = image.convert("RGB")
-    # image.resize([2*image.width,2*image.height])
     st.write(f"__입력 이미지 사이즈__ : {image.width} x {image.height}")
     
     cons = st.container()
-    tab1, tab2 = st.tabs(["안면 랜드마크 탐지 결과", "입력 이미지 및 안면 탐지"])
-    with tab1:
-        col1, col2 = st.columns([2,1])
-        with col1:
-            rect = st_cropper(
-                image,
-                realtime_update=True,
-                box_color=box_color,
-                aspect_ratio=None,
-                box_algorithm=return_box,
-                return_type="box"
-            )
-            
-            l, t, w, h = tuple(map(int, rect.values()))
-            
-            cropped_img = image.crop(
-                (l,t,l+w,t+h)
-            )
+    col1, col2 = st.columns([2,1])
+    with col1:
+        rect = st_cropper(
+            image,
+            realtime_update=True,
+            box_color=box_color,
+            aspect_ratio=None,
+            box_algorithm=return_box,
+            return_type="box"
+        )
+        
+        l, t, w, h = tuple(map(int, rect.values()))
+        
+        cropped_img = image.crop(
+            (l,t,l+w,t+h)
+        )
 
-            np_image = np.asarray(cropped_img).astype('uint8')
+        np_image = np.asarray(cropped_img).astype('uint8')
 
-            cropped_img_byte = io.BytesIO()
-            cropped_img.save(cropped_img_byte, format='PNG')
-            cropped_img_byte = cropped_img_byte.getvalue()
-            
-        with col2:
-            st.image(cropped_img)
+        cropped_img_byte = io.BytesIO()
+        cropped_img.save(cropped_img_byte, format='PNG')
+        cropped_img_byte = cropped_img_byte.getvalue()
+        
+    with col2:
+        st.image(cropped_img)
 
     if cons.button("안면 계측점 탐지하기"):
         start_time = time.time()
+
+        my_bar = st.progress(0)
+        for percent_complete in range(100):
+            time.sleep(0.01)
+            my_bar.progress(percent_complete + 1)
+        st.success("안면 랜드마크 탐지 완료! :sunglasses:")
+
+
         image, pil_image, landmarks, angle = run_detect(image,
                                         cropped_img_byte,
                                         pretrained=pretrained_model,
@@ -90,112 +96,103 @@ if uploaded_file:
         for idx in range(len(landmarks)):
             x,y = landmarks[idx]
             landmark_result.append([landmark_index[idx], x*w, y*h])
-            
-        with tab2:
-            col1, col2 = st.columns(2)
-            with col1:
-                fig1 = plt.figure(figsize=(10,10))
-                plt.axis("off")
-                for idx in range(len(landmarks)):
-                    x,y = landmarks[idx][0]*w, landmarks[idx][1]*h
-
-                    if show_in_input:
-                        plt.scatter(x+l,y+t,s=point_scale,c=point_color,marker='X')
-                        if show_annotate:
-                            plt.annotate(idx, (x+l,y+t))
-                        plt.imshow(image)
-                    else:
-                        plt.scatter(x,y,s=point_scale,c=point_color,marker='X')
-                        if show_annotate:
-                            plt.annotate(idx, (x,y))
-                        plt.imshow(pil_image)
-
-                st.pyplot(fig = fig1)
-                st.write(f"경과시간: {time.time()-start_time:2.2f} 초")
                 
-            with col2:
-                df = pd.DataFrame(landmark_result, columns=["name","x","y"])
-                st.write(df)
+        col1, col2 = st.columns(2)
+        with col1:
+            fig1 = plt.figure(figsize=(10,10))
+            plt.axis("off")
+            for idx in range(len(landmarks)):
+                x,y = landmarks[idx][0]*w, landmarks[idx][1]*h
 
-        my_bar = st.progress(0)
-        for percent_complete in range(100):
-            time.sleep(0.01)
-            my_bar.progress(percent_complete + 1)
-        st.success("안면 랜드마크 탐지 완료! :sunglasses:")
+                if show_in_input:
+                    plt.scatter(x+l,y+t,s=point_scale,c=point_color,marker='X')
+                    if show_annotate:
+                        plt.annotate(idx, (x+l,y+t))
+                    plt.imshow(image)
+                else:
+                    plt.scatter(x,y,s=point_scale,c=point_color,marker='X')
+                    if show_annotate:
+                        plt.annotate(idx, (x,y))
+                    plt.imshow(pil_image)
 
-          
-
-if st.sidebar.button("결과를 확인하시고, 버튼을 눌러주세요."):
-    save = datetime.now() 
-    image, pil_image, landmarks, angle = run_detect(image,
-                                    cropped_img_byte,
-                                    pretrained=pretrained_model,
-                                    rotation=rotation_check
-                                    )
-
-    save_dir = f"/data/komedi/streamlit_logs"
-    save_raw_image_dir = os.path.join(save_dir, "raw_image")
-    save_crop_image_dir = os.path.join(save_dir, "crop_image")
-    save_result_image_dir = os.path.join(save_dir, "result")
-    
-    os.makedirs(save_raw_image_dir, exist_ok=True)
-    os.makedirs(save_crop_image_dir, exist_ok=True)
-    os.makedirs(save_result_image_dir, exist_ok=True)
-    
-    fig1 = plt.figure(figsize=(11,33))
-    plt.subplot(1,2,1)
-    plt.axis("off")
-    plt.imshow(image)
-
-    plt.subplot(1,2,2)
-    plt.axis("off")
-    
-    for idx in range(len(landmarks)):
-        x,y = landmarks[idx][0]*w, landmarks[idx][1]*h
-        if show_in_input:
-            plt.scatter(x+l,y+t,s=point_scale,c=point_color,marker='X')
-            if show_annotate:
-                plt.annotate(idx, (x+l,y+t))
-            plt.imshow(image.rotate(angle))
-        else:
-            plt.scatter(x,y,s=point_scale,c=point_color,marker='X')
-            if show_annotate:
-                plt.annotate(idx, (x,y))
-            plt.imshow(pil_image.rotate(angle))
-
-    plt.savefig(f"{save_result_image_dir}/{Path(image_name).stem}.jpg",bbox_inches='tight', pad_inches=0)
-
-    image = image.convert("RGB")
-
-    image.save(f"{save_raw_image_dir}/{Path(image_name).stem}.jpg")
-    pil_image.save(f"{save_crop_image_dir}/{Path(image_name).stem}.jpg")
-    
-    times = f"{str(save.day).zfill(2)}_{str(save.hour).zfill(2)}:{str(save.minute).zfill(2)}:{str(save.second).zfill(2)}"
-    
-    csv_lists = pd.read_csv("/data/komedi/streamlit_logs/result.csv",header=None).values.tolist()
-    
-    csv_list = []
-    csv_list.append(f"{Path(image_name).stem}.jpg")
-    csv_list.append("streamlit")
-    csv_list.append(f"{save_raw_image_dir}/{Path(image_name).stem}.jpg")
-    csv_list.append("")
-    csv_list.append("")
-    csv_list.append("")
-    csv_list.append("")                        
-    csv_list.append(times)
-    csv_list.append("")
-    csv_list.append("")        
-
-    landmark_result = []
-    for idx in range(len(landmarks)):
-        x,y = landmarks[idx]
-        landmark_result.append([landmark_index[idx], x*w, y*h])
+            st.pyplot(fig = fig1)
+            st.write(f"경과시간: {time.time()-start_time:2.2f} 초")
             
-    for landmark in landmark_result:
-        _, x,y = landmark
-        csv_list.append((round(x+l,4), round(y+t,4)))
-    csv_lists.append(csv_list)
-    df = pd.DataFrame(csv_lists)
-    
-    df.to_csv(f"{save_dir}/result.csv", index=None, header=None)
-    st.sidebar.write("감사합니다! :sunglasses:")
+        with col2:
+            df = pd.DataFrame(landmark_result, columns=["name","x","y"])
+            st.write(df)
+
+    if st.sidebar.button("결과를 확인하시고, 버튼을 눌러주세요."):
+        save = datetime.now() 
+        image, pil_image, landmarks, angle = run_detect(image,
+                                        cropped_img_byte,
+                                        pretrained=pretrained_model,
+                                        rotation=rotation_check
+                                        )
+
+        save_dir = f"/data/komedi/streamlit_logs"
+        save_raw_image_dir = os.path.join(save_dir, "raw_image")
+        save_crop_image_dir = os.path.join(save_dir, "crop_image")
+        save_result_image_dir = os.path.join(save_dir, "result")
+        
+        os.makedirs(save_raw_image_dir, exist_ok=True)
+        os.makedirs(save_crop_image_dir, exist_ok=True)
+        os.makedirs(save_result_image_dir, exist_ok=True)
+        
+        fig1 = plt.figure(figsize=(11,33))
+        plt.subplot(1,2,1)
+        plt.axis("off")
+        plt.imshow(image)
+
+        plt.subplot(1,2,2)
+        plt.axis("off")
+        
+        for idx in range(len(landmarks)):
+            x,y = landmarks[idx][0]*w, landmarks[idx][1]*h
+            if show_in_input:
+                plt.scatter(x+l,y+t,s=point_scale,c=point_color,marker='X')
+                if show_annotate:
+                    plt.annotate(idx, (x+l,y+t))
+                plt.imshow(image.rotate(angle))
+            else:
+                plt.scatter(x,y,s=point_scale,c=point_color,marker='X')
+                if show_annotate:
+                    plt.annotate(idx, (x,y))
+                plt.imshow(pil_image.rotate(angle))
+
+        plt.savefig(f"{save_result_image_dir}/{Path(image_name).stem}.jpg",bbox_inches='tight', pad_inches=0)
+
+        image = image.convert("RGB")
+
+        image.save(f"{save_raw_image_dir}/{Path(image_name).stem}.jpg")
+        pil_image.save(f"{save_crop_image_dir}/{Path(image_name).stem}.jpg")
+        
+        times = f"{str(save.day).zfill(2)}_{str(save.hour).zfill(2)}:{str(save.minute).zfill(2)}:{str(save.second).zfill(2)}"
+        
+        csv_lists = pd.read_csv("/data/komedi/streamlit_logs/result.csv",header=None).values.tolist()
+        
+        csv_list = []
+        csv_list.append(f"{Path(image_name).stem}.jpg")
+        csv_list.append("streamlit")
+        csv_list.append(f"{save_raw_image_dir}/{Path(image_name).stem}.jpg")
+        csv_list.append("")
+        csv_list.append("")
+        csv_list.append("")
+        csv_list.append("")                        
+        csv_list.append(times)
+        csv_list.append("")
+        csv_list.append("")        
+
+        landmark_result = []
+        for idx in range(len(landmarks)):
+            x,y = landmarks[idx]
+            landmark_result.append([landmark_index[idx], x*w, y*h])
+                
+        for landmark in landmark_result:
+            _, x,y = landmark
+            csv_list.append((round(x+l,4), round(y+t,4)))
+        csv_lists.append(csv_list)
+        df = pd.DataFrame(csv_lists)
+        
+        df.to_csv(f"{save_dir}/result.csv", index=None, header=None)
+        st.sidebar.write("감사합니다! :sunglasses:")

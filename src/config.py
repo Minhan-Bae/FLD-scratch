@@ -3,20 +3,20 @@ from datetime import date, datetime
 
 from models.pfld import *
 from models.timm_swin import *
-from models.xception256 import *
+from models.xception import *
 from loss.loss import PFLDLoss
 
-device = '0,1,2,3'
+device = '0,1'
 devices_id = [int(d) for d in device.split(',')]
 
 log_dirs = f"{datetime.now().hour}".zfill(2)+'_'+f"{datetime.now().minute}".zfill(2) # H_M
 experiment = {
     "day": date.today().isoformat(),
     "model" : "xception",
-    "epoch" : 100,
-    "lr" : 1e-4,
+    "epoch" : 60,
+    "lr" : 8e-4,
     "seed" : 2022,
-    "batch_size" : 128,
+    "batch_size" : 64,
     "workers" : 4 * len(device.split(',')), # number of gpu * 4
     "early_stop" : 999
 }
@@ -33,7 +33,7 @@ save_best_model = os.path.join(f"/data/komedi/komedi/logs/{experiment['day']}/{e
 
 
 # pretrained_path = "/data/komedi/komedi/logs/2022-07-29/xception_16_53_07224/16_53_best.pt"
-pretrained_path = None
+pretrained_path = "/data/komedi/komedi/logs/2022-07-28/xception_13_51_09336/13_51_best.pt"
 xception_Net = XceptionNet(num_classes=27*2)
 if len(devices_id) != 1:
     xception_Net = nn.DataParallel(xception_Net, device_ids=devices_id)

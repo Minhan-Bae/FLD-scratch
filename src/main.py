@@ -55,7 +55,7 @@ def validate(types, valid_loader, model, criterion, save = None):
 
             outputs = model(features).cuda()
 
-            loss = custom_loss(outputs, labels)
+            loss = criterion(outputs, labels)
             nme=NME(outputs, labels)
             
             cum_nme += nme.item()
@@ -132,7 +132,7 @@ for epoch in range(1, C.experiment["epoch"]+1):
 
         with autocast(enabled=True):         
             predicts = model(features)
-            loss = custom_loss(predicts, landmarks_gt)
+            loss = criterion(predicts, landmarks_gt)
         scaler.scale(loss).backward()
         scaler.step(optimizer)
         scaler.update()
