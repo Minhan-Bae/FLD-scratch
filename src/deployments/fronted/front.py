@@ -95,14 +95,14 @@ if uploaded_file:
         landmark_result = []
         for idx in range(len(landmarks)):
             x,y = landmarks[idx]
-            landmark_result.append([landmark_index[idx], x*w, y*h])
+            landmark_result.append([landmark_index[idx], x, y])
                 
         col1, col2 = st.columns(2)
         with col1:
             fig1 = plt.figure(figsize=(10,10))
             plt.axis("off")
             for idx in range(len(landmarks)):
-                x,y = landmarks[idx][0]*w, landmarks[idx][1]*h
+                x,y = landmarks[idx][0], landmarks[idx][1]
 
                 if show_in_input:
                     plt.scatter(x+l,y+t,s=point_scale,c=point_color,marker='X')
@@ -148,7 +148,6 @@ if uploaded_file:
         plt.axis("off")
         
         for idx in range(len(landmarks)):
-            x,y = landmarks[idx][0]*w, landmarks[idx][1]*h
             if show_in_input:
                 plt.scatter(x+l,y+t,s=point_scale,c=point_color,marker='X')
                 if show_annotate:
@@ -186,7 +185,7 @@ if uploaded_file:
         landmark_result = []
         for idx in range(len(landmarks)):
             x,y = landmarks[idx]
-            landmark_result.append([landmark_index[idx], x*w, y*h])
+            landmark_result.append([landmark_index[idx], x, y])
                 
         for landmark in landmark_result:
             _, x,y = landmark
