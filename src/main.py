@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-#-*- coding:utf-8 -*-
-
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -8,30 +5,34 @@ import gc
 gc.collect()
 
 import torch
-import torch.nn as nn
+import torch.backends.cudnn as cudnn
+cudnn.benchmark=True
+
 import torch.optim as optim
 from torch.optim.lr_scheduler import ReduceLROnPlateau
-
+from torch.cuda.amp import autocast, GradScaler
 torch.cuda.empty_cache()
+
 import os
 import time
+import argparse
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
-from torch.cuda.amp import autocast, GradScaler
+
+
 from torch import autograd
-# autograd.set_detect_anomaly(True)
+autograd.set_detect_anomaly(True)
+
 import config as C
-# from validate import *
-from loss.loss import *
+
+from loss.weighted_mseloss import *
+
 from utils.fix_seed import *
 from utils.visualize import *
-from utils.logging import *
+
 from dataset.dataloader import *
 from metric.nme import *
-
-import torch.backends.cudnn as cudnn
-cudnn.benchmark=True
 
 # init parameters & logs
 log_list = list()
@@ -73,125 +74,126 @@ def validate(types, valid_loader, model, criterion, save = None):
 # Fix seed
 seed_everything(C.experiment["seed"])
 
-# check start time
-start_time = time.time()
-logging(f"exp model : {C.experiment['model']}     version : {C.log_dirs}")
+def main(args):
+    # check start time
+    start_time = time.time()
+    logging(f"exp model : {C.experiment['model']}     version : {C.log_dirs}")
 
-# Set dataloader
-logging("Set dataloader")
-train_loader, valid_loader_aflw, valid_loader_face = Dataloader(batch_size=C.experiment["batch_size"],
-                                            workers=C.experiment["workers"])
+    # Set dataloader
+    logging("Set dataloader")
+    train_loader, valid_loader_aflw, valid_loader_face = Dataloader(batch_size=C.experiment["batch_size"],
+                                                workers=C.experiment["workers"])
 
-# load model
-devices_id = [int(d) for d in C.device.split(',')]
-torch.cuda.set_device(devices_id[0])
+    # load model
+    devices_id = [int(d) for d in C.device.split(',')]
+    torch.cuda.set_device(devices_id[0])
 
-model = C.xception_Net.cuda()
+    model = C.xception_Net.cuda()
 
 
-criterion = torch.nn.MSELoss()
+    optimizer = optim.Adam(model.parameters(), lr = C.experiment["lr"], weight_decay = 1e-6) 
+    scheduler = ReduceLROnPlateau(optimizer, mode='min', patience=40, verbose=True)
 
-def custom_loss(preds, labels):
-    loss1 = criterion(preds[:24], labels[:24])
-    loss2 = criterion(preds[24:], labels[24:])
-    # loss3 = criterion(preds[36:], labels[36:])
-    return 0.8*loss1+0.2*loss2
+    optimizer.zero_grad()
 
-optimizer = optim.Adam(model.parameters(), lr = C.experiment["lr"], weight_decay = 1e-6) 
-scheduler = ReduceLROnPlateau(optimizer, mode='min', patience=40, verbose=True)
+    # init validate
+    validate(types='kface',
+            valid_loader=valid_loader_face,
+            model = model,
+            criterion = weighted_mseloss,
+            save=os.path.join(f'{C.save_image_path}/kface',
+                            f'epoch({str(0).zfill(len(str(C.experiment["epoch"])))}).jpg'))
+    validate(types='aflw',
+            valid_loader=valid_loader_aflw,
+            model = model,
+            criterion = weighted_mseloss,
+            save=os.path.join(f'{C.save_image_path}/aflw',
+                            f'epoch({str(0).zfill(len(str(C.experiment["epoch"])))}).jpg'))
 
-optimizer.zero_grad()
-
-# init validate
-validate(types='kface',
-         valid_loader=valid_loader_face,
-         model = model,
-         criterion = criterion,
-         save=os.path.join(f'{C.save_image_path}/kface',
-                           f'epoch({str(0).zfill(len(str(C.experiment["epoch"])))}).jpg'))
-validate(types='aflw',
-         valid_loader=valid_loader_aflw,
-         model = model,
-         criterion = criterion,
-         save=os.path.join(f'{C.save_image_path}/aflw',
-                           f'epoch({str(0).zfill(len(str(C.experiment["epoch"])))}).jpg'))
-
-# run
-logging("Start train")
-for epoch in range(1, C.experiment["epoch"]+1):
-    cum_loss = 0.0 # define current loss
-    scaler = GradScaler() 
-    
-    # train mode
-    model.train()
-    
-    pbar = tqdm(enumerate(train_loader),total=len(train_loader))
-    for idx, (features, landmarks_gt) in pbar:
-        features = features.cuda()
-        landmarks_gt = landmarks_gt.cuda()
-
-        with autocast(enabled=True):         
-            predicts = model(features)
-            loss = criterion(predicts, landmarks_gt)
-        scaler.scale(loss).backward()
-        scaler.step(optimizer)
-        scaler.update()
+    # run
+    logging("Start train")
+    for epoch in range(1, C.experiment["epoch"]+1):
+        cum_loss = 0.0 # define current loss
+        scaler = GradScaler() 
         
-        optimizer.zero_grad()
-        # loss = torch.nan_to_num(loss)
+        # train mode
+        model.train()
         
-        cum_loss += loss.item()
-        
-        description_train = f"| # Epoch: {str(epoch).zfill(len(str(C.experiment['epoch'])))}/{C.experiment['epoch']}, Loss: {cum_loss/(idx+1):.8f}"
-        pbar.set_description(description_train)
-        
-    scheduler.step(cum_loss/len(train_loader))
-    log_list.append(f"| # Epoch: {str(epoch).zfill(len(str(C.experiment['epoch'])))}/{C.experiment['epoch']}, Loss: {cum_loss/(idx+1):.8f}")
+        pbar = tqdm(enumerate(train_loader),total=len(train_loader))
+        for idx, (features, landmarks_gt) in pbar:
+            features = features.cuda()
+            landmarks_gt = landmarks_gt.cuda()
 
-    if epoch%C.validation_term == 0: 
-        # valid mode
-        k_loss, k_nme = validate(types='kface',
-                                 valid_loader=valid_loader_face,
-                                 model = model,
-                                 criterion = criterion,
-                                 save=os.path.join(f'{C.save_image_path}/kface',
-                                                   f'epoch({str(epoch).zfill(len(str(C.experiment["epoch"])))}).jpg'))
-        a_loss, a_nme = validate(types='aflw',
-                                 valid_loader=valid_loader_aflw,
-                                 model = model,
-                                 criterion = criterion,
-                                 save=os.path.join(f'{C.save_image_path}/aflw',
-                                                   f'epoch({str(epoch).zfill(len(str(C.experiment["epoch"])))}).jpg'))
+            with autocast(enabled=True):         
+                predicts = model(features)
+                loss = weighted_mseloss(predicts, landmarks_gt)
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
+            
+            optimizer.zero_grad()
+            cum_loss += loss.item()
+            
+            description_train = f"| # Epoch: {str(epoch).zfill(len(str(C.experiment['epoch'])))}/{C.experiment['epoch']}, Loss: {cum_loss/(idx+1):.8f}"
+            pbar.set_description(description_train)
+            
+        scheduler.step(cum_loss/len(train_loader))
+        log_list.append(f"| # Epoch: {str(epoch).zfill(len(str(C.experiment['epoch'])))}/{C.experiment['epoch']}, Loss: {cum_loss/(idx+1):.8f}")
 
-        ratio = [len(valid_loader_aflw)/(len(valid_loader_aflw)+len(valid_loader_face)),
-                 len(valid_loader_face)/(len(valid_loader_aflw)+len(valid_loader_face))]
-        mean_nme = a_nme*ratio[0]+k_nme*ratio[1]
-        val_loss= a_loss*ratio[0]+k_loss*ratio[1]
-        
-        torch.save(model.module.state_dict(), os.path.join(C.save_model_path, f"{C.log_dirs}_flmk_{epoch}.pt"))
+        if epoch%C.validation_term == 0: 
+            # valid mode
+            k_loss, k_nme = validate(types='kface',
+                                    valid_loader=valid_loader_face,
+                                    model = model,
+                                    criterion = weighted_mseloss,
+                                    save=os.path.join(f'{C.save_image_path}/kface',
+                                                    f'epoch({str(epoch).zfill(len(str(C.experiment["epoch"])))}).jpg'))
+            a_loss, a_nme = validate(types='aflw',
+                                    valid_loader=valid_loader_aflw,
+                                    model = model,
+                                    criterion = weighted_mseloss,
+                                    save=os.path.join(f'{C.save_image_path}/aflw',
+                                                    f'epoch({str(epoch).zfill(len(str(C.experiment["epoch"])))}).jpg'))
 
-        # early-stopping part
-        if mean_nme < best_nme:
-            best_nme = mean_nme
-            early_cnt = 0
-            logging(f"           >> Saving model..   Best_NME : {best_nme:.4f}")
-            torch.save(model.module.state_dict(),
-                       os.path.join(f"/data/komedi/komedi/logs/{C.experiment['day']}/{C.experiment['model']}_{C.log_dirs}", f"{C.log_dirs}_best.pt"))
-        else:
-            early_cnt += 1
-            logging(f"           >> Early stopping cnt... {early_cnt}  Best_NME : {best_nme:.4f}")
-            if early_cnt >= C.experiment["early_stop"]:
-                logging("Early stop")
-                break
+            ratio = [len(valid_loader_aflw)/(len(valid_loader_aflw)+len(valid_loader_face)),
+                    len(valid_loader_face)/(len(valid_loader_aflw)+len(valid_loader_face))]
+            mean_nme = a_nme*ratio[0]+k_nme*ratio[1]
+            val_loss= a_loss*ratio[0]+k_loss*ratio[1]
+            
+            torch.save(model.module.state_dict(), os.path.join(C.save_model_path, f"{C.log_dirs}_flmk_{epoch}.pt"))
 
-    # save log
+            # early-stopping part
+            if mean_nme < best_nme:
+                best_nme = mean_nme
+                early_cnt = 0
+                logging(f"           >> Saving model..   Best_NME : {best_nme:.4f}")
+                torch.save(model.module.state_dict(),
+                        os.path.join(f"/data/komedi/komedi/logs/{C.experiment['day']}/{C.experiment['model']}_{C.log_dirs}", f"{C.log_dirs}_best.pt"))
+            else:
+                early_cnt += 1
+                logging(f"           >> Early stopping cnt... {early_cnt}  Best_NME : {best_nme:.4f}")
+                if early_cnt >= C.experiment["early_stop"]:
+                    logging("Early stop")
+                    break
+
+        # save log(real-time)
+        df = pd.DataFrame(log_list)
+        df.to_csv(f"{C.save_path}/{C.log_dirs}_logs.csv", index=None, header=None)
+
+    logging(f"best mean nme is : {best_nme:.4f}")
+    logging('Training Complete')
+    logging("Total Elapsed Time : {} s".format(time.time()-start_time))    
+
+    # save log(finish)
     df = pd.DataFrame(log_list)
     df.to_csv(f"{C.save_path}/{C.log_dirs}_logs.csv", index=None, header=None)
-
-# Finish
-logging(f"best mean nme is : {best_nme:.4f}")
-logging('Training Complete')
-logging("Total Elapsed Time : {} s".format(time.time()-start_time))    
-
-df = pd.DataFrame(log_list)
-df.to_csv(f"{C.save_path}/{C.log_dirs}_logs.csv", index=None, header=None)
+    
+if __name__=="__main__":
+    parser = argparse.ArgumentParser()
+    
+    parser.add_argument("--seed", type=int, default=2022, help="random seed(default:2022)")
+    parser.add_argument('--epochs', type = int, default = 5, help = 'number of epochs to train (default: 1)')
+    
+    
+    args = parser.parse_args()
+    main(args)
