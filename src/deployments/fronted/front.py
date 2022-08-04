@@ -21,19 +21,19 @@ st.set_page_config(page_title="[Demo] 코메디클럽 안면 랜드마크 탐지
 
 st.header("😀 [Demo] 코메디클럽 안면 랜드마크 탐지")
 
-## Just Test
-# pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_14_06772/11_14_best.pt"
-# pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_29_06801/11_29_best.pt"
-# pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_11_42_09346/11_42_best.pt"
-# pretrained_model = "/data/komedi/komedi/logs/2022-08-01/xception_12_09_07272/12_09_best.pt"
-
-pretrained_model = "/data/komedi/komedi/logs/2022-07-28/xception_13_51_09336/13_51_best.pt" ######
+# 학습 모델 로드
+# pretrained_model = "/data/komedi/komedi/logs/2022-07-28/xception_13_51_09336/13_51_best.pt" ######
 # pretrained_model = "/data/komedi/komedi/logs/2022-08-02/xception_13_05/13_05_best.pt"
+
 pretrained_model = "/data/komedi/komedi/logs/2022-08-02/xception_16_53/16_53_best.pt"
+# pretrained_model = "//data/komedi/komedi/logs/2022-08-03/xception_13_33_00760/13_33_best.pt"
+pretrained_model = "/data/komedi/komedi/logs/2022-08-04/xception_01_04/01_04_best.pt"
+pretrained_model = "/data/komedi/komedi/logs/2022-08-04/xception_18_07/18_07_best.pt" # Finetuned using kface
+pretrained_model = "/data/komedi/komedi/logs/2022-08-04/xception_18_47/18_47_best.pt" # Finetuned using kface2
 
 uploaded_file = st.sidebar.file_uploader(label='파일 업로드', type=['png', 'jpg'])
 
-rotation_check = st.sidebar.checkbox(label="자동 안면 회전 기능(30도 이상)", value=True)
+# rotation_check = st.sidebar.checkbox(label="자동 안면 회전 기능(30도 이상)", value=True)
 show_in_input = st.sidebar.checkbox(label="원본 이미지에서 보기", value=False)
 show_annotate = st.sidebar.checkbox(label="인덱스 보기", value=True)
 box_color = st.sidebar.color_picker(label="박스 색상", value='#0000FF')
@@ -86,11 +86,9 @@ if uploaded_file:
         st.success("안면 랜드마크 탐지 완료! :sunglasses:")
 
 
-        image, pil_image, landmarks, angle = run_detect(image,
-                                        cropped_img_byte,
-                                        pretrained=pretrained_model,
-                                        rotation=rotation_check
-                                        )
+        image, pil_image, landmarks = run_detect(image,
+                                                 cropped_img_byte,
+                                                 pretrained=pretrained_model)
 
         landmark_result = []
         for idx in range(len(landmarks)):
@@ -123,14 +121,16 @@ if uploaded_file:
             st.write(df)
 
     if st.sidebar.button("결과를 확인하시고, 버튼을 눌러주세요."):
-        save = datetime.now() 
-        image, pil_image, landmarks, angle = run_detect(image,
-                                        cropped_img_byte,
-                                        pretrained=pretrained_model,
-                                        rotation=rotation_check
-                                        )
+        save = datetime.now()
+        
+        # 결과 저장 및 원본 이미지 저장을 위한 Inference 재수행
+        image, pil_image, landmarks = run_detect(image,
+                                                 cropped_img_byte,
+                                                 pretrained=pretrained_model
+                                                 )
 
         save_dir = f"/data/komedi/streamlit_logs"
+        
         save_raw_image_dir = os.path.join(save_dir, "raw_image")
         save_crop_image_dir = os.path.join(save_dir, "crop_image")
         save_result_image_dir = os.path.join(save_dir, "result")
@@ -139,7 +139,15 @@ if uploaded_file:
         os.makedirs(save_crop_image_dir, exist_ok=True)
         os.makedirs(save_result_image_dir, exist_ok=True)
         
+        # 중목 파일명이 있을 경우, 파일명 변경
+        uniq = 1
+        name, ext = os.path.splitext(image_name)
+        while os.path.isfile(os.path.join(save_raw_image_dir,image_name)):
+            image_name = "%s(%d)%s" % (name,uniq,ext)
+            uniq += 1
+        
         fig1 = plt.figure(figsize=(5,10))
+        
         plt.subplot(1,2,1)
         plt.axis("off")
         plt.imshow(image)
@@ -148,39 +156,45 @@ if uploaded_file:
         plt.axis("off")
         
         for idx in range(len(landmarks)):
-            if show_in_input:
+            x,y = landmarks[idx][0], landmarks[idx][1]            
+            if show_in_input: #전체 이미지에서 보기
                 plt.scatter(x+l,y+t,s=point_scale,c=point_color,marker='X')
                 if show_annotate:
                     plt.annotate(idx, (x+l,y+t))
-                plt.imshow(image.rotate(angle))
-            else:
+                plt.imshow(image)
+            else: # 크롭 이미지에서 결과 보기
                 plt.scatter(x,y,s=point_scale,c=point_color,marker='X')
                 if show_annotate:
                     plt.annotate(idx, (x,y))
-                plt.imshow(pil_image.rotate(angle))
-
+                plt.imshow(pil_image)
+        
+        # Inference 결과 이미지 저장
         plt.savefig(f"{save_result_image_dir}/{Path(image_name).stem}.jpg",bbox_inches='tight', pad_inches=0)
-
+        
+        # RGBA 타입을 RGB 타입으로 변환
         image = image.convert("RGB")
 
+        # 원본 이미지 및 크롭 이미지 저장
         image.save(f"{save_raw_image_dir}/{Path(image_name).stem}.jpg")
         pil_image.save(f"{save_crop_image_dir}/{Path(image_name).stem}.jpg")
         
+        # Inference 완료 시간 기록
         times = f"{str(save.day).zfill(2)}_{str(save.hour).zfill(2)}:{str(save.minute).zfill(2)}:{str(save.second).zfill(2)}"
         
+        # Inference 결과 데이터를 바로 학습데이터셋으로 활용하기 위한 df 업데이트        
         csv_lists = pd.read_csv("/data/komedi/streamlit_logs/result.csv",header=None).values.tolist()
-        
+
         csv_list = []
-        csv_list.append(f"{Path(image_name).stem}.jpg")
-        csv_list.append("streamlit")
-        csv_list.append(f"{save_raw_image_dir}/{Path(image_name).stem}.jpg")
+        csv_list.append(f"{Path(image_name).stem}.jpg") # image namd
+        csv_list.append("streamlit") # type
+        csv_list.append(f"{save_raw_image_dir}/{Path(image_name).stem}.jpg") # image path
+        csv_list.append(l)
+        csv_list.append(t)
+        csv_list.append(l+w)
+        csv_list.append(t+h)                        
+        csv_list.append("") # rotation
         csv_list.append("")
-        csv_list.append("")
-        csv_list.append("")
-        csv_list.append("")                        
-        csv_list.append(times)
-        csv_list.append("")
-        csv_list.append("")        
+        csv_list.append(times)        
 
         landmark_result = []
         for idx in range(len(landmarks)):
@@ -190,8 +204,9 @@ if uploaded_file:
         for landmark in landmark_result:
             _, x,y = landmark
             csv_list.append((round(x+l,4), round(y+t,4)))
+            
         csv_lists.append(csv_list)
         df = pd.DataFrame(csv_lists)
         
         df.to_csv(f"{save_dir}/result.csv", index=None, header=None)
-        st.sidebar.write("감사합니다! :sunglasses:")
+        st.sidebar.write("감사합니다!")
