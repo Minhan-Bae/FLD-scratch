@@ -1,0 +1,14 @@
+albumentations==1.2.0
+fastapi==0.72.0
+lightgbm==3.3.2
+numpy==1.22.3
+pandas==1.4.2
+pillow==9.0.1
+plotly==5.9.0
+python-multipart==0.0.5
+scipy==1.8.0
+streamlit==1.11.0
+streamlit_cropper
+facenet_pytorch==2.5.2
+uvicorn==0.18.2
+responses

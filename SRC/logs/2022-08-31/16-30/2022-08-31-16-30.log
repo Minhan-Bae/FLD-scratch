@@ -1,0 +1,1135 @@
+[2022-08-31 16:30:07,561] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] image_dir: /data/komedi/komedi-dataset
+[2022-08-31 16:30:07,561] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] train_csv_path: /home/ubuntu/workspace/dv-22-komediclub/SRC/dataset/data/train_df.csv
+[2022-08-31 16:30:07,561] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] valid_csv_path: /home/ubuntu/workspace/dv-22-komediclub/SRC/dataset/data/valid_df.csv
+[2022-08-31 16:30:07,561] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] log_dir: ./logs/2022-08-31/16-30
+[2022-08-31 16:30:07,561] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] gpus: 0,1,2,3
+[2022-08-31 16:30:07,561] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] epochs: 500
+[2022-08-31 16:30:07,561] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] batch_size: 512
+[2022-08-31 16:30:07,561] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] base_lr: 0.0001
+[2022-08-31 16:30:07,561] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] workers: 16
+[2022-08-31 16:30:07,561] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] criterion: wingloss
+[2022-08-31 16:30:07,561] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] optimizer: SGD
+[2022-08-31 16:30:07,561] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] momentum: 0.9
+[2022-08-31 16:30:07,561] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] weight_decay: 0.0005
+[2022-08-31 16:30:07,561] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] valid_term: 5
+[2022-08-31 16:30:07,561] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] early_stop: 200
+[2022-08-31 16:30:07,562] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] seed: 2022
+[2022-08-31 16:30:07,562] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] milestones: [15, 25, 30]
+[2022-08-31 16:30:07,562] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] warmup: 50
+[2022-08-31 16:30:07,562] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] resume: /home/ubuntu/workspace/dv-22-komediclub/SRC/models/pretrained/2022-08-25-19-10-best.pt
+[2022-08-31 16:30:07,562] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] valid_initial: True
+[2022-08-31 16:30:07,562] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:97] [INFO] devices_id: [0, 1, 2, 3]
+[2022-08-31 16:30:15,247] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:243] [INFO] => Loading checkpoint /home/ubuntu/workspace/dv-22-komediclub/SRC/models/pretrained/2022-08-25-19-10-best.pt
+[2022-08-31 16:30:16,978] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:260] [INFO] Validation from initial
+[2022-08-31 16:30:33,893] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:273] [INFO] 
+Init Landmark Detection Validation(Loss, NME) Loss: 0.003239, NME: 0.026
+[2022-08-31 16:31:52,146] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 001	LR: 0.00002000	Time: 7.819 (0.987)	Loss: 2.48196936	
+[2022-08-31 16:32:53,200] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 002	LR: 0.00002000	Time: 0.462 (0.769)	Loss: 2.40960337	
+[2022-08-31 16:33:54,758] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 003	LR: 0.00002000	Time: 0.465 (0.776)	Loss: 2.39228360	
+[2022-08-31 16:34:56,110] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 004	LR: 0.00002000	Time: 0.970 (0.773)	Loss: 2.37761690	
+[2022-08-31 16:35:56,474] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 005	LR: 0.00002000	Time: 0.466 (0.761)	Loss: 2.37249418	
+[2022-08-31 16:35:56,536] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-5.pt
+[2022-08-31 16:35:56,536] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[5]
+[2022-08-31 16:36:02,443] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.003075, NME: 0.028
+[2022-08-31 16:36:02,443] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 1/200
+[2022-08-31 16:37:03,753] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 006	LR: 0.00002000	Time: 0.464 (0.773)	Loss: 2.36305556	
+[2022-08-31 16:38:06,284] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 007	LR: 0.00002000	Time: 0.487 (0.788)	Loss: 2.35491713	
+[2022-08-31 16:39:25,450] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 008	LR: 0.00002000	Time: 0.471 (0.782)	Loss: 2.34823157	
+[2022-08-31 16:40:26,970] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 009	LR: 0.00002000	Time: 0.461 (0.775)	Loss: 2.34347291	
+[2022-08-31 16:41:28,544] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 010	LR: 0.00002000	Time: 0.464 (0.776)	Loss: 2.33412014	
+[2022-08-31 16:41:28,604] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-10.pt
+[2022-08-31 16:41:28,605] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[10]
+[2022-08-31 16:41:34,425] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.003069, NME: 0.025
+[2022-08-31 16:41:34,465] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./models/pretrained/2022-08-31-16-30-best.pt
+[2022-08-31 16:42:36,024] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 011	LR: 0.00002000	Time: 0.462 (0.776)	Loss: 2.33184404	
+[2022-08-31 16:43:38,326] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 012	LR: 0.00002000	Time: 0.463 (0.785)	Loss: 2.32841129	
+[2022-08-31 16:44:38,446] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 013	LR: 0.00002000	Time: 0.462 (0.758)	Loss: 2.32183917	
+[2022-08-31 16:45:38,645] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 014	LR: 0.00002000	Time: 0.464 (0.758)	Loss: 2.32557730	
+[2022-08-31 16:46:40,346] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 015	LR: 0.00002000	Time: 0.465 (0.777)	Loss: 2.31766105	
+[2022-08-31 16:46:40,398] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-15.pt
+[2022-08-31 16:46:40,398] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[15]
+[2022-08-31 16:46:45,551] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.003042, NME: 0.026
+[2022-08-31 16:46:45,551] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 1/200
+[2022-08-31 16:47:45,821] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 016	LR: 0.00002000	Time: 0.465 (0.760)	Loss: 2.31242396	
+[2022-08-31 16:48:57,494] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 017	LR: 0.00002000	Time: 0.468 (0.780)	Loss: 2.30908070	
+[2022-08-31 16:49:57,333] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 018	LR: 0.00002000	Time: 0.465 (0.754)	Loss: 2.30063811	
+[2022-08-31 16:50:57,108] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 019	LR: 0.00002000	Time: 0.461 (0.754)	Loss: 2.30252811	
+[2022-08-31 16:51:57,894] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 020	LR: 0.00002000	Time: 0.465 (0.766)	Loss: 2.30480949	
+[2022-08-31 16:51:57,948] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-20.pt
+[2022-08-31 16:51:57,948] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[20]
+[2022-08-31 16:52:02,930] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.003036, NME: 0.024
+[2022-08-31 16:52:02,986] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./models/pretrained/2022-08-31-16-30-best.pt
+[2022-08-31 16:53:03,629] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 021	LR: 0.00002000	Time: 0.463 (0.765)	Loss: 2.29926803	
+[2022-08-31 16:54:03,964] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 022	LR: 0.00002000	Time: 0.464 (0.760)	Loss: 2.29367379	
+[2022-08-31 16:55:04,359] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 023	LR: 0.00002000	Time: 0.466 (0.761)	Loss: 2.29141242	
+[2022-08-31 16:56:04,543] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 024	LR: 0.00002000	Time: 0.463 (0.758)	Loss: 2.28271322	
+[2022-08-31 16:57:05,803] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 025	LR: 0.00002000	Time: 0.467 (0.771)	Loss: 2.28449089	
+[2022-08-31 16:57:05,856] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-25.pt
+[2022-08-31 16:57:05,857] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[25]
+[2022-08-31 16:57:10,978] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002975, NME: 0.025
+[2022-08-31 16:57:10,978] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 1/200
+[2022-08-31 16:58:21,529] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 026	LR: 0.00002000	Time: 0.464 (0.769)	Loss: 2.27874345	
+[2022-08-31 16:59:22,097] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 027	LR: 0.00002000	Time: 0.470 (0.762)	Loss: 2.27975085	
+[2022-08-31 17:00:22,489] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 028	LR: 0.00002000	Time: 0.465 (0.761)	Loss: 2.27834421	
+[2022-08-31 17:01:22,806] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 029	LR: 0.00002000	Time: 0.466 (0.760)	Loss: 2.27695060	
+[2022-08-31 17:02:23,527] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 030	LR: 0.00002000	Time: 1.300 (0.764)	Loss: 2.27252824	
+[2022-08-31 17:02:23,603] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-30.pt
+[2022-08-31 17:02:23,604] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[30]
+[2022-08-31 17:02:28,732] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002960, NME: 0.027
+[2022-08-31 17:02:28,733] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 2/200
+[2022-08-31 17:03:29,687] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 031	LR: 0.00002000	Time: 0.463 (0.768)	Loss: 2.26592967	
+[2022-08-31 17:04:29,869] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 032	LR: 0.00002000	Time: 0.464 (0.758)	Loss: 2.27178673	
+[2022-08-31 17:05:29,869] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 033	LR: 0.00002000	Time: 0.464 (0.756)	Loss: 2.26255517	
+[2022-08-31 17:06:43,782] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 034	LR: 0.00002000	Time: 0.483 (0.780)	Loss: 2.26796187	
+[2022-08-31 17:07:45,351] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 035	LR: 0.00002000	Time: 0.471 (0.775)	Loss: 2.26107323	
+[2022-08-31 17:07:45,402] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-35.pt
+[2022-08-31 17:07:45,402] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[35]
+[2022-08-31 17:07:51,653] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002961, NME: 0.024
+[2022-08-31 17:07:51,718] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./models/pretrained/2022-08-31-16-30-best.pt
+[2022-08-31 17:08:51,956] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 036	LR: 0.00002000	Time: 0.466 (0.759)	Loss: 2.26500745	
+[2022-08-31 17:09:52,943] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 037	LR: 0.00002000	Time: 0.464 (0.769)	Loss: 2.26154861	
+[2022-08-31 17:10:53,795] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 038	LR: 0.00002000	Time: 0.467 (0.767)	Loss: 2.25768715	
+[2022-08-31 17:11:54,319] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 039	LR: 0.00002000	Time: 0.479 (0.763)	Loss: 2.25519539	
+[2022-08-31 17:12:55,263] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 040	LR: 0.00002000	Time: 0.464 (0.768)	Loss: 2.25045386	
+[2022-08-31 17:12:55,323] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-40.pt
+[2022-08-31 17:12:55,324] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[40]
+[2022-08-31 17:13:01,521] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002858, NME: 0.024
+[2022-08-31 17:13:01,596] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./models/pretrained/2022-08-31-16-30-best.pt
+[2022-08-31 17:14:01,286] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 041	LR: 0.00002000	Time: 0.474 (0.752)	Loss: 2.25725309	
+[2022-08-31 17:15:16,075] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 042	LR: 0.00002000	Time: 0.475 (0.760)	Loss: 2.24641223	
+[2022-08-31 17:16:18,331] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 043	LR: 0.00002000	Time: 0.465 (0.784)	Loss: 2.24713526	
+[2022-08-31 17:17:18,947] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 044	LR: 0.00002000	Time: 0.463 (0.763)	Loss: 2.24533886	
+[2022-08-31 17:18:18,944] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 045	LR: 0.00002000	Time: 0.466 (0.756)	Loss: 2.24562321	
+[2022-08-31 17:18:19,008] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-45.pt
+[2022-08-31 17:18:19,009] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[45]
+[2022-08-31 17:18:25,318] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002904, NME: 0.026
+[2022-08-31 17:18:25,318] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 1/200
+[2022-08-31 17:19:24,931] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 046	LR: 0.00002000	Time: 0.464 (0.752)	Loss: 2.24422913	
+[2022-08-31 17:20:25,828] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 047	LR: 0.00002000	Time: 0.462 (0.767)	Loss: 2.24474804	
+[2022-08-31 17:21:26,641] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 048	LR: 0.00002000	Time: 0.463 (0.766)	Loss: 2.24983186	
+[2022-08-31 17:22:27,915] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 049	LR: 0.00002000	Time: 0.467 (0.772)	Loss: 2.23502813	
+[2022-08-31 17:23:29,614] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 050	LR: 0.00002000	Time: 0.474 (0.777)	Loss: 2.23801756	
+[2022-08-31 17:23:29,672] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-50.pt
+[2022-08-31 17:23:29,673] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[50]
+[2022-08-31 17:23:35,353] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002863, NME: 0.024
+[2022-08-31 17:23:35,354] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 2/200
+[2022-08-31 17:24:46,394] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 051	LR: 0.00000080	Time: 0.461 (0.782)	Loss: 2.23489677	
+[2022-08-31 17:25:47,564] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 052	LR: 0.00000080	Time: 0.464 (0.770)	Loss: 2.23220292	
+[2022-08-31 17:26:47,317] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 053	LR: 0.00000080	Time: 0.474 (0.753)	Loss: 2.22862649	
+[2022-08-31 17:27:48,762] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 054	LR: 0.00000080	Time: 0.464 (0.774)	Loss: 2.22967865	
+[2022-08-31 17:28:49,056] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 055	LR: 0.00000080	Time: 0.467 (0.760)	Loss: 2.22699130	
+[2022-08-31 17:28:49,110] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-55.pt
+[2022-08-31 17:28:49,110] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[55]
+[2022-08-31 17:28:55,100] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002938, NME: 0.024
+[2022-08-31 17:28:55,100] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 3/200
+[2022-08-31 17:29:57,858] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 056	LR: 0.00000080	Time: 0.468 (0.791)	Loss: 2.22734563	
+[2022-08-31 17:30:59,816] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 057	LR: 0.00000080	Time: 0.461 (0.780)	Loss: 2.23291938	
+[2022-08-31 17:32:00,480] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 058	LR: 0.00000080	Time: 0.462 (0.765)	Loss: 2.23678789	
+[2022-08-31 17:33:15,774] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 059	LR: 0.00000080	Time: 0.481 (0.779)	Loss: 2.23169433	
+[2022-08-31 17:34:16,452] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 060	LR: 0.00000080	Time: 0.463 (0.764)	Loss: 2.23332227	
+[2022-08-31 17:34:16,510] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-60.pt
+[2022-08-31 17:34:16,510] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[60]
+[2022-08-31 17:34:22,298] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002881, NME: 0.024
+[2022-08-31 17:34:22,367] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./models/pretrained/2022-08-31-16-30-best.pt
+[2022-08-31 17:35:23,610] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 061	LR: 0.00000080	Time: 0.459 (0.771)	Loss: 2.22926456	
+[2022-08-31 17:36:24,883] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 062	LR: 0.00000080	Time: 0.459 (0.772)	Loss: 2.23199081	
+[2022-08-31 17:37:25,078] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 063	LR: 0.00000080	Time: 0.465 (0.758)	Loss: 2.22419299	
+[2022-08-31 17:38:26,224] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 064	LR: 0.00000080	Time: 0.463 (0.771)	Loss: 2.23581188	
+[2022-08-31 17:39:26,715] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 065	LR: 0.00000080	Time: 0.464 (0.762)	Loss: 2.22631062	
+[2022-08-31 17:39:26,769] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-65.pt
+[2022-08-31 17:39:26,769] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[65]
+[2022-08-31 17:39:33,430] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002889, NME: 0.023
+[2022-08-31 17:39:33,491] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./models/pretrained/2022-08-31-16-30-best.pt
+[2022-08-31 17:40:33,656] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 066	LR: 0.00000080	Time: 0.465 (0.758)	Loss: 2.23636886	
+[2022-08-31 17:41:34,892] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 067	LR: 0.00000080	Time: 0.465 (0.772)	Loss: 2.23335456	
+[2022-08-31 17:42:43,452] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 068	LR: 0.00000080	Time: 0.463 (0.769)	Loss: 2.22496389	
+[2022-08-31 17:43:43,954] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 069	LR: 0.00000080	Time: 0.465 (0.762)	Loss: 2.23364526	
+[2022-08-31 17:44:43,780] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 070	LR: 0.00000080	Time: 0.487 (0.754)	Loss: 2.22883980	
+[2022-08-31 17:44:43,829] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-70.pt
+[2022-08-31 17:44:43,829] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[70]
+[2022-08-31 17:44:49,327] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002888, NME: 0.023
+[2022-08-31 17:44:49,327] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 1/200
+[2022-08-31 17:45:51,757] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 071	LR: 0.00000080	Time: 0.462 (0.786)	Loss: 2.23128052	
+[2022-08-31 17:46:54,181] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 072	LR: 0.00000080	Time: 0.458 (0.785)	Loss: 2.22964114	
+[2022-08-31 17:47:56,552] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 073	LR: 0.00000080	Time: 0.460 (0.785)	Loss: 2.23280023	
+[2022-08-31 17:48:57,702] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 074	LR: 0.00000080	Time: 0.467 (0.771)	Loss: 2.23678921	
+[2022-08-31 17:49:58,403] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 075	LR: 0.00000080	Time: 0.459 (0.765)	Loss: 2.22951260	
+[2022-08-31 17:49:58,470] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-75.pt
+[2022-08-31 17:49:58,470] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[75]
+[2022-08-31 17:50:04,274] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002901, NME: 0.023
+[2022-08-31 17:50:04,274] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 2/200
+[2022-08-31 17:51:18,135] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 076	LR: 0.00000080	Time: 0.472 (0.781)	Loss: 2.23527646	
+[2022-08-31 17:52:18,605] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 077	LR: 0.00000080	Time: 0.465 (0.760)	Loss: 2.23247037	
+[2022-08-31 17:53:20,645] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 078	LR: 0.00000080	Time: 0.463 (0.781)	Loss: 2.23050736	
+[2022-08-31 17:54:21,094] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 079	LR: 0.00000080	Time: 0.476 (0.760)	Loss: 2.23244285	
+[2022-08-31 17:55:23,003] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 080	LR: 0.00000080	Time: 0.465 (0.780)	Loss: 2.23756955	
+[2022-08-31 17:55:23,057] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-80.pt
+[2022-08-31 17:55:23,057] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[80]
+[2022-08-31 17:55:28,702] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002904, NME: 0.025
+[2022-08-31 17:55:28,702] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 3/200
+[2022-08-31 17:56:28,580] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 081	LR: 0.00000080	Time: 0.465 (0.754)	Loss: 2.22814526	
+[2022-08-31 17:57:30,747] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 082	LR: 0.00000080	Time: 0.466 (0.783)	Loss: 2.22425007	
+[2022-08-31 17:58:31,856] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 083	LR: 0.00000080	Time: 0.469 (0.769)	Loss: 2.22657859	
+[2022-08-31 17:59:34,515] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 084	LR: 0.00000080	Time: 0.463 (0.789)	Loss: 2.22802023	
+[2022-08-31 18:00:44,160] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 085	LR: 0.00000080	Time: 0.464 (0.764)	Loss: 2.23021161	
+[2022-08-31 18:00:44,209] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-85.pt
+[2022-08-31 18:00:44,209] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[85]
+[2022-08-31 18:00:49,933] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002900, NME: 0.024
+[2022-08-31 18:00:49,933] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 4/200
+[2022-08-31 18:01:50,783] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 086	LR: 0.00000080	Time: 0.462 (0.767)	Loss: 2.23326851	
+[2022-08-31 18:02:51,502] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 087	LR: 0.00000080	Time: 0.464 (0.765)	Loss: 2.22923946	
+[2022-08-31 18:03:53,228] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 088	LR: 0.00000080	Time: 0.463 (0.777)	Loss: 2.22728929	
+[2022-08-31 18:04:53,974] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 089	LR: 0.00000080	Time: 0.464 (0.765)	Loss: 2.23275566	
+[2022-08-31 18:05:56,923] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 090	LR: 0.00000080	Time: 0.466 (0.793)	Loss: 2.23213045	
+[2022-08-31 18:05:56,984] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-90.pt
+[2022-08-31 18:05:56,985] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[90]
+[2022-08-31 18:06:02,686] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002907, NME: 0.024
+[2022-08-31 18:06:02,686] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 5/200
+[2022-08-31 18:07:03,182] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 091	LR: 0.00000080	Time: 0.465 (0.761)	Loss: 2.22919001	
+[2022-08-31 18:08:05,576] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 092	LR: 0.00000080	Time: 0.463 (0.786)	Loss: 2.22869880	
+[2022-08-31 18:09:05,550] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 093	LR: 0.00000080	Time: 0.465 (0.755)	Loss: 2.22470546	
+[2022-08-31 18:10:13,549] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 094	LR: 0.00000080	Time: 0.467 (0.777)	Loss: 2.22879157	
+[2022-08-31 18:11:13,978] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 095	LR: 0.00000080	Time: 0.464 (0.761)	Loss: 2.23164419	
+[2022-08-31 18:11:14,039] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-95.pt
+[2022-08-31 18:11:14,040] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[95]
+[2022-08-31 18:11:19,796] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002903, NME: 0.024
+[2022-08-31 18:11:19,796] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 6/200
+[2022-08-31 18:12:21,454] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 096	LR: 0.00000080	Time: 0.462 (0.777)	Loss: 2.22991028	
+[2022-08-31 18:13:21,554] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 097	LR: 0.00000080	Time: 0.464 (0.757)	Loss: 2.22540910	
+[2022-08-31 18:14:21,926] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 098	LR: 0.00000080	Time: 0.461 (0.761)	Loss: 2.23169025	
+[2022-08-31 18:15:24,521] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 099	LR: 0.00000080	Time: 0.463 (0.789)	Loss: 2.22901934	
+[2022-08-31 18:16:24,840] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 100	LR: 0.00000080	Time: 0.466 (0.760)	Loss: 2.22587003	
+[2022-08-31 18:16:24,896] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-100.pt
+[2022-08-31 18:16:24,897] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[100]
+[2022-08-31 18:16:30,712] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002875, NME: 0.024
+[2022-08-31 18:16:30,712] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 7/200
+[2022-08-31 18:17:33,165] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 101	LR: 0.00000080	Time: 0.462 (0.787)	Loss: 2.22441343	
+[2022-08-31 18:18:42,957] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 102	LR: 0.00000080	Time: 0.459 (0.762)	Loss: 2.22609180	
+[2022-08-31 18:19:44,788] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 103	LR: 0.00000080	Time: 0.460 (0.777)	Loss: 2.23450956	
+[2022-08-31 18:20:45,887] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 104	LR: 0.00000080	Time: 0.465 (0.770)	Loss: 2.22601721	
+[2022-08-31 18:21:46,317] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 105	LR: 0.00000080	Time: 0.464 (0.761)	Loss: 2.22509819	
+[2022-08-31 18:21:46,369] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-105.pt
+[2022-08-31 18:21:46,370] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[105]
+[2022-08-31 18:21:53,598] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002925, NME: 0.024
+[2022-08-31 18:21:53,599] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 8/200
+[2022-08-31 18:22:53,728] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 106	LR: 0.00000080	Time: 0.461 (0.758)	Loss: 2.22543309	
+[2022-08-31 18:23:53,439] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 107	LR: 0.00000080	Time: 0.464 (0.753)	Loss: 2.22560606	
+[2022-08-31 18:24:54,891] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 108	LR: 0.00000080	Time: 0.462 (0.774)	Loss: 2.22781472	
+[2022-08-31 18:25:55,148] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 109	LR: 0.00000080	Time: 0.468 (0.758)	Loss: 2.23177582	
+[2022-08-31 18:27:05,470] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 110	LR: 0.00000080	Time: 0.482 (0.770)	Loss: 2.22493902	
+[2022-08-31 18:27:05,529] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-110.pt
+[2022-08-31 18:27:05,530] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[110]
+[2022-08-31 18:27:12,819] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002886, NME: 0.024
+[2022-08-31 18:27:12,819] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 9/200
+[2022-08-31 18:28:12,832] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 111	LR: 0.00000080	Time: 0.460 (0.756)	Loss: 2.22184618	
+[2022-08-31 18:29:14,185] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 112	LR: 0.00000080	Time: 0.464 (0.773)	Loss: 2.23132188	
+[2022-08-31 18:30:16,904] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 113	LR: 0.00000080	Time: 0.462 (0.790)	Loss: 2.22994906	
+[2022-08-31 18:31:17,553] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 114	LR: 0.00000080	Time: 0.467 (0.763)	Loss: 2.22342270	
+[2022-08-31 18:32:17,937] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 115	LR: 0.00000080	Time: 0.464 (0.760)	Loss: 2.23145740	
+[2022-08-31 18:32:18,018] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-115.pt
+[2022-08-31 18:32:18,018] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[115]
+[2022-08-31 18:32:25,354] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002897, NME: 0.024
+[2022-08-31 18:32:25,355] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 10/200
+[2022-08-31 18:33:28,172] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 116	LR: 0.00000080	Time: 0.455 (0.792)	Loss: 2.22667766	
+[2022-08-31 18:34:28,688] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 117	LR: 0.00000080	Time: 0.464 (0.763)	Loss: 2.23020069	
+[2022-08-31 18:35:40,557] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 118	LR: 0.00000080	Time: 0.462 (0.785)	Loss: 2.22754999	
+[2022-08-31 18:36:40,340] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 119	LR: 0.00000080	Time: 0.460 (0.753)	Loss: 2.23347642	
+[2022-08-31 18:37:40,424] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 120	LR: 0.00000080	Time: 0.462 (0.757)	Loss: 2.23347007	
+[2022-08-31 18:37:40,481] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-120.pt
+[2022-08-31 18:37:40,482] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[120]
+[2022-08-31 18:37:46,276] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002907, NME: 0.024
+[2022-08-31 18:37:46,276] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 11/200
+[2022-08-31 18:38:48,872] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 121	LR: 0.00000080	Time: 0.464 (0.789)	Loss: 2.22635470	
+[2022-08-31 18:39:49,414] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 122	LR: 0.00000080	Time: 0.471 (0.763)	Loss: 2.22960368	
+[2022-08-31 18:40:51,569] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 123	LR: 0.00000080	Time: 0.465 (0.783)	Loss: 2.22424362	
+[2022-08-31 18:41:51,593] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 124	LR: 0.00000080	Time: 0.463 (0.756)	Loss: 2.22734426	
+[2022-08-31 18:42:52,080] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 125	LR: 0.00000080	Time: 0.467 (0.762)	Loss: 2.22996609	
+[2022-08-31 18:42:52,136] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-125.pt
+[2022-08-31 18:42:52,136] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[125]
+[2022-08-31 18:42:58,175] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002853, NME: 0.024
+[2022-08-31 18:42:58,176] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 12/200
+[2022-08-31 18:44:00,961] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 126	LR: 0.00000080	Time: 0.464 (0.791)	Loss: 2.22802874	
+[2022-08-31 18:45:11,611] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 127	LR: 0.00000080	Time: 0.465 (0.766)	Loss: 2.22553810	
+[2022-08-31 18:46:12,119] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 128	LR: 0.00000080	Time: 0.461 (0.762)	Loss: 2.22217375	
+[2022-08-31 18:47:14,614] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 129	LR: 0.00000080	Time: 0.462 (0.787)	Loss: 2.23271009	
+[2022-08-31 18:48:15,080] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 130	LR: 0.00000080	Time: 0.465 (0.761)	Loss: 2.22384977	
+[2022-08-31 18:48:15,137] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-130.pt
+[2022-08-31 18:48:15,137] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[130]
+[2022-08-31 18:48:21,260] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002876, NME: 0.023
+[2022-08-31 18:48:21,260] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 13/200
+[2022-08-31 18:49:23,246] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 131	LR: 0.00000080	Time: 0.482 (0.781)	Loss: 2.23019566	
+[2022-08-31 18:50:23,712] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 132	LR: 0.00000080	Time: 0.471 (0.762)	Loss: 2.22587588	
+[2022-08-31 18:51:24,106] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 133	LR: 0.00000080	Time: 0.463 (0.761)	Loss: 2.22854804	
+[2022-08-31 18:52:26,553] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 134	LR: 0.00000080	Time: 2.195 (0.786)	Loss: 2.22493497	
+[2022-08-31 18:53:39,489] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 135	LR: 0.00000080	Time: 0.477 (0.764)	Loss: 2.22572940	
+[2022-08-31 18:53:39,550] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-135.pt
+[2022-08-31 18:53:39,550] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[135]
+[2022-08-31 18:53:45,658] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002854, NME: 0.023
+[2022-08-31 18:53:45,658] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 14/200
+[2022-08-31 18:54:45,794] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 136	LR: 0.00000080	Time: 0.464 (0.758)	Loss: 2.22979502	
+[2022-08-31 18:55:48,141] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 137	LR: 0.00000080	Time: 0.463 (0.785)	Loss: 2.22597047	
+[2022-08-31 18:56:48,664] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 138	LR: 0.00000080	Time: 0.463 (0.762)	Loss: 2.22491621	
+[2022-08-31 18:57:48,904] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 139	LR: 0.00000080	Time: 0.462 (0.759)	Loss: 2.23105548	
+[2022-08-31 18:58:49,005] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 140	LR: 0.00000080	Time: 0.464 (0.757)	Loss: 2.22671657	
+[2022-08-31 18:58:49,058] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-140.pt
+[2022-08-31 18:58:49,059] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[140]
+[2022-08-31 18:58:56,605] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002888, NME: 0.026
+[2022-08-31 18:58:56,605] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 15/200
+[2022-08-31 18:59:56,415] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 141	LR: 0.00000080	Time: 0.462 (0.754)	Loss: 2.22443138	
+[2022-08-31 19:00:56,508] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 142	LR: 0.00000080	Time: 0.464 (0.757)	Loss: 2.22695499	
+[2022-08-31 19:01:56,804] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 143	LR: 0.00000080	Time: 0.465 (0.759)	Loss: 2.22323202	
+[2022-08-31 19:03:07,870] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 144	LR: 0.00000080	Time: 0.462 (0.800)	Loss: 2.22602574	
+[2022-08-31 19:04:08,128] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 145	LR: 0.00000080	Time: 0.460 (0.759)	Loss: 2.23135371	
+[2022-08-31 19:04:08,175] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-145.pt
+[2022-08-31 19:04:08,176] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[145]
+[2022-08-31 19:04:14,177] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002881, NME: 0.025
+[2022-08-31 19:04:14,178] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 16/200
+[2022-08-31 19:05:15,695] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 146	LR: 0.00000080	Time: 0.460 (0.775)	Loss: 2.22494740	
+[2022-08-31 19:06:15,990] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 147	LR: 0.00000080	Time: 0.463 (0.759)	Loss: 2.22846608	
+[2022-08-31 19:07:16,057] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 148	LR: 0.00000080	Time: 0.461 (0.757)	Loss: 2.22253073	
+[2022-08-31 19:08:16,116] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 149	LR: 0.00000080	Time: 0.463 (0.757)	Loss: 2.22982935	
+[2022-08-31 19:09:18,547] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 150	LR: 0.00000080	Time: 0.462 (0.786)	Loss: 2.22361202	
+[2022-08-31 19:09:18,600] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-150.pt
+[2022-08-31 19:09:18,600] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[150]
+[2022-08-31 19:09:24,611] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002878, NME: 0.023
+[2022-08-31 19:09:24,650] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./models/pretrained/2022-08-31-16-30-best.pt
+[2022-08-31 19:10:24,720] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 151	LR: 0.00000080	Time: 0.462 (0.757)	Loss: 2.22266639	
+[2022-08-31 19:11:24,663] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 152	LR: 0.00000080	Time: 0.461 (0.755)	Loss: 2.21992311	
+[2022-08-31 19:12:35,701] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 153	LR: 0.00000080	Time: 0.460 (0.798)	Loss: 2.22725289	
+[2022-08-31 19:13:35,940] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 154	LR: 0.00000080	Time: 0.462 (0.759)	Loss: 2.22348487	
+[2022-08-31 19:14:36,033] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 155	LR: 0.00000080	Time: 0.463 (0.757)	Loss: 2.23070543	
+[2022-08-31 19:14:36,115] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-155.pt
+[2022-08-31 19:14:36,115] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[155]
+[2022-08-31 19:14:42,182] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002845, NME: 0.026
+[2022-08-31 19:14:42,182] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 1/200
+[2022-08-31 19:15:44,525] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 156	LR: 0.00000080	Time: 0.462 (0.785)	Loss: 2.22436791	
+[2022-08-31 19:16:44,673] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 157	LR: 0.00000080	Time: 0.464 (0.757)	Loss: 2.21881696	
+[2022-08-31 19:17:45,315] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 158	LR: 0.00000080	Time: 0.462 (0.764)	Loss: 2.22260357	
+[2022-08-31 19:18:48,221] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 159	LR: 0.00000080	Time: 0.466 (0.792)	Loss: 2.22771103	
+[2022-08-31 19:19:48,147] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 160	LR: 0.00000080	Time: 0.463 (0.754)	Loss: 2.22372798	
+[2022-08-31 19:19:48,204] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-160.pt
+[2022-08-31 19:19:48,205] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[160]
+[2022-08-31 19:19:54,264] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002850, NME: 0.023
+[2022-08-31 19:19:54,264] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 2/200
+[2022-08-31 19:20:54,426] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 161	LR: 0.00000080	Time: 0.464 (0.758)	Loss: 2.22426596	
+[2022-08-31 19:22:02,509] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 162	LR: 0.00000080	Time: 0.461 (0.760)	Loss: 2.23308333	
+[2022-08-31 19:23:04,619] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 163	LR: 0.00000080	Time: 0.462 (0.782)	Loss: 2.23069675	
+[2022-08-31 19:24:04,646] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 164	LR: 0.00000080	Time: 0.466 (0.757)	Loss: 2.22542751	
+[2022-08-31 19:25:04,646] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 165	LR: 0.00000080	Time: 0.464 (0.756)	Loss: 2.22437588	
+[2022-08-31 19:25:04,705] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-165.pt
+[2022-08-31 19:25:04,705] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[165]
+[2022-08-31 19:25:10,959] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002869, NME: 0.026
+[2022-08-31 19:25:10,960] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 3/200
+[2022-08-31 19:26:13,510] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 166	LR: 0.00000080	Time: 0.463 (0.788)	Loss: 2.22406800	
+[2022-08-31 19:27:13,442] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 167	LR: 0.00000080	Time: 0.463 (0.755)	Loss: 2.22787730	
+[2022-08-31 19:28:13,739] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 168	LR: 0.00000080	Time: 0.465 (0.760)	Loss: 2.22978696	
+[2022-08-31 19:29:14,616] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 169	LR: 0.00000080	Time: 0.464 (0.767)	Loss: 2.22877620	
+[2022-08-31 19:30:28,838] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 170	LR: 0.00000080	Time: 0.464 (0.802)	Loss: 2.22010834	
+[2022-08-31 19:30:28,889] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-170.pt
+[2022-08-31 19:30:28,889] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[170]
+[2022-08-31 19:30:35,084] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002899, NME: 0.024
+[2022-08-31 19:30:35,084] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 4/200
+[2022-08-31 19:31:34,969] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 171	LR: 0.00000080	Time: 0.463 (0.754)	Loss: 2.22145458	
+[2022-08-31 19:32:35,120] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 172	LR: 0.00000080	Time: 0.459 (0.757)	Loss: 2.22363837	
+[2022-08-31 19:33:37,749] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 173	LR: 0.00000080	Time: 0.467 (0.788)	Loss: 2.22276158	
+[2022-08-31 19:34:38,170] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 174	LR: 0.00000080	Time: 0.464 (0.760)	Loss: 2.22351337	
+[2022-08-31 19:35:38,439] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 175	LR: 0.00000080	Time: 0.463 (0.759)	Loss: 2.22571477	
+[2022-08-31 19:35:38,496] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-175.pt
+[2022-08-31 19:35:38,496] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[175]
+[2022-08-31 19:35:44,557] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002869, NME: 0.023
+[2022-08-31 19:35:44,557] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 5/200
+[2022-08-31 19:36:44,487] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 176	LR: 0.00000080	Time: 0.463 (0.755)	Loss: 2.22208705	
+[2022-08-31 19:37:47,104] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 177	LR: 0.00000080	Time: 0.460 (0.788)	Loss: 2.22216649	
+[2022-08-31 19:38:47,477] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 178	LR: 0.00000080	Time: 0.467 (0.760)	Loss: 2.22659101	
+[2022-08-31 19:39:53,524] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 179	LR: 0.00000080	Time: 0.464 (0.780)	Loss: 2.22174791	
+[2022-08-31 19:40:53,614] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 180	LR: 0.00000080	Time: 0.480 (0.756)	Loss: 2.22968361	
+[2022-08-31 19:40:53,665] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-180.pt
+[2022-08-31 19:40:53,665] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[180]
+[2022-08-31 19:41:01,891] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002925, NME: 0.024
+[2022-08-31 19:41:01,892] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 6/200
+[2022-08-31 19:42:01,906] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 181	LR: 0.00000080	Time: 0.473 (0.756)	Loss: 2.22414685	
+[2022-08-31 19:43:01,818] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 182	LR: 0.00000080	Time: 0.464 (0.755)	Loss: 2.22520232	
+[2022-08-31 19:44:01,608] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 183	LR: 0.00000080	Time: 0.464 (0.753)	Loss: 2.22653553	
+[2022-08-31 19:45:04,769] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 184	LR: 0.00000080	Time: 0.460 (0.796)	Loss: 2.21584200	
+[2022-08-31 19:46:04,422] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 185	LR: 0.00000080	Time: 0.464 (0.751)	Loss: 2.22158629	
+[2022-08-31 19:46:04,494] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-185.pt
+[2022-08-31 19:46:04,495] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[185]
+[2022-08-31 19:46:10,638] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002848, NME: 0.023
+[2022-08-31 19:46:10,638] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 7/200
+[2022-08-31 19:47:11,583] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 186	LR: 0.00000080	Time: 0.463 (0.768)	Loss: 2.22212700	
+[2022-08-31 19:48:25,817] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 187	LR: 0.00000080	Time: 0.483 (0.756)	Loss: 2.22408542	
+[2022-08-31 19:49:29,007] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 188	LR: 0.00000080	Time: 0.463 (0.795)	Loss: 2.22077617	
+[2022-08-31 19:50:29,630] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 189	LR: 0.00000080	Time: 0.462 (0.763)	Loss: 2.22227408	
+[2022-08-31 19:51:30,424] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 190	LR: 0.00000080	Time: 0.462 (0.766)	Loss: 2.22663976	
+[2022-08-31 19:51:30,477] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-190.pt
+[2022-08-31 19:51:30,477] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[190]
+[2022-08-31 19:51:36,455] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002883, NME: 0.024
+[2022-08-31 19:51:36,455] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 8/200
+[2022-08-31 19:52:36,644] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 191	LR: 0.00000080	Time: 0.463 (0.758)	Loss: 2.22428733	
+[2022-08-31 19:53:39,292] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 192	LR: 0.00000080	Time: 0.464 (0.789)	Loss: 2.22287720	
+[2022-08-31 19:54:39,597] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 193	LR: 0.00000080	Time: 0.466 (0.759)	Loss: 2.22446492	
+[2022-08-31 19:55:40,617] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 194	LR: 0.00000080	Time: 0.468 (0.768)	Loss: 2.22394319	
+[2022-08-31 19:56:42,247] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 195	LR: 0.00000080	Time: 0.463 (0.776)	Loss: 2.23087266	
+[2022-08-31 19:56:42,309] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-195.pt
+[2022-08-31 19:56:42,310] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[195]
+[2022-08-31 19:56:48,505] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002853, NME: 0.024
+[2022-08-31 19:56:48,505] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 9/200
+[2022-08-31 19:57:57,515] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 196	LR: 0.00000080	Time: 0.456 (0.808)	Loss: 2.22517660	
+[2022-08-31 19:58:58,004] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 197	LR: 0.00000080	Time: 0.463 (0.762)	Loss: 2.22153346	
+[2022-08-31 19:59:58,117] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 198	LR: 0.00000080	Time: 0.465 (0.757)	Loss: 2.22293426	
+[2022-08-31 20:00:58,577] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 199	LR: 0.00000080	Time: 0.464 (0.761)	Loss: 2.22173957	
+[2022-08-31 20:02:00,837] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 200	LR: 0.00000080	Time: 0.464 (0.784)	Loss: 2.22472517	
+[2022-08-31 20:02:00,886] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-200.pt
+[2022-08-31 20:02:00,886] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[200]
+[2022-08-31 20:02:07,034] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002797, NME: 0.022
+[2022-08-31 20:02:07,100] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./models/pretrained/2022-08-31-16-30-best.pt
+[2022-08-31 20:03:07,023] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 201	LR: 0.00000080	Time: 0.463 (0.755)	Loss: 2.22154204	
+[2022-08-31 20:04:07,206] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 202	LR: 0.00000080	Time: 0.465 (0.758)	Loss: 2.22262378	
+[2022-08-31 20:05:07,712] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 203	LR: 0.00000080	Time: 0.464 (0.761)	Loss: 2.22590150	
+[2022-08-31 20:06:11,629] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 204	LR: 0.00000080	Time: 3.473 (0.805)	Loss: 2.22072596	
+[2022-08-31 20:07:19,190] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 205	LR: 0.00000080	Time: 0.463 (0.765)	Loss: 2.22529722	
+[2022-08-31 20:07:19,239] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-205.pt
+[2022-08-31 20:07:19,239] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[205]
+[2022-08-31 20:07:25,501] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002886, NME: 0.024
+[2022-08-31 20:07:25,501] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 1/200
+[2022-08-31 20:08:25,680] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 206	LR: 0.00000080	Time: 0.464 (0.758)	Loss: 2.21920806	
+[2022-08-31 20:09:25,678] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 207	LR: 0.00000080	Time: 0.464 (0.755)	Loss: 2.22164411	
+[2022-08-31 20:10:28,899] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 208	LR: 0.00000080	Time: 0.465 (0.797)	Loss: 2.22755831	
+[2022-08-31 20:11:29,275] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 209	LR: 0.00000080	Time: 0.465 (0.760)	Loss: 2.21999723	
+[2022-08-31 20:12:29,223] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 210	LR: 0.00000080	Time: 0.465 (0.755)	Loss: 2.21823388	
+[2022-08-31 20:12:29,273] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-210.pt
+[2022-08-31 20:12:29,274] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[210]
+[2022-08-31 20:12:35,195] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002874, NME: 0.023
+[2022-08-31 20:12:35,195] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 2/200
+[2022-08-31 20:13:35,318] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 211	LR: 0.00000080	Time: 0.465 (0.758)	Loss: 2.22167835	
+[2022-08-31 20:14:35,764] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 212	LR: 0.00000080	Time: 0.460 (0.761)	Loss: 2.22095510	
+[2022-08-31 20:15:53,529] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 213	LR: 0.00000080	Time: 0.474 (0.823)	Loss: 2.22028570	
+[2022-08-31 20:16:53,816] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 214	LR: 0.00000080	Time: 0.464 (0.758)	Loss: 2.22085181	
+[2022-08-31 20:17:54,692] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 215	LR: 0.00000080	Time: 0.465 (0.767)	Loss: 2.21904068	
+[2022-08-31 20:17:54,749] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-215.pt
+[2022-08-31 20:17:54,750] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[215]
+[2022-08-31 20:18:00,768] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002873, NME: 0.023
+[2022-08-31 20:18:00,769] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 3/200
+[2022-08-31 20:19:00,869] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 216	LR: 0.00000080	Time: 0.463 (0.757)	Loss: 2.22262498	
+[2022-08-31 20:20:03,731] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 217	LR: 0.00000080	Time: 0.464 (0.792)	Loss: 2.22136314	
+[2022-08-31 20:21:04,173] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 218	LR: 0.00000080	Time: 0.461 (0.761)	Loss: 2.22348747	
+[2022-08-31 20:22:04,683] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 219	LR: 0.00000080	Time: 0.465 (0.762)	Loss: 2.22393559	
+[2022-08-31 20:23:05,213] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 220	LR: 0.00000080	Time: 0.467 (0.762)	Loss: 2.22209491	
+[2022-08-31 20:23:05,266] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-220.pt
+[2022-08-31 20:23:05,267] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[220]
+[2022-08-31 20:23:11,381] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002918, NME: 0.025
+[2022-08-31 20:23:11,382] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 4/200
+[2022-08-31 20:24:14,436] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 221	LR: 0.00000080	Time: 0.462 (0.794)	Loss: 2.22665393	
+[2022-08-31 20:25:24,280] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 222	LR: 0.00000080	Time: 0.465 (0.769)	Loss: 2.22100627	
+[2022-08-31 20:26:24,911] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 223	LR: 0.00000080	Time: 0.463 (0.763)	Loss: 2.22192848	
+[2022-08-31 20:27:25,286] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 224	LR: 0.00000080	Time: 0.463 (0.760)	Loss: 2.22278460	
+[2022-08-31 20:28:25,677] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 225	LR: 0.00000080	Time: 0.464 (0.760)	Loss: 2.21639836	
+[2022-08-31 20:28:25,765] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-225.pt
+[2022-08-31 20:28:25,766] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[225]
+[2022-08-31 20:28:32,023] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002912, NME: 0.026
+[2022-08-31 20:28:32,023] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 5/200
+[2022-08-31 20:29:35,347] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 226	LR: 0.00000080	Time: 0.463 (0.797)	Loss: 2.22128372	
+[2022-08-31 20:30:35,537] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 227	LR: 0.00000080	Time: 0.466 (0.757)	Loss: 2.21865865	
+[2022-08-31 20:31:35,888] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 228	LR: 0.00000080	Time: 0.467 (0.760)	Loss: 2.21742009	
+[2022-08-31 20:32:36,392] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 229	LR: 0.00000080	Time: 0.469 (0.762)	Loss: 2.21824571	
+[2022-08-31 20:33:51,273] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 230	LR: 0.00000080	Time: 0.475 (0.763)	Loss: 2.21973711	
+[2022-08-31 20:33:51,334] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-230.pt
+[2022-08-31 20:33:51,335] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[230]
+[2022-08-31 20:34:00,697] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002793, NME: 0.025
+[2022-08-31 20:34:00,697] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 6/200
+[2022-08-31 20:35:00,429] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 231	LR: 0.00000080	Time: 0.461 (0.752)	Loss: 2.21655703	
+[2022-08-31 20:36:00,579] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 232	LR: 0.00000080	Time: 0.462 (0.758)	Loss: 2.21745194	
+[2022-08-31 20:37:00,821] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 233	LR: 0.00000080	Time: 0.460 (0.759)	Loss: 2.22043888	
+[2022-08-31 20:38:01,140] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 234	LR: 0.00000080	Time: 0.463 (0.759)	Loss: 2.22233014	
+[2022-08-31 20:39:01,275] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 235	LR: 0.00000080	Time: 0.465 (0.758)	Loss: 2.22289677	
+[2022-08-31 20:39:01,333] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-235.pt
+[2022-08-31 20:39:01,333] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[235]
+[2022-08-31 20:39:10,597] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002848, NME: 0.024
+[2022-08-31 20:39:10,598] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 7/200
+[2022-08-31 20:40:10,649] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 236	LR: 0.00000080	Time: 0.463 (0.756)	Loss: 2.21934618	
+[2022-08-31 20:41:10,967] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 237	LR: 0.00000080	Time: 0.463 (0.760)	Loss: 2.21421074	
+[2022-08-31 20:42:11,769] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 238	LR: 0.00000080	Time: 0.466 (0.766)	Loss: 2.21584699	
+[2022-08-31 20:43:24,644] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 239	LR: 0.00000080	Time: 0.467 (0.770)	Loss: 2.22181488	
+[2022-08-31 20:44:27,713] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 240	LR: 0.00000080	Time: 0.462 (0.794)	Loss: 2.22195545	
+[2022-08-31 20:44:27,764] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-240.pt
+[2022-08-31 20:44:27,765] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[240]
+[2022-08-31 20:44:34,222] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002896, NME: 0.026
+[2022-08-31 20:44:34,223] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 8/200
+[2022-08-31 20:45:34,496] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 241	LR: 0.00000080	Time: 0.463 (0.759)	Loss: 2.22224519	
+[2022-08-31 20:46:34,777] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 242	LR: 0.00000080	Time: 0.462 (0.759)	Loss: 2.21614157	
+[2022-08-31 20:47:35,274] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 243	LR: 0.00000080	Time: 0.465 (0.762)	Loss: 2.21869907	
+[2022-08-31 20:48:35,615] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 244	LR: 0.00000080	Time: 0.464 (0.760)	Loss: 2.22298437	
+[2022-08-31 20:49:39,464] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 245	LR: 0.00000080	Time: 0.464 (0.803)	Loss: 2.22000051	
+[2022-08-31 20:49:39,526] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-245.pt
+[2022-08-31 20:49:39,526] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[245]
+[2022-08-31 20:49:46,100] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002849, NME: 0.024
+[2022-08-31 20:49:46,100] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 9/200
+[2022-08-31 20:50:46,355] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 246	LR: 0.00000080	Time: 0.474 (0.759)	Loss: 2.22252724	
+[2022-08-31 20:51:46,720] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 247	LR: 0.00000080	Time: 0.469 (0.761)	Loss: 2.21360516	
+[2022-08-31 20:53:01,155] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 248	LR: 0.00000080	Time: 0.481 (0.766)	Loss: 2.21529209	
+[2022-08-31 20:54:01,375] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 249	LR: 0.00000080	Time: 0.464 (0.758)	Loss: 2.22070909	
+[2022-08-31 20:55:05,239] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 250	LR: 0.00000080	Time: 0.464 (0.804)	Loss: 2.22655506	
+[2022-08-31 20:55:05,296] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-250.pt
+[2022-08-31 20:55:05,296] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[250]
+[2022-08-31 20:55:11,766] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002899, NME: 0.024
+[2022-08-31 20:55:11,766] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 10/200
+[2022-08-31 20:56:12,041] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 251	LR: 0.00000080	Time: 0.464 (0.759)	Loss: 2.21946252	
+[2022-08-31 20:57:12,634] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 252	LR: 0.00000080	Time: 0.464 (0.763)	Loss: 2.21455735	
+[2022-08-31 20:58:12,912] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 253	LR: 0.00000080	Time: 0.464 (0.759)	Loss: 2.21890593	
+[2022-08-31 20:59:13,944] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 254	LR: 0.00000080	Time: 0.464 (0.769)	Loss: 2.22607081	
+[2022-08-31 21:00:17,978] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 255	LR: 0.00000080	Time: 0.463 (0.806)	Loss: 2.22109290	
+[2022-08-31 21:00:18,029] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-255.pt
+[2022-08-31 21:00:18,030] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[255]
+[2022-08-31 21:00:24,543] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002886, NME: 0.025
+[2022-08-31 21:00:24,543] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 11/200
+[2022-08-31 21:01:25,076] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 256	LR: 0.00000080	Time: 0.462 (0.762)	Loss: 2.21591096	
+[2022-08-31 21:02:35,750] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 257	LR: 0.00000080	Time: 0.466 (0.773)	Loss: 2.22110851	
+[2022-08-31 21:03:36,024] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 258	LR: 0.00000080	Time: 0.463 (0.759)	Loss: 2.21655780	
+[2022-08-31 21:04:36,290] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 259	LR: 0.00000080	Time: 0.464 (0.759)	Loss: 2.21531193	
+[2022-08-31 21:05:40,465] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 260	LR: 0.00000080	Time: 0.464 (0.808)	Loss: 2.21844883	
+[2022-08-31 21:05:40,528] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-260.pt
+[2022-08-31 21:05:40,528] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[260]
+[2022-08-31 21:05:46,971] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002853, NME: 0.023
+[2022-08-31 21:05:46,972] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 12/200
+[2022-08-31 21:06:47,187] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 261	LR: 0.00000080	Time: 0.461 (0.758)	Loss: 2.21717826	
+[2022-08-31 21:07:47,268] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 262	LR: 0.00000080	Time: 0.462 (0.757)	Loss: 2.22112407	
+[2022-08-31 21:08:47,568] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 263	LR: 0.00000080	Time: 0.468 (0.760)	Loss: 2.22004193	
+[2022-08-31 21:09:48,011] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 264	LR: 0.00000080	Time: 0.463 (0.761)	Loss: 2.21655842	
+[2022-08-31 21:10:52,138] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 265	LR: 0.00000080	Time: 0.465 (0.807)	Loss: 2.21613063	
+[2022-08-31 21:10:52,200] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-265.pt
+[2022-08-31 21:10:52,201] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[265]
+[2022-08-31 21:10:58,548] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002930, NME: 0.025
+[2022-08-31 21:10:58,549] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 13/200
+[2022-08-31 21:12:08,078] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 266	LR: 0.00000080	Time: 0.463 (0.762)	Loss: 2.22130688	
+[2022-08-31 21:13:08,403] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 267	LR: 0.00000080	Time: 0.462 (0.759)	Loss: 2.22334535	
+[2022-08-31 21:14:08,369] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 268	LR: 0.00000080	Time: 0.464 (0.756)	Loss: 2.22479473	
+[2022-08-31 21:15:08,722] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 269	LR: 0.00000080	Time: 0.462 (0.760)	Loss: 2.22222632	
+[2022-08-31 21:16:08,763] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 270	LR: 0.00000080	Time: 0.463 (0.756)	Loss: 2.21698940	
+[2022-08-31 21:16:08,826] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-270.pt
+[2022-08-31 21:16:08,827] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[270]
+[2022-08-31 21:16:18,172] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002819, NME: 0.023
+[2022-08-31 21:16:18,172] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 14/200
+[2022-08-31 21:17:18,043] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 271	LR: 0.00000080	Time: 0.467 (0.754)	Loss: 2.21799105	
+[2022-08-31 21:18:18,291] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 272	LR: 0.00000080	Time: 0.463 (0.759)	Loss: 2.22297304	
+[2022-08-31 21:19:18,714] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 273	LR: 0.00000080	Time: 0.462 (0.761)	Loss: 2.21800621	
+[2022-08-31 21:20:19,018] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 274	LR: 0.00000080	Time: 0.489 (0.760)	Loss: 2.21946064	
+[2022-08-31 21:21:29,437] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 275	LR: 0.00000080	Time: 0.462 (0.770)	Loss: 2.21685843	
+[2022-08-31 21:21:29,498] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-275.pt
+[2022-08-31 21:21:29,499] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[275]
+[2022-08-31 21:21:36,418] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002944, NME: 0.025
+[2022-08-31 21:21:36,418] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 15/200
+[2022-08-31 21:22:39,601] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 276	LR: 0.00000080	Time: 0.459 (0.796)	Loss: 2.21903508	
+[2022-08-31 21:23:39,673] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 277	LR: 0.00000080	Time: 0.462 (0.756)	Loss: 2.21683845	
+[2022-08-31 21:24:39,749] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 278	LR: 0.00000080	Time: 0.464 (0.756)	Loss: 2.21698560	
+[2022-08-31 21:25:41,161] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 279	LR: 0.00000080	Time: 0.465 (0.773)	Loss: 2.21847776	
+[2022-08-31 21:26:42,072] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 280	LR: 0.00000080	Time: 0.467 (0.767)	Loss: 2.21876606	
+[2022-08-31 21:26:42,132] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-280.pt
+[2022-08-31 21:26:42,132] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[280]
+[2022-08-31 21:26:48,826] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002853, NME: 0.023
+[2022-08-31 21:26:48,826] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 16/200
+[2022-08-31 21:27:52,954] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 281	LR: 0.00000080	Time: 4.310 (0.808)	Loss: 2.21421067	
+[2022-08-31 21:28:52,891] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 282	LR: 0.00000080	Time: 0.464 (0.754)	Loss: 2.21355266	
+[2022-08-31 21:29:53,263] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 283	LR: 0.00000080	Time: 0.463 (0.760)	Loss: 2.22255435	
+[2022-08-31 21:31:03,692] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 284	LR: 0.00000080	Time: 0.462 (0.764)	Loss: 2.21729262	
+[2022-08-31 21:32:04,010] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 285	LR: 0.00000080	Time: 0.462 (0.759)	Loss: 2.21508592	
+[2022-08-31 21:32:04,083] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-285.pt
+[2022-08-31 21:32:04,083] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[285]
+[2022-08-31 21:32:10,677] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002839, NME: 0.023
+[2022-08-31 21:32:10,678] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 17/200
+[2022-08-31 21:33:11,062] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 286	LR: 0.00000080	Time: 0.470 (0.760)	Loss: 2.21706873	
+[2022-08-31 21:34:11,932] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 287	LR: 0.00000080	Time: 0.465 (0.766)	Loss: 2.22105566	
+[2022-08-31 21:35:16,988] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 288	LR: 0.00000080	Time: 0.465 (0.819)	Loss: 2.21927892	
+[2022-08-31 21:36:17,820] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 289	LR: 0.00000080	Time: 0.464 (0.766)	Loss: 2.21420474	
+[2022-08-31 21:37:17,987] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 290	LR: 0.00000080	Time: 0.461 (0.757)	Loss: 2.21884171	
+[2022-08-31 21:37:18,054] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-290.pt
+[2022-08-31 21:37:18,054] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[290]
+[2022-08-31 21:37:25,046] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002866, NME: 0.025
+[2022-08-31 21:37:25,046] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 18/200
+[2022-08-31 21:38:25,873] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 291	LR: 0.00000080	Time: 0.462 (0.766)	Loss: 2.21887864	
+[2022-08-31 21:39:26,451] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 292	LR: 0.00000080	Time: 0.464 (0.763)	Loss: 2.21634625	
+[2022-08-31 21:40:41,318] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 293	LR: 0.00000080	Time: 0.464 (0.826)	Loss: 2.21991506	
+[2022-08-31 21:41:41,753] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 294	LR: 0.00000080	Time: 0.459 (0.760)	Loss: 2.21531877	
+[2022-08-31 21:42:42,323] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 295	LR: 0.00000080	Time: 0.463 (0.762)	Loss: 2.21818896	
+[2022-08-31 21:42:42,379] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-295.pt
+[2022-08-31 21:42:42,379] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[295]
+[2022-08-31 21:42:48,826] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002888, NME: 0.024
+[2022-08-31 21:42:48,826] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 19/200
+[2022-08-31 21:43:49,187] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 296	LR: 0.00000080	Time: 0.463 (0.760)	Loss: 2.22243508	
+[2022-08-31 21:44:49,553] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 297	LR: 0.00000080	Time: 0.463 (0.760)	Loss: 2.21823660	
+[2022-08-31 21:45:50,237] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 298	LR: 0.00000080	Time: 0.464 (0.764)	Loss: 2.21682247	
+[2022-08-31 21:46:54,653] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 299	LR: 0.00000080	Time: 0.463 (0.811)	Loss: 2.21640210	
+[2022-08-31 21:47:55,334] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 300	LR: 0.00000080	Time: 0.466 (0.764)	Loss: 2.21585117	
+[2022-08-31 21:47:55,427] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-300.pt
+[2022-08-31 21:47:55,427] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[300]
+[2022-08-31 21:48:02,227] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002879, NME: 0.023
+[2022-08-31 21:48:02,227] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 20/200
+[2022-08-31 21:49:02,739] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 301	LR: 0.00000080	Time: 0.464 (0.762)	Loss: 2.21890814	
+[2022-08-31 21:50:16,817] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 302	LR: 0.00000080	Time: 0.470 (0.769)	Loss: 2.21778793	
+[2022-08-31 21:51:18,504] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 303	LR: 0.00000080	Time: 0.461 (0.775)	Loss: 2.21991884	
+[2022-08-31 21:52:19,545] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 304	LR: 0.00000080	Time: 0.463 (0.768)	Loss: 2.21875958	
+[2022-08-31 21:53:25,031] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 305	LR: 0.00000080	Time: 0.463 (0.824)	Loss: 2.21819793	
+[2022-08-31 21:53:25,118] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-305.pt
+[2022-08-31 21:53:25,119] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[305]
+[2022-08-31 21:53:32,044] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002843, NME: 0.024
+[2022-08-31 21:53:32,044] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 21/200
+[2022-08-31 21:54:32,408] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 306	LR: 0.00000080	Time: 0.464 (0.760)	Loss: 2.21879680	
+[2022-08-31 21:55:32,788] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 307	LR: 0.00000080	Time: 0.463 (0.761)	Loss: 2.21375647	
+[2022-08-31 21:56:33,379] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 308	LR: 0.00000080	Time: 0.465 (0.762)	Loss: 2.21942612	
+[2022-08-31 21:57:35,315] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 309	LR: 0.00000080	Time: 0.471 (0.780)	Loss: 2.21711244	
+[2022-08-31 21:58:36,504] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 310	LR: 0.00000080	Time: 0.464 (0.771)	Loss: 2.21465200	
+[2022-08-31 21:58:36,557] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-310.pt
+[2022-08-31 21:58:36,557] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[310]
+[2022-08-31 21:58:43,576] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002883, NME: 0.024
+[2022-08-31 21:58:43,576] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 22/200
+[2022-08-31 21:59:57,206] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 311	LR: 0.00000080	Time: 0.462 (0.829)	Loss: 2.21162244	
+[2022-08-31 22:00:57,733] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 312	LR: 0.00000080	Time: 0.461 (0.762)	Loss: 2.21835537	
+[2022-08-31 22:01:58,094] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 313	LR: 0.00000080	Time: 0.464 (0.760)	Loss: 2.22082597	
+[2022-08-31 22:02:58,788] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 314	LR: 0.00000080	Time: 0.464 (0.765)	Loss: 2.20965036	
+[2022-08-31 22:03:59,290] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 315	LR: 0.00000080	Time: 0.466 (0.762)	Loss: 2.21269987	
+[2022-08-31 22:03:59,344] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-315.pt
+[2022-08-31 22:03:59,345] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[315]
+[2022-08-31 22:04:06,283] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002841, NME: 0.023
+[2022-08-31 22:04:06,283] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 23/200
+[2022-08-31 22:05:06,854] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 316	LR: 0.00000080	Time: 0.470 (0.763)	Loss: 2.20881434	
+[2022-08-31 22:06:12,840] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 317	LR: 0.00000080	Time: 0.466 (0.831)	Loss: 2.21344121	
+[2022-08-31 22:07:14,355] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 318	LR: 0.00000080	Time: 0.465 (0.774)	Loss: 2.21741989	
+[2022-08-31 22:08:15,735] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 319	LR: 0.00000080	Time: 0.485 (0.773)	Loss: 2.21419010	
+[2022-08-31 22:09:25,085] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 320	LR: 0.00000080	Time: 0.463 (0.762)	Loss: 2.21729461	
+[2022-08-31 22:09:25,148] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-320.pt
+[2022-08-31 22:09:25,149] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[320]
+[2022-08-31 22:09:31,913] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002840, NME: 0.023
+[2022-08-31 22:09:31,913] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 24/200
+[2022-08-31 22:10:32,490] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 321	LR: 0.00000080	Time: 0.464 (0.763)	Loss: 2.22181324	
+[2022-08-31 22:11:33,243] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 322	LR: 0.00000080	Time: 0.463 (0.765)	Loss: 2.21905477	
+[2022-08-31 22:12:37,669] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 323	LR: 0.00000080	Time: 0.466 (0.811)	Loss: 2.21538473	
+[2022-08-31 22:13:38,316] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 324	LR: 0.00000080	Time: 0.463 (0.764)	Loss: 2.21860129	
+[2022-08-31 22:14:38,759] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 325	LR: 0.00000080	Time: 0.463 (0.761)	Loss: 2.21990083	
+[2022-08-31 22:14:38,814] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-325.pt
+[2022-08-31 22:14:38,815] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[325]
+[2022-08-31 22:14:45,658] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002855, NME: 0.024
+[2022-08-31 22:14:45,658] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 25/200
+[2022-08-31 22:15:46,147] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 326	LR: 0.00000080	Time: 0.463 (0.762)	Loss: 2.21321515	
+[2022-08-31 22:16:46,596] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 327	LR: 0.00000080	Time: 0.462 (0.761)	Loss: 2.21804566	
+[2022-08-31 22:17:46,860] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 328	LR: 0.00000080	Time: 0.463 (0.759)	Loss: 2.21299034	
+[2022-08-31 22:18:57,558] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 329	LR: 0.00000080	Time: 0.462 (0.764)	Loss: 2.21485671	
+[2022-08-31 22:20:03,066] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 330	LR: 0.00000080	Time: 0.462 (0.824)	Loss: 2.22071401	
+[2022-08-31 22:20:03,122] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-330.pt
+[2022-08-31 22:20:03,122] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[330]
+[2022-08-31 22:20:10,095] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002866, NME: 0.023
+[2022-08-31 22:20:10,095] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 26/200
+[2022-08-31 22:21:11,091] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 331	LR: 0.00000080	Time: 0.459 (0.767)	Loss: 2.21615640	
+[2022-08-31 22:22:12,862] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 332	LR: 0.00000080	Time: 0.462 (0.777)	Loss: 2.21554136	
+[2022-08-31 22:23:14,155] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 333	LR: 0.00000080	Time: 0.478 (0.772)	Loss: 2.21568050	
+[2022-08-31 22:24:15,155] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 334	LR: 0.00000080	Time: 0.465 (0.768)	Loss: 2.21842175	
+[2022-08-31 22:25:15,969] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 335	LR: 0.00000080	Time: 0.463 (0.766)	Loss: 2.21528456	
+[2022-08-31 22:25:16,023] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-335.pt
+[2022-08-31 22:25:16,023] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[335]
+[2022-08-31 22:25:22,762] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002813, NME: 0.023
+[2022-08-31 22:25:22,763] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 27/200
+[2022-08-31 22:26:27,888] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 336	LR: 0.00000080	Time: 0.461 (0.820)	Loss: 2.21158304	
+[2022-08-31 22:27:43,233] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 337	LR: 0.00000080	Time: 0.476 (0.765)	Loss: 2.21347123	
+[2022-08-31 22:28:44,248] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 338	LR: 0.00000080	Time: 0.461 (0.767)	Loss: 2.21982565	
+[2022-08-31 22:29:44,789] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 339	LR: 0.00000080	Time: 0.463 (0.762)	Loss: 2.21035480	
+[2022-08-31 22:30:46,367] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 340	LR: 0.00000080	Time: 0.465 (0.776)	Loss: 2.21283375	
+[2022-08-31 22:30:46,438] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-340.pt
+[2022-08-31 22:30:46,439] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[340]
+[2022-08-31 22:30:53,309] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002884, NME: 0.023
+[2022-08-31 22:30:53,309] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 28/200
+[2022-08-31 22:31:53,621] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 341	LR: 0.00000080	Time: 0.462 (0.759)	Loss: 2.21600189	
+[2022-08-31 22:32:53,905] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 342	LR: 0.00000080	Time: 0.461 (0.759)	Loss: 2.21268744	
+[2022-08-31 22:33:59,432] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 343	LR: 0.00000080	Time: 0.464 (0.825)	Loss: 2.21471430	
+[2022-08-31 22:34:59,743] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 344	LR: 0.00000080	Time: 0.464 (0.759)	Loss: 2.22164570	
+[2022-08-31 22:36:00,095] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 345	LR: 0.00000080	Time: 0.461 (0.760)	Loss: 2.21345504	
+[2022-08-31 22:36:00,147] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-345.pt
+[2022-08-31 22:36:00,147] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[345]
+[2022-08-31 22:36:06,487] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002846, NME: 0.024
+[2022-08-31 22:36:06,487] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 29/200
+[2022-08-31 22:37:19,474] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 346	LR: 0.00000080	Time: 0.475 (0.756)	Loss: 2.21477360	
+[2022-08-31 22:38:19,554] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 347	LR: 0.00000080	Time: 0.458 (0.755)	Loss: 2.21754155	
+[2022-08-31 22:39:19,458] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 348	LR: 0.00000080	Time: 0.459 (0.754)	Loss: 2.21297047	
+[2022-08-31 22:40:19,851] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 349	LR: 0.00000080	Time: 0.463 (0.761)	Loss: 2.21780582	
+[2022-08-31 22:41:25,238] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 350	LR: 0.00000080	Time: 0.463 (0.823)	Loss: 2.21759422	
+[2022-08-31 22:41:25,289] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-350.pt
+[2022-08-31 22:41:25,290] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[350]
+[2022-08-31 22:41:32,249] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002840, NME: 0.022
+[2022-08-31 22:41:32,313] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./models/pretrained/2022-08-31-16-30-best.pt
+[2022-08-31 22:42:33,559] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 351	LR: 0.00000080	Time: 0.461 (0.771)	Loss: 2.22087867	
+[2022-08-31 22:43:34,984] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 352	LR: 0.00000080	Time: 0.462 (0.773)	Loss: 2.21486608	
+[2022-08-31 22:44:35,949] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 353	LR: 0.00000080	Time: 0.463 (0.767)	Loss: 2.21220539	
+[2022-08-31 22:45:36,743] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 354	LR: 0.00000080	Time: 0.459 (0.766)	Loss: 2.21438060	
+[2022-08-31 22:46:37,415] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 355	LR: 0.00000080	Time: 0.463 (0.764)	Loss: 2.21163563	
+[2022-08-31 22:46:37,468] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-355.pt
+[2022-08-31 22:46:37,469] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[355]
+[2022-08-31 22:46:44,165] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002813, NME: 0.025
+[2022-08-31 22:46:44,166] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 1/200
+[2022-08-31 22:47:56,832] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 356	LR: 0.00000080	Time: 0.459 (0.840)	Loss: 2.21506503	
+[2022-08-31 22:48:57,515] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 357	LR: 0.00000080	Time: 0.462 (0.764)	Loss: 2.21475306	
+[2022-08-31 22:49:58,013] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 358	LR: 0.00000080	Time: 0.464 (0.761)	Loss: 2.20822416	
+[2022-08-31 22:50:58,762] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 359	LR: 0.00000080	Time: 0.462 (0.765)	Loss: 2.20570342	
+[2022-08-31 22:51:58,804] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 360	LR: 0.00000080	Time: 0.465 (0.756)	Loss: 2.21544913	
+[2022-08-31 22:51:58,861] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-360.pt
+[2022-08-31 22:51:58,862] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[360]
+[2022-08-31 22:52:05,808] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002808, NME: 0.024
+[2022-08-31 22:52:05,808] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 2/200
+[2022-08-31 22:53:06,177] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 361	LR: 0.00000080	Time: 0.462 (0.760)	Loss: 2.21505116	
+[2022-08-31 22:54:06,753] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 362	LR: 0.00000080	Time: 0.462 (0.763)	Loss: 2.21133995	
+[2022-08-31 22:55:12,483] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 363	LR: 0.00000080	Time: 0.462 (0.828)	Loss: 2.20613913	
+[2022-08-31 22:56:24,136] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 364	LR: 0.00000080	Time: 0.463 (0.766)	Loss: 2.21387806	
+[2022-08-31 22:57:24,747] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 365	LR: 0.00000080	Time: 0.460 (0.762)	Loss: 2.20994086	
+[2022-08-31 22:57:24,827] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-365.pt
+[2022-08-31 22:57:24,827] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[365]
+[2022-08-31 22:57:31,326] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002873, NME: 0.024
+[2022-08-31 22:57:31,326] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 3/200
+[2022-08-31 22:58:31,362] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 366	LR: 0.00000080	Time: 0.464 (0.756)	Loss: 2.21497779	
+[2022-08-31 22:59:31,594] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 367	LR: 0.00000080	Time: 0.463 (0.759)	Loss: 2.21430011	
+[2022-08-31 23:00:32,026] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 368	LR: 0.00000080	Time: 0.491 (0.761)	Loss: 2.20572986	
+[2022-08-31 23:01:32,844] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 369	LR: 0.00000080	Time: 0.462 (0.766)	Loss: 2.21765070	
+[2022-08-31 23:02:33,423] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 370	LR: 0.00000080	Time: 0.463 (0.763)	Loss: 2.22124917	
+[2022-08-31 23:02:33,474] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-370.pt
+[2022-08-31 23:02:33,475] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[370]
+[2022-08-31 23:02:45,446] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002875, NME: 0.023
+[2022-08-31 23:02:45,446] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 4/200
+[2022-08-31 23:03:46,296] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 371	LR: 0.00000080	Time: 0.461 (0.767)	Loss: 2.21214281	
+[2022-08-31 23:05:01,556] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 372	LR: 0.00000080	Time: 0.470 (0.760)	Loss: 2.21162368	
+[2022-08-31 23:06:02,129] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 373	LR: 0.00000080	Time: 0.460 (0.762)	Loss: 2.20782221	
+[2022-08-31 23:07:02,510] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 374	LR: 0.00000080	Time: 0.463 (0.760)	Loss: 2.21270824	
+[2022-08-31 23:08:02,926] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 375	LR: 0.00000080	Time: 0.461 (0.760)	Loss: 2.21423901	
+[2022-08-31 23:08:02,992] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-375.pt
+[2022-08-31 23:08:02,993] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[375]
+[2022-08-31 23:08:10,300] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002895, NME: 0.026
+[2022-08-31 23:08:10,301] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 5/200
+[2022-08-31 23:09:10,869] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 376	LR: 0.00000080	Time: 0.464 (0.763)	Loss: 2.21121712	
+[2022-08-31 23:10:16,362] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 377	LR: 0.00000080	Time: 0.462 (0.824)	Loss: 2.21132129	
+[2022-08-31 23:11:17,285] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 378	LR: 0.00000080	Time: 0.463 (0.767)	Loss: 2.21559561	
+[2022-08-31 23:12:17,920] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 379	LR: 0.00000080	Time: 0.463 (0.764)	Loss: 2.20822730	
+[2022-08-31 23:13:18,548] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 380	LR: 0.00000080	Time: 0.464 (0.764)	Loss: 2.22052085	
+[2022-08-31 23:13:18,608] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-380.pt
+[2022-08-31 23:13:18,608] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[380]
+[2022-08-31 23:13:25,696] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002810, NME: 0.026
+[2022-08-31 23:13:25,696] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 6/200
+[2022-08-31 23:14:38,395] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 381	LR: 0.00000080	Time: 0.463 (0.768)	Loss: 2.21334195	
+[2022-08-31 23:15:38,978] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 382	LR: 0.00000080	Time: 0.461 (0.762)	Loss: 2.21291285	
+[2022-08-31 23:16:39,405] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 383	LR: 0.00000080	Time: 0.464 (0.761)	Loss: 2.21018345	
+[2022-08-31 23:17:39,341] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 384	LR: 0.00000080	Time: 0.464 (0.755)	Loss: 2.20869703	
+[2022-08-31 23:18:46,200] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 385	LR: 0.00000080	Time: 0.462 (0.841)	Loss: 2.20614461	
+[2022-08-31 23:18:46,258] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-385.pt
+[2022-08-31 23:18:46,259] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[385]
+[2022-08-31 23:18:53,765] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002870, NME: 0.023
+[2022-08-31 23:18:53,765] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 7/200
+[2022-08-31 23:19:55,077] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 386	LR: 0.00000080	Time: 0.465 (0.771)	Loss: 2.21495732	
+[2022-08-31 23:20:56,552] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 387	LR: 0.00000080	Time: 0.462 (0.774)	Loss: 2.21496032	
+[2022-08-31 23:21:57,145] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 388	LR: 0.00000080	Time: 0.466 (0.763)	Loss: 2.21332851	
+[2022-08-31 23:23:10,910] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 389	LR: 0.00000080	Time: 0.489 (0.779)	Loss: 2.20889853	
+[2022-08-31 23:24:11,296] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 390	LR: 0.00000080	Time: 0.461 (0.760)	Loss: 2.21291853	
+[2022-08-31 23:24:11,374] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-390.pt
+[2022-08-31 23:24:11,374] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[390]
+[2022-08-31 23:24:18,340] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002832, NME: 0.024
+[2022-08-31 23:24:18,341] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 8/200
+[2022-08-31 23:25:18,682] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 391	LR: 0.00000080	Time: 0.458 (0.760)	Loss: 2.21086525	
+[2022-08-31 23:26:25,050] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 392	LR: 0.00000080	Time: 0.464 (0.835)	Loss: 2.20932747	
+[2022-08-31 23:27:24,885] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 393	LR: 0.00000080	Time: 0.461 (0.753)	Loss: 2.20904809	
+[2022-08-31 23:28:25,355] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 394	LR: 0.00000080	Time: 0.460 (0.761)	Loss: 2.20952218	
+[2022-08-31 23:29:25,588] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 395	LR: 0.00000080	Time: 0.460 (0.758)	Loss: 2.21532660	
+[2022-08-31 23:29:25,652] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-395.pt
+[2022-08-31 23:29:25,653] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[395]
+[2022-08-31 23:29:32,607] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002827, NME: 0.024
+[2022-08-31 23:29:32,607] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 9/200
+[2022-08-31 23:30:33,146] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 396	LR: 0.00000080	Time: 0.460 (0.763)	Loss: 2.20230926	
+[2022-08-31 23:31:33,679] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 397	LR: 0.00000080	Time: 0.462 (0.762)	Loss: 2.21694945	
+[2022-08-31 23:32:48,319] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 398	LR: 0.00000080	Time: 0.474 (0.765)	Loss: 2.21257826	
+[2022-08-31 23:33:49,094] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 399	LR: 0.00000080	Time: 0.471 (0.764)	Loss: 2.21170154	
+[2022-08-31 23:34:55,298] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 400	LR: 0.00000080	Time: 0.461 (0.834)	Loss: 2.20989982	
+[2022-08-31 23:34:55,355] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-400.pt
+[2022-08-31 23:34:55,355] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[400]
+[2022-08-31 23:35:02,314] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002905, NME: 0.024
+[2022-08-31 23:35:02,314] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 10/200
+[2022-08-31 23:36:02,805] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 401	LR: 0.00000080	Time: 0.461 (0.762)	Loss: 2.21159160	
+[2022-08-31 23:37:03,458] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 402	LR: 0.00000080	Time: 0.463 (0.764)	Loss: 2.21535394	
+[2022-08-31 23:38:04,046] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 403	LR: 0.00000080	Time: 0.464 (0.763)	Loss: 2.21256422	
+[2022-08-31 23:39:04,373] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 404	LR: 0.00000080	Time: 0.462 (0.760)	Loss: 2.21314375	
+[2022-08-31 23:40:04,838] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 405	LR: 0.00000080	Time: 0.465 (0.761)	Loss: 2.20976307	
+[2022-08-31 23:40:04,919] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-405.pt
+[2022-08-31 23:40:04,919] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[405]
+[2022-08-31 23:40:11,621] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002794, NME: 0.023
+[2022-08-31 23:40:11,621] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 11/200
+[2022-08-31 23:41:12,519] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 406	LR: 0.00000080	Time: 0.465 (0.767)	Loss: 2.21090314	
+[2022-08-31 23:42:33,097] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 407	LR: 0.00000080	Time: 0.466 (0.837)	Loss: 2.21370699	
+[2022-08-31 23:43:33,541] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 408	LR: 0.00000080	Time: 0.460 (0.760)	Loss: 2.21528857	
+[2022-08-31 23:44:34,146] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 409	LR: 0.00000080	Time: 0.460 (0.763)	Loss: 2.21030010	
+[2022-08-31 23:45:34,697] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 410	LR: 0.00000080	Time: 0.474 (0.762)	Loss: 2.20944733	
+[2022-08-31 23:45:34,750] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-410.pt
+[2022-08-31 23:45:34,750] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[410]
+[2022-08-31 23:45:41,422] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002836, NME: 0.023
+[2022-08-31 23:45:41,423] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 12/200
+[2022-08-31 23:46:41,456] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 411	LR: 0.00000080	Time: 0.462 (0.756)	Loss: 2.20679692	
+[2022-08-31 23:47:41,580] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 412	LR: 0.00000080	Time: 0.461 (0.757)	Loss: 2.21374247	
+[2022-08-31 23:48:42,331] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 413	LR: 0.00000080	Time: 0.465 (0.764)	Loss: 2.21208648	
+[2022-08-31 23:49:43,272] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 414	LR: 0.00000080	Time: 0.463 (0.767)	Loss: 2.21215494	
+[2022-08-31 23:50:44,875] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 415	LR: 0.00000080	Time: 0.465 (0.776)	Loss: 2.20817762	
+[2022-08-31 23:50:44,934] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-415.pt
+[2022-08-31 23:50:44,934] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[415]
+[2022-08-31 23:50:57,654] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002824, NME: 0.026
+[2022-08-31 23:50:57,654] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 13/200
+[2022-08-31 23:52:09,899] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 416	LR: 0.00000080	Time: 0.459 (0.768)	Loss: 2.20882600	
+[2022-08-31 23:53:09,952] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 417	LR: 0.00000080	Time: 0.463 (0.756)	Loss: 2.20969586	
+[2022-08-31 23:54:10,015] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 418	LR: 0.00000080	Time: 0.463 (0.756)	Loss: 2.21180592	
+[2022-08-31 23:55:10,651] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 419	LR: 0.00000080	Time: 0.462 (0.763)	Loss: 2.20917757	
+[2022-08-31 23:56:11,535] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 420	LR: 0.00000080	Time: 0.466 (0.766)	Loss: 2.21115120	
+[2022-08-31 23:56:11,597] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-420.pt
+[2022-08-31 23:56:11,598] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[420]
+[2022-08-31 23:56:18,737] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002836, NME: 0.024
+[2022-08-31 23:56:18,738] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 14/200
+[2022-08-31 23:57:19,802] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 421	LR: 0.00000080	Time: 0.460 (0.769)	Loss: 2.20907688	
+[2022-08-31 23:58:20,274] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 422	LR: 0.00000080	Time: 0.462 (0.761)	Loss: 2.20827740	
+[2022-08-31 23:59:27,018] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 423	LR: 0.00000080	Time: 0.468 (0.840)	Loss: 2.21378152	
+[2022-09-01 00:00:27,697] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 424	LR: 0.00000080	Time: 0.461 (0.764)	Loss: 2.21417426	
+[2022-09-01 00:01:39,675] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 425	LR: 0.00000080	Time: 0.463 (0.760)	Loss: 2.20942637	
+[2022-09-01 00:01:39,736] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-425.pt
+[2022-09-01 00:01:39,736] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[425]
+[2022-09-01 00:01:47,110] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002819, NME: 0.023
+[2022-09-01 00:01:47,111] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 15/200
+[2022-09-01 00:02:47,625] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 426	LR: 0.00000080	Time: 0.459 (0.762)	Loss: 2.21113297	
+[2022-09-01 00:03:48,085] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 427	LR: 0.00000080	Time: 0.462 (0.761)	Loss: 2.20783127	
+[2022-09-01 00:04:48,436] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 428	LR: 0.00000080	Time: 0.460 (0.760)	Loss: 2.21032614	
+[2022-09-01 00:05:48,717] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 429	LR: 0.00000080	Time: 0.463 (0.759)	Loss: 2.21266879	
+[2022-09-01 00:06:49,305] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 430	LR: 0.00000080	Time: 0.461 (0.763)	Loss: 2.20467235	
+[2022-09-01 00:06:49,377] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-430.pt
+[2022-09-01 00:06:49,377] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[430]
+[2022-09-01 00:06:56,464] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002902, NME: 0.024
+[2022-09-01 00:06:56,464] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 16/200
+[2022-09-01 00:07:56,791] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 431	LR: 0.00000080	Time: 0.465 (0.760)	Loss: 2.20924952	
+[2022-09-01 00:09:04,108] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 432	LR: 0.00000080	Time: 0.458 (0.847)	Loss: 2.20805421	
+[2022-09-01 00:10:04,549] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 433	LR: 0.00000080	Time: 0.461 (0.761)	Loss: 2.20571210	
+[2022-09-01 00:11:17,723] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 434	LR: 0.00000080	Time: 0.462 (0.768)	Loss: 2.21021352	
+[2022-09-01 00:12:18,477] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 435	LR: 0.00000080	Time: 0.464 (0.764)	Loss: 2.21265955	
+[2022-09-01 00:12:18,531] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-435.pt
+[2022-09-01 00:12:18,531] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[435]
+[2022-09-01 00:12:25,833] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002898, NME: 0.024
+[2022-09-01 00:12:25,834] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 17/200
+[2022-09-01 00:13:26,528] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 436	LR: 0.00000080	Time: 0.459 (0.764)	Loss: 2.20804817	
+[2022-09-01 00:14:26,827] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 437	LR: 0.00000080	Time: 0.461 (0.759)	Loss: 2.21326648	
+[2022-09-01 00:15:27,229] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 438	LR: 0.00000080	Time: 0.461 (0.760)	Loss: 2.21268849	
+[2022-09-01 00:16:27,775] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 439	LR: 0.00000080	Time: 0.463 (0.762)	Loss: 2.20881752	
+[2022-09-01 00:17:28,535] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 440	LR: 0.00000080	Time: 0.464 (0.765)	Loss: 2.20793040	
+[2022-09-01 00:17:28,607] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-440.pt
+[2022-09-01 00:17:28,607] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[440]
+[2022-09-01 00:17:41,019] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002817, NME: 0.023
+[2022-09-01 00:17:41,020] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 18/200
+[2022-09-01 00:18:41,863] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 441	LR: 0.00000080	Time: 0.462 (0.766)	Loss: 2.20513840	
+[2022-09-01 00:19:42,596] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 442	LR: 0.00000080	Time: 0.463 (0.764)	Loss: 2.20975383	
+[2022-09-01 00:20:56,749] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 443	LR: 0.00000080	Time: 0.461 (0.776)	Loss: 2.21115911	
+[2022-09-01 00:21:57,291] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 444	LR: 0.00000080	Time: 0.463 (0.762)	Loss: 2.20935079	
+[2022-09-01 00:22:57,932] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 445	LR: 0.00000080	Time: 0.463 (0.763)	Loss: 2.21041619	
+[2022-09-01 00:22:57,986] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-445.pt
+[2022-09-01 00:22:57,986] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[445]
+[2022-09-01 00:23:04,925] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002892, NME: 0.024
+[2022-09-01 00:23:04,925] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 19/200
+[2022-09-01 00:24:05,400] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 446	LR: 0.00000080	Time: 0.460 (0.762)	Loss: 2.20833930	
+[2022-09-01 00:25:05,774] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 447	LR: 0.00000080	Time: 0.463 (0.760)	Loss: 2.20813193	
+[2022-09-01 00:26:06,445] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 448	LR: 0.00000080	Time: 0.463 (0.764)	Loss: 2.21206736	
+[2022-09-01 00:27:13,892] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 449	LR: 0.00000080	Time: 0.462 (0.850)	Loss: 2.20737177	
+[2022-09-01 00:28:14,304] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 450	LR: 0.00000080	Time: 0.464 (0.761)	Loss: 2.21083830	
+[2022-09-01 00:28:14,364] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-450.pt
+[2022-09-01 00:28:14,364] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[450]
+[2022-09-01 00:28:21,463] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002813, NME: 0.022
+[2022-09-01 00:28:21,524] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./models/pretrained/2022-08-31-16-30-best.pt
+[2022-09-01 00:29:22,094] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 451	LR: 0.00000080	Time: 0.466 (0.763)	Loss: 2.20779316	
+[2022-09-01 00:30:27,155] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 452	LR: 0.00000080	Time: 0.461 (0.803)	Loss: 2.20734231	
+[2022-09-01 00:31:28,087] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 453	LR: 0.00000080	Time: 0.462 (0.767)	Loss: 2.20470804	
+[2022-09-01 00:32:28,561] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 454	LR: 0.00000080	Time: 0.461 (0.761)	Loss: 2.20933125	
+[2022-09-01 00:33:29,088] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 455	LR: 0.00000080	Time: 0.462 (0.762)	Loss: 2.20460928	
+[2022-09-01 00:33:29,154] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-455.pt
+[2022-09-01 00:33:29,155] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[455]
+[2022-09-01 00:33:36,333] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002818, NME: 0.023
+[2022-09-01 00:33:36,333] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 1/200
+[2022-09-01 00:34:36,823] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 456	LR: 0.00000080	Time: 0.469 (0.762)	Loss: 2.20562945	
+[2022-09-01 00:35:37,475] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 457	LR: 0.00000080	Time: 0.463 (0.763)	Loss: 2.21039124	
+[2022-09-01 00:36:45,002] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 458	LR: 0.00000080	Time: 0.461 (0.850)	Loss: 2.20432977	
+[2022-09-01 00:37:45,564] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 459	LR: 0.00000080	Time: 0.464 (0.762)	Loss: 2.20334722	
+[2022-09-01 00:38:46,316] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 460	LR: 0.00000080	Time: 0.464 (0.765)	Loss: 2.20904896	
+[2022-09-01 00:38:46,374] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-460.pt
+[2022-09-01 00:38:46,375] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[460]
+[2022-09-01 00:38:54,079] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002837, NME: 0.023
+[2022-09-01 00:38:54,079] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 2/200
+[2022-09-01 00:40:07,765] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 461	LR: 0.00000080	Time: 0.459 (0.780)	Loss: 2.20661742	
+[2022-09-01 00:41:09,338] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 462	LR: 0.00000080	Time: 0.458 (0.775)	Loss: 2.20937559	
+[2022-09-01 00:42:09,747] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 463	LR: 0.00000080	Time: 0.463 (0.761)	Loss: 2.20642117	
+[2022-09-01 00:43:10,733] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 464	LR: 0.00000080	Time: 0.464 (0.768)	Loss: 2.21002152	
+[2022-09-01 00:44:11,186] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 465	LR: 0.00000080	Time: 0.461 (0.761)	Loss: 2.20323746	
+[2022-09-01 00:44:11,244] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-465.pt
+[2022-09-01 00:44:11,244] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[465]
+[2022-09-01 00:44:18,121] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002886, NME: 0.023
+[2022-09-01 00:44:18,122] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 3/200
+[2022-09-01 00:45:18,334] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 466	LR: 0.00000080	Time: 0.464 (0.758)	Loss: 2.21223666	
+[2022-09-01 00:46:26,369] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 467	LR: 0.00000080	Time: 0.465 (0.857)	Loss: 2.20572093	
+[2022-09-01 00:47:27,228] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 468	LR: 0.00000080	Time: 0.464 (0.766)	Loss: 2.20920862	
+[2022-09-01 00:48:40,871] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 469	LR: 0.00000080	Time: 0.472 (0.769)	Loss: 2.20657545	
+[2022-09-01 00:49:42,284] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 470	LR: 0.00000080	Time: 0.469 (0.773)	Loss: 2.20878076	
+[2022-09-01 00:49:42,342] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-470.pt
+[2022-09-01 00:49:42,342] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[470]
+[2022-09-01 00:49:49,789] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002831, NME: 0.022
+[2022-09-01 00:49:49,789] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 4/200
+[2022-09-01 00:50:50,853] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 471	LR: 0.00000080	Time: 0.465 (0.768)	Loss: 2.20894535	
+[2022-09-01 00:51:51,576] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 472	LR: 0.00000080	Time: 0.465 (0.764)	Loss: 2.20762833	
+[2022-09-01 00:52:52,218] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 473	LR: 0.00000080	Time: 0.474 (0.763)	Loss: 2.21087519	
+[2022-09-01 00:53:52,790] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 474	LR: 0.00000080	Time: 0.463 (0.762)	Loss: 2.21323926	
+[2022-09-01 00:54:54,255] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 475	LR: 0.00000080	Time: 0.460 (0.773)	Loss: 2.20484712	
+[2022-09-01 00:54:54,330] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-475.pt
+[2022-09-01 00:54:54,331] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[475]
+[2022-09-01 00:55:02,157] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002912, NME: 0.023
+[2022-09-01 00:55:02,157] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 5/200
+[2022-09-01 00:56:11,870] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 476	LR: 0.00000080	Time: 0.461 (0.878)	Loss: 2.20903193	
+[2022-09-01 00:57:13,583] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 477	LR: 0.00000080	Time: 0.464 (0.776)	Loss: 2.20780542	
+[2022-09-01 00:58:27,167] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 478	LR: 0.00000080	Time: 0.461 (0.781)	Loss: 2.20712663	
+[2022-09-01 00:59:27,507] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 479	LR: 0.00000080	Time: 0.460 (0.759)	Loss: 2.20299699	
+[2022-09-01 01:00:28,026] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 480	LR: 0.00000080	Time: 0.461 (0.762)	Loss: 2.20617811	
+[2022-09-01 01:00:28,087] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-480.pt
+[2022-09-01 01:00:28,087] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[480]
+[2022-09-01 01:00:35,531] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002875, NME: 0.024
+[2022-09-01 01:00:35,532] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 6/200
+[2022-09-01 01:01:36,044] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 481	LR: 0.00000080	Time: 0.461 (0.762)	Loss: 2.20590767	
+[2022-09-01 01:02:36,661] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 482	LR: 0.00000080	Time: 0.464 (0.763)	Loss: 2.20291180	
+[2022-09-01 01:03:37,411] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 483	LR: 0.00000080	Time: 0.459 (0.765)	Loss: 2.21060075	
+[2022-09-01 01:04:38,166] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 484	LR: 0.00000080	Time: 0.463 (0.765)	Loss: 2.20489817	
+[2022-09-01 01:05:46,185] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 485	LR: 0.00000080	Time: 0.464 (0.855)	Loss: 2.20977005	
+[2022-09-01 01:05:46,239] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-485.pt
+[2022-09-01 01:05:46,240] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[485]
+[2022-09-01 01:05:54,094] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002864, NME: 0.024
+[2022-09-01 01:05:54,094] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 7/200
+[2022-09-01 01:06:55,945] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 486	LR: 0.00000080	Time: 0.463 (0.777)	Loss: 2.20243564	
+[2022-09-01 01:08:10,616] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 487	LR: 0.00000080	Time: 0.463 (0.784)	Loss: 2.21001807	
+[2022-09-01 01:09:12,495] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 488	LR: 0.00000080	Time: 0.470 (0.777)	Loss: 2.21210620	
+[2022-09-01 01:10:13,963] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 489	LR: 0.00000080	Time: 0.462 (0.774)	Loss: 2.20987614	
+[2022-09-01 01:11:15,728] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 490	LR: 0.00000080	Time: 0.464 (0.777)	Loss: 2.20477689	
+[2022-09-01 01:11:15,781] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-490.pt
+[2022-09-01 01:11:15,781] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[490]
+[2022-09-01 01:11:23,366] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002840, NME: 0.023
+[2022-09-01 01:11:23,366] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 8/200
+[2022-09-01 01:12:24,501] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 491	LR: 0.00000080	Time: 0.460 (0.769)	Loss: 2.20948275	
+[2022-09-01 01:13:26,155] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 492	LR: 0.00000080	Time: 0.465 (0.775)	Loss: 2.20374436	
+[2022-09-01 01:14:27,669] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 493	LR: 0.00000080	Time: 0.461 (0.774)	Loss: 2.20634987	
+[2022-09-01 01:15:35,191] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 494	LR: 0.00000080	Time: 0.460 (0.850)	Loss: 2.20287379	
+[2022-09-01 01:16:35,535] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 495	LR: 0.00000080	Time: 0.460 (0.759)	Loss: 2.20876042	
+[2022-09-01 01:16:35,624] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-495.pt
+[2022-09-01 01:16:35,624] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[495]
+[2022-09-01 01:16:42,872] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002810, NME: 0.023
+[2022-09-01 01:16:42,873] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 9/200
+[2022-09-01 01:17:52,453] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 496	LR: 0.00000080	Time: 0.460 (0.779)	Loss: 2.20384377	
+[2022-09-01 01:18:54,016] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 497	LR: 0.00000080	Time: 0.461 (0.775)	Loss: 2.20485465	
+[2022-09-01 01:19:55,406] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 498	LR: 0.00000080	Time: 0.462 (0.773)	Loss: 2.20529818	
+[2022-09-01 01:20:57,295] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 499	LR: 0.00000080	Time: 0.464 (0.779)	Loss: 2.20705130	
+[2022-09-01 01:21:58,081] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:203] [INFO] Epoch: 500	LR: 0.00000080	Time: 0.462 (0.765)	Loss: 2.20723475	
+[2022-09-01 01:21:58,138] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:102] [INFO] 
+Save checkpoint to ./logs/2022-08-31/16-30/model_logs/2022-08-31-epoch-500.pt
+[2022-09-01 01:21:58,138] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:300] [INFO] 
+Validation[500]
+[2022-09-01 01:22:06,023] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:311] [INFO] 	Loss: 0.002764, NME: 0.025
+[2022-09-01 01:22:06,023] [p11558] [/home/ubuntu/workspace/dv-22-komediclub/SRC/main.py:327] [INFO] 	Early stopping count: 10/200
